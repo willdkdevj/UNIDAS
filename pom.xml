@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>br.com.infotera</groupId>
+	<artifactId>unidas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>unidas</name>
+	<description>Projeto para webservice de API para locação de veículos</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencies>
+            <!-- Deploy -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+            </dependency>
+            <!--/Deploy -->
+
+            <!--    SpringDependency    -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web-services</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <!--    /SpringDependency    -->
+
+            <!--    SOAP Objects Mapping    -->
+            <dependency>
+                <groupId>org.apache.ws.commons.axiom</groupId>
+                <artifactId>axiom-api</artifactId>
+                <version>1.2.22</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>geronimo-activation_1.1_spec</artifactId>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ws.commons.axiom</groupId>
+                <artifactId>axiom-impl</artifactId>
+                <version>1.2.22</version>
+                <scope>runtime</scope>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>stax2-api</artifactId>
+                        <groupId>org.codehaus.woodstox</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>woodstox-core-asl</artifactId>
+                        <groupId>org.codehaus.woodstox</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.axis</groupId>
+                <artifactId>axis</artifactId>
+                <version>1.4</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.12.5</version>
+            </dependency>
+            <!--    /SOAP Objects Mapping    -->
+
+            <!--    It-common    -->
+            <dependency>
+                <groupId>br.com.infotera.it</groupId>
+                <artifactId>it-common</artifactId>
+                <version>1.9.15.0-SNAPSHOT</version>
+                <type>jar</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--    /It-common    -->
+            <!-- commons -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+            </dependency>
+            <!-- /commons -->
+
+            <!--    Gson    -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <type>jar</type>
+                  <version>2.9.0</version>
+            </dependency>
+            <!--    /Gson    -->
+
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+                <version>3.4.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>3.12.1.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+            </dependency>
+            
+            
+            <!--    Http    -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <!--    Glassfish    -->
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.ext</groupId>
+                <artifactId>jersey-spring4</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-jetty-servlet</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>3.1.2.2</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--    Javax xml    -->
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.1.1</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml</groupId>
+                <artifactId>jaxrpc-api</artifactId>
+                <version>1.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+            </dependency>
+            <!--    Sun xml    -->
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>2.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-rt</artifactId>
+                <version>2.3.3</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>rt</artifactId>
+                <version>2.3.3</version>
+            </dependency>
+             <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>1.19.1</version>
+                <type>jar</type>
+                <scope>provided</scope>
+            </dependency>
+            <!--  Email  -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.5.1</version>
+                <type>jar</type>
+            </dependency>
+            <!--  /Email  -->
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+            </dependency>
+        </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- Plugin required to build java classes from XSD using XJC -->
+<!--			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.5</version> 
+				<executions>
+					<execution>
+                                            <id>xjc-to-java</id>
+                                            <goals>
+                                                    <goal>xjc</goal>
+                                            </goals>
+					</execution>
+				</executions>
+				<configuration>
+                                     The name of your generated source package 
+                                    <sources>
+                                        <source>${project.basedir}/src/main/java/xsd</source>
+                                    </sources>
+                                    <xsdPathWithinArtifact>xsd</xsdPathWithinArtifact>
+                                    <addGeneratedAnnotation>true</addGeneratedAnnotation>
+                                    <laxSchemaValidation>true</laxSchemaValidation>
+                                    <verbose>true</verbose>
+                                     Package name of the generated sources 
+                                    <packageName>br.com.infotera.dotw.model.gen</packageName>
+                                    <generatedResourcesDirectory>${project.basedir}/src/main/java</generatedResourcesDirectory>
+                                    <schemaDirectory>${project.basedir}/src/main/java/xsd</schemaDirectory>
+                                    <schemaFiles>complexCondition.xsd</schemaFiles>
+                                </configuration>
+			</plugin>-->
+		</plugins>
+	</build>
+
+</project>
