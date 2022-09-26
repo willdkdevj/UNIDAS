@@ -8,6 +8,11 @@
 
 package br.com.infotera.unidas.model.gen;
 
+import br.com.infotera.unidas.model.gen.opentravel.TransactionStatusType;
+import br.com.infotera.unidas.model.gen.opentravel.SuccessType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleCancelRSAdditionalInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.ErrorsType;
+import br.com.infotera.unidas.model.gen.opentravel.WarningsType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;

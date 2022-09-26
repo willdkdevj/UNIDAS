@@ -5,5 +5,5 @@
 // Gerado em: 2022.09.21 às 12:52:49 PM BRT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED) //QUALIFIED http://www.opentravel.org/OTA/2003/05
 package br.com.infotera.unidas.model.gen;

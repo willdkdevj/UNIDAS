@@ -7,8 +7,8 @@ import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRate;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRateResponse;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +31,8 @@ public class UnidasClient {
     private SOAPClient soapClient;
     
     /**
-     * The invokeA method is responsible for forwarding requests created from the BookingDetailA 
-     * that follow a certain ordering pattern of its parameters that is checked when arriving at the partner webservice
+     * The callOTAVehAvailRate method is responsible for forwarding requests created from the BookingDetailA 
+ that follow a certain ordering pattern of its parameters that is checked when arriving at the partner webservice
      * 
      * @param vehAvailRateRQ
      * @see - sendAndReceive - responsible for handling the validation of the transaction of sending and receiving requests (XML)
@@ -42,7 +42,7 @@ public class UnidasClient {
      * @return Result - Class responsible for encapsulating the response referring to the type (command) of request sent
      * @throws ErrorException - If errors occur in the process to be carried out, an exception is launched in order to inform the user through the Legacy System
      */
-    public OtaVehAvailRateResponse invokeA(WSIntegrador integrador, OtaVehAvailRate vehAvailRateRQ) throws ErrorException {
+    public OtaVehAvailRateResponse callOTAVehAvailRate(WSIntegrador integrador, OtaVehAvailRate vehAvailRateRQ) throws ErrorException {
         OtaVehAvailRateResponse response = null;
         try {
             integrador.setDsAction("OTAVehAvailRate");

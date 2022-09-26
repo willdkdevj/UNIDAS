@@ -8,6 +8,7 @@
 
 package br.com.infotera.unidas.model.gen;
 
+import br.com.infotera.unidas.model.gen.opentravel.OtaVehLocDetailResult;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

@@ -6,9 +6,10 @@ package br.com.infotera.unidas.client.interfaces;
 
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
-import br.com.infotera.unidas.model.gen.Usuario;
+import br.com.infotera.unidas.model.gen.unidas.Usuario;
 import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.ws.soap.saaj.SaajSoapMessage;
 
 /**
  * Interface responsible for standardizing the methods to be implemented for treatments to be applied to the Client
@@ -34,5 +35,7 @@ public interface ConnectionWebservice {
     String checkURI(WSIntegrador integrador) throws ErrorException;
     
     Usuario buiderUserCredential(WSIntegrador integrador) throws ErrorException;
+    
+    void soapEnvelopeCustom(SaajSoapMessage message);
     
 }   

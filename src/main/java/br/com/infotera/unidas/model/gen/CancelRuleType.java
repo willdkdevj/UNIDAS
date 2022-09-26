@@ -8,6 +8,7 @@
 
 package br.com.infotera.unidas.model.gen;
 
+import br.com.infotera.unidas.model.gen.opentravel.PaymentCardType;
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -21,8 +21,8 @@ import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRQ;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRS;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.client.UnidasClient;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRate;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRateResponse;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import br.com.infotera.unidas.service.DisponibilidadeCarWS;
 import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
 import br.com.infotera.unidas.util.ObjectHandling;
@@ -98,7 +98,7 @@ public class TestController {
             disponibilidadeVeiculoRQ.setStNacional(Boolean.TRUE);
             disponibilidadeVeiculoRQ.setIntegrador(integrador);
             // Realiza thread para buscar relação de hotéis
-            WSDisponibilidadeVeiculoRS disponibilidade = disponibilidadeCarWS.disponibilidade(disponibilidadeVeiculoRQ);
+            WSDisponibilidadeVeiculoRS disponibilidade = disponibilidadeCarWS.availability(disponibilidadeVeiculoRQ);
             
             return disponibilidade != null ? Utils.getGson().toJson(disponibilidade) : "Erro ao obter disponibilidade de veículos";
             

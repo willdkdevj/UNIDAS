@@ -7,7 +7,7 @@ import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.client.SOAPClient;
 import br.com.infotera.unidas.model.gen.ObjectFactory;
-import br.com.infotera.unidas.model.gen.Usuario;
+import br.com.infotera.unidas.model.gen.unidas.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
@@ -62,7 +62,9 @@ public class UnidasConfig {
     @Bean
     public Jaxb2Marshaller assembleMarshaller() {
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setContextPath("br.com.infotera.unidas.model.gen");
+        jaxb2Marshaller.setContextPaths("br.com.infotera.unidas.model.gen",
+                "br.com.infotera.unidas.model.gen.unidas",
+                "br.com.infotera.unidas.model.gen.opentravel");
         
         return jaxb2Marshaller;
     }
@@ -112,10 +114,10 @@ public class UnidasConfig {
         return saajSoapMessageFactory;
     }
     
-    @Bean
-    public ObjectFactory objectFactory() {
-        return new ObjectFactory();
-    }
+//    @Bean
+//    public ObjectFactory objectFactory() {
+//        return new ObjectFactory();
+//    }
 
     @Bean
     public ObjectMapper objectMapper() {

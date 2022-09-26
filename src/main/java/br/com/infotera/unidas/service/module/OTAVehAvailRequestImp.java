@@ -10,22 +10,24 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRQ;
 import br.com.infotera.common.util.Utils;
-import br.com.infotera.unidas.model.gen.ArrayOfSourceType;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref.CoveragePref;
-import br.com.infotera.unidas.model.gen.CompanyNameType;
-import br.com.infotera.unidas.model.gen.InventoryStatusType;
-import br.com.infotera.unidas.model.gen.OTAVehAvailRateRQ;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRate;
-import br.com.infotera.unidas.model.gen.PreferLevelType;
-import br.com.infotera.unidas.model.gen.SourceType;
-import br.com.infotera.unidas.model.gen.SourceType.RequestorID;
-import br.com.infotera.unidas.model.gen.VehicleAvailRQAdditionalInfoType;
-import br.com.infotera.unidas.model.gen.VehicleAvailRQCoreType;
-import br.com.infotera.unidas.model.gen.VehicleRentalCoreType;
+import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
+import br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref;
+import br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref.CoveragePref;
+import br.com.infotera.unidas.model.gen.opentravel.CompanyNameType;
+import br.com.infotera.unidas.model.gen.opentravel.InventoryStatusType;
+import br.com.infotera.unidas.model.gen.opentravel.OTAVehAvailRateRQ;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
+import br.com.infotera.unidas.model.gen.opentravel.PreferLevelType;
+import br.com.infotera.unidas.model.gen.opentravel.SourceType;
+import br.com.infotera.unidas.model.gen.opentravel.SourceType.RequestorID;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRQAdditionalInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRQCoreType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
 import br.com.infotera.unidas.service.DisponibilidadeCarWS;
 import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,6 +55,19 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
         }
      
         return otaVehAvailRate;
+    }
+    
+    @Override
+    public void validateBusinessRules(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) {
+        /** Verifica se o parâmetro stNacionalidade consta com o valor booleano como TRUE, caso contrário é reportado que o fornecedor não possui produtos internacionais */
+        if(!disponibilidadeVeiculoRQ.getStNacional()){
+            try {
+                throw new ErrorException(disponibilidadeVeiculoRQ.getIntegrador(), DisponibilidadeCarWS.class, "validateBusinessRules", WSMensagemErroEnum.SDI,
+                        "Este fornecedor não possui produtos internacionais. Por favor, revise a configuração sobre a nacionalidade (SgNacionalidade)", WSIntegracaoStatusEnum.NEGADO, null, false);
+            } catch (ErrorException ex) {
+                Logger.getLogger(OTAVehAvailRequestImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     private ArrayOfSourceType setUpPos(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) throws ErrorException {
@@ -194,4 +209,6 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
         
         return infoAdditional;
     }
+
+    
 }

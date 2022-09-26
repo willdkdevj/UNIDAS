@@ -8,6 +8,8 @@
 
 package br.com.infotera.unidas.model.gen;
 
+import br.com.infotera.unidas.model.gen.opentravel.FormattedTextType;
+import br.com.infotera.unidas.model.gen.opentravel.LocationDetailRequirementInfoType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

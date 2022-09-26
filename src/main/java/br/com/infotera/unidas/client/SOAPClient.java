@@ -16,21 +16,16 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.soap.SOAPException;
-import javax.xml.transform.TransformerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.WebServiceMessageFactory;
-import org.springframework.ws.client.core.WebServiceMessageCallback;
-import org.springframework.ws.client.core.WebServiceMessageExtractor;
 import org.springframework.ws.client.core.WebServiceTemplate;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.SoapBody;
-import org.springframework.ws.soap.SoapEnvelope;
-import org.springframework.ws.soap.SoapEnvelopeException;
 import org.springframework.ws.soap.SoapHeader;
 import org.springframework.ws.soap.SoapMessage;
+import org.springframework.ws.soap.saaj.SaajSoapMessage;
 import org.springframework.ws.support.MarshallingUtils;
 import org.springframework.ws.transport.WebServiceMessageSender;
 import org.springframework.ws.transport.http.HttpUrlConnectionMessageSender;
@@ -73,57 +68,47 @@ public class SOAPClient extends WebServiceGatewaySupport {
 
             WebServiceTemplate wsTemplate = getWebServiceTemplate();
             
-            result = wsTemplate.sendAndReceive(
-                    new WebServiceMessageCallback() {
-                        @Override
-                        public void doWithMessage(WebServiceMessage message) throws IOException, TransformerException {
-                            SoapHeader soapHeader = ((SoapMessage) message).getSoapHeader();
-                            try {
-                                getMarshaller().marshal(connection.buiderUserCredential(integrador), soapHeader.getResult());
-                            } catch (ErrorException | IOException | XmlMappingException ex) {
-                                Logger.getLogger(SOAPClient.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            
-                            ((SoapMessage) message).setSoapAction(action);
-                            SoapBody soapBody = ((SoapMessage) message).getSoapBody();
-                            try {
-                                getMarshaller().marshal(object, soapBody.getPayloadResult());
-                            } catch (IOException | XmlMappingException ex) {
-                                Logger.getLogger(SOAPClient.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            
-//                            try {
-//                                alterarEnvelope(message);
-//                            } catch (SOAPException ex) {
-//                                Logger.getLogger(SOAPClient.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-                            
-                            ByteArrayOutputStream out = new ByteArrayOutputStream();
-                            ((WebServiceMessage) message).writeTo(out);
-                            ObjectHandling.generateFile(out.toString(), "/home/william/Documentos/Unidas/", "responseRQ_header.xml");
-                            LogWS.convertRequestSoap(integrador, log, message);
-                        }
-                    }, new WebServiceMessageExtractor<Object>() {
-                        @Override
-                        public Object extractData(WebServiceMessage message) throws IOException {
-                            Object result = null;
-                            try {
-                                result = MarshallingUtils.unmarshal(getUnmarshaller(), message);
-                            } catch (IOException ex) {
-                                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                                ((WebServiceMessage) message).writeTo(out);
-                                log.setDsResponse(out.toByteArray());
-                                throw ex;
-                            }
-                            LogWS.convertResponseSoap(integrador, log, result);
-                            ObjectHandling.generateFile(ObjectHandling.marshalObjectXML(result), "/home/william/Documentos/Unidas/", "responseRS_header.xml");
-                            
-                            return result;
-                        }
-                    });
-
+            result = wsTemplate.sendAndReceive((WebServiceMessage message) -> {
+                SoapHeader soapHeader = ((SoapMessage) message).getSoapHeader();
+                try {
+                    getMarshaller().marshal(connection.buiderUserCredential(integrador), soapHeader.getResult());
+                } catch (ErrorException | IOException | XmlMappingException ex) {
+                    Logger.getLogger(SOAPClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                ((SoapMessage) message).setSoapAction(action);
+                SoapBody soapBody = ((SoapMessage) message).getSoapBody();
+                try {
+                    getMarshaller().marshal(object, soapBody.getPayloadResult());
+                } catch (IOException | XmlMappingException ex) {
+                    Logger.getLogger(SOAPClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                connection.soapEnvelopeCustom((SaajSoapMessage) message);
+                
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ((WebServiceMessage) message).writeTo(out);
+                ObjectHandling.generateFile(out.toString(), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RQ_header.xml");
+                LogWS.convertRequestSoap(integrador, log, message);
+                
+            }, (WebServiceMessage message) -> {
+                Object result1 = null;
+                try {
+                    result1 = MarshallingUtils.unmarshal(getUnmarshaller(), message);
+                }catch (IOException ex) {
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    ((WebServiceMessage) message).writeTo(out);
+                    log.setDsResponse(out.toByteArray());
+                    throw ex;
+                }
+                LogWS.convertResponseSoap(integrador, log, result1);
+                ObjectHandling.generateFile(ObjectHandling.marshalObjectXML(result1), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RS_header.xml");
+                
+                return result1;
+            });
             
             connection.checkError(integrador, result);
+            
         } catch (ErrorException ex) {
             LogWS.convertResponseSoap(integrador, log, result);
             throw ex;
@@ -135,21 +120,4 @@ public class SOAPClient extends WebServiceGatewaySupport {
 
         return result;
     }    
-    
-    private void alterarEnvelope(WebServiceMessage message) throws SOAPException {
-        try {
-            SoapEnvelope envelope = ((SoapMessage) message).getEnvelope();
-//            SoapHeader header = ((SoapMessage) message).getSoapHeader();
-//            SoapBody body = ((SoapMessage) message).getSoapBody();
-            
-            envelope.addNamespaceDeclaration("soap", "http://www.w3.org/2003/05/soap-envelope");
-            envelope.addNamespaceDeclaration("unid", "http://www.unidas.com.br/");
-            envelope.addNamespaceDeclaration("ns", "http://www.opentravel.org/OTA/2003/05");
-//            header.addNamespaceDeclaration("soap", "http://www.w3.org/2003/05/soap-envelope");
-//            body.addNamespaceDeclaration("soap", "http://www.w3.org/2003/05/soap-envelope");
-            
-        } catch(SoapEnvelopeException ex){
-            ex.printStackTrace();
-        }
-    }
 }

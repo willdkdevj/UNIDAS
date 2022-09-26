@@ -10,20 +10,29 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.client.interfaces.ConnectionWebservice;
-import br.com.infotera.unidas.model.gen.ErrorType;
-import br.com.infotera.unidas.model.gen.ErrorsType;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRateResponse;
-import br.com.infotera.unidas.model.gen.Usuario;
+import br.com.infotera.unidas.model.gen.opentravel.ErrorType;
+import br.com.infotera.unidas.model.gen.opentravel.ErrorsType;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
+import br.com.infotera.unidas.model.gen.unidas.Usuario;
 import br.com.infotera.unidas.util.ObjectHandling;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPHeader;
+import javax.xml.soap.SOAPMessage;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.ws.soap.SoapEnvelopeException;
+import org.springframework.ws.soap.saaj.SaajSoapMessage;
 
 /**
  *
@@ -55,19 +64,21 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
                 OtaVehAvailRateResponse retorno = (OtaVehAvailRateResponse) response;
                 if(retorno.getOtaVehAvailRateResult() != null && !Utils.isListNothing(retorno.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore())) {
                     for(Object obj : retorno.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore()){
-                        ErrorsType errors = (ErrorsType) obj;
-                        if(!Utils.isListNothing(errors.getError())){
-                            for(ErrorType error : errors.getError()){
-                                dsErro = error.getCode() + " - " + error.getValue();
+                        if(obj instanceof ErrorsType){
+                            ErrorsType errors = (ErrorsType) obj;
+                            if(!Utils.isListNothing(errors.getError())){
+                                for(ErrorType error : errors.getError()){
+                                    dsErro = error.getCode() + " - " + error.getValue();
+                                }
                             }
                         }
                     }
                 }
             }
-//                dsErro = retorno.getRequest() != null && retorno.getRequest().getError() != null ? retorno.getRequest().getError().getDetails() : "";
-//            } else if(retorno.getRequest() != null && retorno.getRequest().getSuccessful() != null && !Boolean.parseBoolean(retorno.getRequest().getSuccessful())){
-//                dsErro = retorno.getRequest() != null && retorno.getRequest().getError() != null ? retorno.getRequest().getError().getDetails() : "";
-//            }
+
+        } catch(NullPointerException ex){
+            throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkError", WSMensagemErroEnum.GENNULO, 
+                    "Não houve resposta do webservice parceiro - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, true);
         } catch(Exception ex){
             throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkError", WSMensagemErroEnum.GENCLIENT, 
                     "Não foi possível determinar o retorno do webservice - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
@@ -175,6 +186,30 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
         
         return user;
     }
-    
-    
+
+    @Override
+    public void soapEnvelopeCustom(SaajSoapMessage message) {
+        try {
+            SOAPMessage soapMessage = (SOAPMessage) message.getSaajMessage();
+            SOAPEnvelope envelope = soapMessage.getSOAPPart().getEnvelope();
+            SOAPHeader header = soapMessage.getSOAPHeader();
+            SOAPBody body = soapMessage.getSOAPBody();
+            
+            envelope.removeNamespaceDeclaration(envelope.getPrefix());
+            envelope.addNamespaceDeclaration("soap", "http://www.w3.org/2003/05/soap-envelope");
+            envelope.addNamespaceDeclaration("unid", "http://www.unidas.com.br/");
+            envelope.addNamespaceDeclaration("ns", "http://www.opentravel.org/OTA/2003/05");
+            envelope.setPrefix("soap");
+
+            header.removeNamespaceDeclaration(header.getPrefix());
+            header.setPrefix("soap");
+
+            body.removeNamespaceDeclaration(body.getPrefix());
+            body.setPrefix("soap");
+            
+        } catch(SoapEnvelopeException ex){
+        } catch (SOAPException ex) {
+            Logger.getLogger(ConnectionWebServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

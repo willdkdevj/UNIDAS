@@ -6,7 +6,7 @@ package br.com.infotera.unidas.service.interfaces;
 
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRQ;
-import br.com.infotera.unidas.model.gen.OtaVehAvailRate;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,4 +18,5 @@ public interface OTAVehAvailRequest {
     
     OtaVehAvailRate builderOTAVehAvailRateRequest(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) throws ErrorException;
     
+    void validateBusinessRules(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ);
 }

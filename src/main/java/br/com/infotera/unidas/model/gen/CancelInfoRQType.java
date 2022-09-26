@@ -8,6 +8,9 @@
 
 package br.com.infotera.unidas.model.gen;
 
+import br.com.infotera.unidas.model.gen.opentravel.PersonNameType;
+import br.com.infotera.unidas.model.gen.opentravel.TransactionActionType;
+import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
