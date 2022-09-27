@@ -5,6 +5,9 @@
  */
 package br.com.infotera.unidas.service;
 
+import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
+import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 import org.springframework.stereotype.Service;
 
 
@@ -12,4 +15,7 @@ import org.springframework.stereotype.Service;
 public class ReservarCarWS {
 
 
+    public WSReservarRS reservar(WSReservarRQ reservarRQ) throws ErrorException {
+        
+    }
 }

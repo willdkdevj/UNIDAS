@@ -6,9 +6,9 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehResResult;
+import br.com.infotera.unidas.model.gen.OtaVehCancelResult;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OtaVehResResult" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OtaVehCancelResult" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,36 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "otaVehResResult"
+    "otaVehCancelResult"
 })
-@XmlRootElement(name = "OtaVehResResponse", namespace = "http://www.unidas.com.br/")
-public class OtaVehResResponse {
+@XmlRootElement(name = "OtaVehCancelResponse", namespace = "http://www.unidas.com.br/")
+public class OtaVehCancelResponse {
 
-    @XmlElement(name = "OtaVehResResult")
-    protected OtaVehResResult otaVehResResult;
+    @XmlElement(name = "OtaVehCancelResult")
+    protected OtaVehCancelResult otaVehCancelResult;
 
     /**
-     * Obtém o valor da propriedade otaVehResResult.
+     * Obtém o valor da propriedade otaVehCancelResult.
      * 
      * @return
      *     possible object is
-     *     {@link OtaVehResResult }
+     *     {@link OtaVehCancelResult }
      *     
      */
-    public OtaVehResResult getOtaVehResResult() {
-        return otaVehResResult;
+    public OtaVehCancelResult getOtaVehCancelResult() {
+        return otaVehCancelResult;
     }
 
     /**
-     * Define o valor da propriedade otaVehResResult.
+     * Define o valor da propriedade otaVehCancelResult.
      * 
      * @param value
      *     allowed object is
-     *     {@link OtaVehResResult }
+     *     {@link OtaVehCancelResult }
      *     
      */
-    public void setOtaVehResResult(OtaVehResResult value) {
-        this.otaVehResResult = value;
+    public void setOtaVehCancelResult(OtaVehCancelResult value) {
+        this.otaVehCancelResult = value;
     }
 
 }

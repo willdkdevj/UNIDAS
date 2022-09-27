@@ -32,14 +32,12 @@ import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalRateType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType.VehAvails.VehAvail;
 import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
-import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.xml.datatype.XMLGregorianCalendar;
 import org.springframework.stereotype.Component;
 
 @Component

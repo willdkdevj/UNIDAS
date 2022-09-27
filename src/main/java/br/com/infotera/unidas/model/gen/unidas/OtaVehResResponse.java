@@ -6,9 +6,9 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehLocDetailResult;
+import br.com.infotera.unidas.model.gen.opentravel.OtaVehResResult;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OtaVehLocDetailResult" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OtaVehResResult" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,36 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "otaVehLocDetailResult"
+    "otaVehResResult"
 })
-@XmlRootElement(name = "OtaVehLocDetailResponse", namespace = "http://www.unidas.com.br/")
-public class OtaVehLocDetailResponse {
+@XmlRootElement(name = "OtaVehResResponse", namespace = "http://www.unidas.com.br/")
+public class OtaVehResResponse {
 
-    @XmlElement(name = "OtaVehLocDetailResult")
-    protected OtaVehLocDetailResult otaVehLocDetailResult;
+    @XmlElement(name = "OtaVehResResult")
+    protected OtaVehResResult otaVehResResult;
 
     /**
-     * Obtém o valor da propriedade otaVehLocDetailResult.
+     * Obtém o valor da propriedade otaVehResResult.
      * 
      * @return
      *     possible object is
-     *     {@link OtaVehLocDetailResult }
+     *     {@link OtaVehResResult }
      *     
      */
-    public OtaVehLocDetailResult getOtaVehLocDetailResult() {
-        return otaVehLocDetailResult;
+    public OtaVehResResult getOtaVehResResult() {
+        return otaVehResResult;
     }
 
     /**
-     * Define o valor da propriedade otaVehLocDetailResult.
+     * Define o valor da propriedade otaVehResResult.
      * 
      * @param value
      *     allowed object is
-     *     {@link OtaVehLocDetailResult }
+     *     {@link OtaVehResResult }
      *     
      */
-    public void setOtaVehLocDetailResult(OtaVehLocDetailResult value) {
-        this.otaVehLocDetailResult = value;
+    public void setOtaVehResResult(OtaVehResResult value) {
+        this.otaVehResResult = value;
     }
 
 }
