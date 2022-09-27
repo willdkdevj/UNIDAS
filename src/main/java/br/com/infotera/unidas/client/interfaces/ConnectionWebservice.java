@@ -16,7 +16,7 @@ import org.springframework.ws.soap.saaj.SaajSoapMessage;
  * 
  * @author William Dias
  * @version 1.0
- * @since Branch Master (29/08/2022)
+ * @since Branch Master (20/09/2022)
  * 
  * @see - builderPost - responsible for building all the necessary parameters requested by the partner to be sent via the POST (HTTP) protocol
  * @see - execute - responsible for initiating the communication by sending the request previously requested by the partner through the HttpClient framework

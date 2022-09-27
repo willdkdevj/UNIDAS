@@ -25,7 +25,7 @@ pipeline {
                     docker.build('us.gcr.io/poc-kubernetes-256618/${IMAGE}:${VERSION}','--build-arg AMBIENTE=P --build-arg JAR_FILE=${IMAGE}-${VERSION}.jar .' )
                     sh "docker push us.gcr.io/poc-kubernetes-256618/${IMAGE}:${VERSION}"
                 }
-                    sh "kubectl set image deployment.v1.apps/unidas-deployment unidas=us.gcr.io/poc-kubernetes-256618/${IMAGE}:${VERSION}"
+                    sh "kubectl set image deployment.v1.apps/unidas-deployment unidas-deployment=us.gcr.io/poc-kubernetes-256618/${IMAGE}:${VERSION}"
             }
         }
 

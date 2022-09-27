@@ -32,6 +32,7 @@ import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalRateType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType.VehAvails.VehAvail;
 import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
+import br.com.infotera.unidas.util.SupplierBase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
@@ -101,7 +102,7 @@ public class DisponibilidadeCarWS {
                                         veiculo.setServicoTipo(WSServicoTipoEnum.VEICULO);
                                         veiculo.setDtRetirada(dtRetirada);
                                         veiculo.setDtDevolucao(dtDevolucao);
-                                        veiculo.setNmClasse(vehAvail.getVehAvailCore().getVehicle().getVehMakeModel().getCode());
+                                        veiculo.setNmClasse(SupplierBase.loadingClassVehicle().get(vehAvail.getVehAvailCore().getVehicle().getVehMakeModel().getCode()));
                                         veiculo.setNmModelo(vehAvail.getVehAvailCore().getVehicle().getVehMakeModel().getName());
                                         veiculo.setLocalRetirada(veiculoLocalList.get(0));
                                         veiculo.setLocalDevolucao(veiculoLocalList.size() > 1 ? veiculoLocalList.get(1) : veiculoLocalList.get(0));
@@ -201,7 +202,7 @@ public class DisponibilidadeCarWS {
                 /** Verifica o codigo referente a categoria do veículo */
                 WSVeiculoDetalhe veiculoCategoria = new WSVeiculoDetalhe();
                 veiculoCategoria.setDetalheEnum(WSVeiculoDetalheEnum.CATEGORIA);
-                veiculoCategoria.setNmDetalhe(vehAvailCore.getVehicle().getCode() != null ? vehAvailCore.getVehicle().getCode() : "Não informada");
+                veiculoCategoria.setNmDetalhe(vehAvailCore.getVehicle().getCode() != null ? SupplierBase.loadingClassVehicle().get(vehAvailCore.getVehicle().getCode()) : "Não informada");
                 veiculoDetalheList.add(veiculoCategoria);
                 
                 /** Verifica a existencia de ar condicionado */
@@ -295,7 +296,7 @@ public class DisponibilidadeCarWS {
                 }
                 
                 veiculoLocal.setNmMunicipio(addressLocal.getCityName() + " - " + addressLocal.getStateProv() != null ? addressLocal.getStateProv().getStateCode() : "" + ", CEP:" + addressLocal.getPostalCode());
-                veiculoLocal.setNmPais(addressLocal.getCounty());
+                veiculoLocal.setNmPais(addressLocal.getCounty() != null && addressLocal.getCounty().equals("BR") ? "BRASIL" : addressLocal.getCounty());
             }
             
         } catch (Exception ex) {

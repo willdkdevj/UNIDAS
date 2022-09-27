@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/carro")
 public class DisponibilidadeController {
 
     @Autowired

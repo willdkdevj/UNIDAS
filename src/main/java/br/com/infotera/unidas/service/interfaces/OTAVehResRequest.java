@@ -7,11 +7,13 @@ package br.com.infotera.unidas.service.interfaces;
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author William Dias
  */
+@Component
 public interface OTAVehResRequest {
     
     OtaVehRes builderOTAVehResRequest(WSReservarRQ reservarRQ) throws ErrorException;

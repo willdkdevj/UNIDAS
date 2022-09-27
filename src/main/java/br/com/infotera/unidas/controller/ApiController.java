@@ -12,6 +12,8 @@ import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRQ;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRS;
 import br.com.infotera.common.util.LogWS;
+import br.com.infotera.unidas.service.ReservarCarWS;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/carro")
 public class ApiController {
 
 //    @Autowired
@@ -30,14 +31,14 @@ public class ApiController {
 //    private ConsultarCarWS consultarWS;
 //    @Autowired
 //    private PreReservarCarWS preReservarWS;
-//    @Autowired
-//    private ReservarCarWS reservarWS;
-//    @Autowired
+    @Autowired
+    private ReservarCarWS reservarWS;
+    @Autowired
 //    private TarifarCarWS tarifarWS;
 //    @Autowired
 //    private PreCancelarCarWS preCancelarWS;
 //    @Autowired
-//    private Gson gson;
+    private Gson gson;
 //
 //    private static Logger logger;
 //
@@ -87,24 +88,24 @@ public class ApiController {
 //        }
 //        return gson.toJson(result);
 //    }
-//
-//    @RequestMapping(value = "reservar", method = RequestMethod.POST)
-//    public String reservar(@RequestBody String jsonRQ) {
-//        WSReservarRS result = null;
-//        WSReservarRQ wsRQ = gson.fromJson(jsonRQ, WSReservarRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("reservar");
-//        try {
-//            result = reservarWS.reservar(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSReservarRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSReservarRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "reservar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        return gson.toJson(result);
-//    }
-//
+
+    @RequestMapping(value = "reservar", method = RequestMethod.POST)
+    public String reservar(@RequestBody String jsonRQ) {
+        WSReservarRS result = null;
+        WSReservarRQ wsRQ = gson.fromJson(jsonRQ, WSReservarRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("reservar");
+        try {
+            result = reservarWS.book(wsRQ);
+        } catch (ErrorException ex) {
+            result = new WSReservarRS(null, ex.getIntegrador());
+        } catch (Exception ex) {
+            result = new WSReservarRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "reservar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
+        } finally {
+            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
+        }
+        return gson.toJson(result);
+    }
+
 //    @RequestMapping(value = "confirmar", method = RequestMethod.POST)
 //    public String confirmar(@RequestBody String jsonRQ) {
 //        WSReservaRS result = null;

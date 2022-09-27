@@ -33,12 +33,13 @@ public class PreReservarCarWS {
                 "Não foi possível a reserva do serviço (WSReservaServico). Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false));
         
         if (!Utils.isListNothing(reservaServico.getServico().getReservaNomeList())) {
-            Boolean isFirst = true;
+//            Boolean isFirst = true;
             for(WSReservaNome reservaNome : reservaServico.getServico().getReservaNomeList()) {
-                if(isFirst){
+//                if(isFirst){
                     reservaNome.setDocumento(new WSDocumento(WSDocumentoTipoEnum.CPF, Boolean.TRUE));
-                    isFirst = false;
-                }
+//                    isFirst = false;
+                    break;
+//                }
             }
         } else {
             WSReservaNome reservaNomePadrao = new WSReservaNome();
