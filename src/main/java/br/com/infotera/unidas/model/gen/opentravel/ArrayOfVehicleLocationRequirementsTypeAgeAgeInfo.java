@@ -6,10 +6,10 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.IncludeExcludeType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleType;
+import br.com.infotera.unidas.model.gen.opentravel.FormattedTextType;
+import br.com.infotera.unidas.model.gen.opentravel.LocationDetailRequirementAgeInfoType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,20 +20,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle complex type.
+ * <p>Classe Java de ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo complex type.
  * 
  * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle"&gt;
+ * &lt;complexType name="ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="Vehicle" maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="AgeInfo" maxOccurs="unbounded" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
- *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}VehicleType"&gt;
- *                 &lt;attribute name="IncludeExclude" type="{http://www.opentravel.org/OTA/2003/05}IncludeExcludeType" /&gt;
+ *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
+ *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAgeInfoType" /&gt;
  *               &lt;/extension&gt;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
@@ -47,41 +47,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle", propOrder = {
-    "vehicle"
+@XmlType(name = "ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo", propOrder = {
+    "ageInfo"
 })
-public class ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle {
+public class ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo {
 
-    @XmlElement(name = "Vehicle")
-    protected List<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle> vehicle;
+    @XmlElement(name = "AgeInfo")
+    protected List<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo> ageInfo;
 
     /**
-     * Gets the value of the vehicle property.
+     * Gets the value of the ageInfo property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the vehicle property.
+     * This is why there is not a <CODE>set</CODE> method for the ageInfo property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getVehicle().add(newItem);
+     *    getAgeInfo().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle }
+     * {@link ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo }
      * 
      * 
      */
-    public List<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle> getVehicle() {
-        if (vehicle == null) {
-            vehicle = new ArrayList<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle>();
+    public List<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo> getAgeInfo() {
+        if (ageInfo == null) {
+            ageInfo = new ArrayList<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo>();
         }
-        return this.vehicle;
+        return this.ageInfo;
     }
 
 
@@ -93,8 +93,8 @@ public class ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle {
      * <pre>
      * &lt;complexType&gt;
      *   &lt;complexContent&gt;
-     *     &lt;extension base="{http://www.opentravel.org/OTA/2003/05}VehicleType"&gt;
-     *       &lt;attribute name="IncludeExclude" type="{http://www.opentravel.org/OTA/2003/05}IncludeExcludeType" /&gt;
+     *     &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
+     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAgeInfoType" /&gt;
      *     &lt;/extension&gt;
      *   &lt;/complexContent&gt;
      * &lt;/complexType&gt;
@@ -104,35 +104,35 @@ public class ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class Vehicle
-        extends VehicleType
+    public static class AgeInfo
+        extends FormattedTextType
     {
 
-        @XmlAttribute(name = "IncludeExclude")
-        protected IncludeExcludeType includeExclude;
+        @XmlAttribute(name = "Type", required = true)
+        protected LocationDetailRequirementAgeInfoType type;
 
         /**
-         * Obtém o valor da propriedade includeExclude.
+         * Obtém o valor da propriedade type.
          * 
          * @return
          *     possible object is
-         *     {@link IncludeExcludeType }
+         *     {@link LocationDetailRequirementAgeInfoType }
          *     
          */
-        public IncludeExcludeType getIncludeExclude() {
-            return includeExclude;
+        public LocationDetailRequirementAgeInfoType getType() {
+            return type;
         }
 
         /**
-         * Define o valor da propriedade includeExclude.
+         * Define o valor da propriedade type.
          * 
          * @param value
          *     allowed object is
-         *     {@link IncludeExcludeType }
+         *     {@link LocationDetailRequirementAgeInfoType }
          *     
          */
-        public void setIncludeExclude(IncludeExcludeType value) {
-            this.includeExclude = value;
+        public void setType(LocationDetailRequirementAgeInfoType value) {
+            this.type = value;
         }
 
     }

@@ -5,32 +5,17 @@
 package br.com.infotera.unidas.controller;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSDocumento;
 import br.com.infotera.common.WSIntegrador;
-import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.enumerator.WSAmbienteEnum;
-import br.com.infotera.common.enumerator.WSDocumentoTipoEnum;
 import br.com.infotera.common.enumerator.WSEmpresaEnum;
 import br.com.infotera.common.enumerator.WSIntegradorEnum;
-import br.com.infotera.common.enumerator.WSPaxTipoEnum;
-import br.com.infotera.common.enumerator.WSSexoEnum;
-import br.com.infotera.common.hotel.WSConfigUh;
-import br.com.infotera.common.hotel.WSHotel;
-import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRQ;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRS;
 import br.com.infotera.common.util.Utils;
-import br.com.infotera.unidas.client.UnidasClient;
-import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
-import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import br.com.infotera.unidas.service.DisponibilidadeCarWS;
-import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
-import br.com.infotera.unidas.util.ObjectHandling;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author william
+ * @author William Dias
  */
 @RestController
 public class TestController {

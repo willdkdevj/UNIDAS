@@ -84,7 +84,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 @XmlSeeAlso({
     br.com.infotera.unidas.model.gen.opentravel.VehicleLocationVehiclesType.Vehicle.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle.class
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle.class
 })
 public class VehicleType
     extends VehicleCoreType

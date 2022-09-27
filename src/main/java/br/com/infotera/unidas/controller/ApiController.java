@@ -12,7 +12,9 @@ import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRQ;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRS;
 import br.com.infotera.common.util.LogWS;
+import br.com.infotera.unidas.service.PreReservarCarWS;
 import br.com.infotera.unidas.service.ReservarCarWS;
+import br.com.infotera.unidas.service.TarifarCarWS;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,15 +31,15 @@ public class ApiController {
 //    private CancelarCarWS cancelarWS;
 //    @Autowired
 //    private ConsultarCarWS consultarWS;
-//    @Autowired
-//    private PreReservarCarWS preReservarWS;
+    @Autowired
+    private PreReservarCarWS preReservarWS;
     @Autowired
     private ReservarCarWS reservarWS;
     @Autowired
-//    private TarifarCarWS tarifarWS;
+    private TarifarCarWS tarifarWS;
 //    @Autowired
 //    private PreCancelarCarWS preCancelarWS;
-//    @Autowired
+    @Autowired
     private Gson gson;
 //
 //    private static Logger logger;
@@ -54,40 +56,40 @@ public class ApiController {
 //    public String helloWorld() {
 //        return "Hello World Amadeus Car";
 //    }
-//
-//    @RequestMapping(value = "tarifar", method = RequestMethod.POST)
-//    public String tarifar(@RequestBody String jsonRQ) {
-//        WSTarifarServicoRS result = null;
-//        WSTarifarServicoRQ wsRQ = gson.fromJson(jsonRQ, WSTarifarServicoRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("tarifar");
-//        try {
-//            result = tarifarWS.tarifar(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSTarifarServicoRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSTarifarServicoRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "tarifar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        return gson.toJson(result);
-//    }
-//
-//    @RequestMapping(value = "preReservar", method = RequestMethod.POST)
-//    public String preReservar(@RequestBody String jsonRQ) {
-//        WSPreReservarRS result = null;
-//        WSPreReservarRQ wsRQ = gson.fromJson(jsonRQ, WSPreReservarRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("preReservar");
-//        try {
-//            result = preReservarWS.preReservar(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSPreReservarRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSPreReservarRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "preReservar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        return gson.toJson(result);
-//    }
+
+    @RequestMapping(value = "tarifar", method = RequestMethod.POST)
+    public String tarifar(@RequestBody String jsonRQ) {
+        WSTarifarServicoRS result = null;
+        WSTarifarServicoRQ wsRQ = gson.fromJson(jsonRQ, WSTarifarServicoRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("tarifar");
+        try {
+            result = tarifarWS.rate(wsRQ);
+        } catch (ErrorException ex) {
+            result = new WSTarifarServicoRS(null, ex.getIntegrador());
+        } catch (Exception ex) {
+            result = new WSTarifarServicoRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "tarifar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
+        } finally {
+            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
+        }
+        return gson.toJson(result);
+    }
+
+    @RequestMapping(value = "preReservar", method = RequestMethod.POST)
+    public String preReservar(@RequestBody String jsonRQ) {
+        WSPreReservarRS result = null;
+        WSPreReservarRQ wsRQ = gson.fromJson(jsonRQ, WSPreReservarRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("preReservar");
+        try {
+            result = preReservarWS.preBooking(wsRQ);
+        } catch (ErrorException ex) {
+            result = new WSPreReservarRS(null, ex.getIntegrador());
+        } catch (Exception ex) {
+            result = new WSPreReservarRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "preReservar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
+        } finally {
+            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
+        }
+        return gson.toJson(result);
+    }
 
     @RequestMapping(value = "reservar", method = RequestMethod.POST)
     public String reservar(@RequestBody String jsonRQ) {
@@ -169,6 +171,4 @@ public class ApiController {
 //        }
 //        return gson.toJson(result);
 //    }
-
-
 }

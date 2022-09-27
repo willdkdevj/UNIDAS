@@ -6,7 +6,7 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.opentravel.ArrayOfCancelRuleType;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     "uniqueID"
 })
 @XmlSeeAlso({
-    br.com.infotera.unidas.model.gen.OtaVehCancelResult.VehCancelRSCore.class
+    br.com.infotera.unidas.model.gen.opentravel.OtaVehCancelResult.VehCancelRSCore.class
 })
 public class CancelInfoRSType {
 

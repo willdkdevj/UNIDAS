@@ -1,6 +1,3 @@
-/*
- * DOCUMENTAÇÃO DO FORNECEDOR: https://www.dotwconnect.com/interface/pt/documentation
- */
 package br.com.infotera.unidas.client.module;
 
 import br.com.infotera.common.ErrorException;
@@ -14,9 +11,6 @@ import br.com.infotera.unidas.model.gen.opentravel.ErrorType;
 import br.com.infotera.unidas.model.gen.opentravel.ErrorsType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import br.com.infotera.unidas.model.gen.unidas.Usuario;
-import br.com.infotera.unidas.util.ObjectHandling;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,11 +19,7 @@ import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.soap.SoapEnvelopeException;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;

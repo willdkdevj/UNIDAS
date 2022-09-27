@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.*;
 import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehAvailRateRQ;
 import javax.xml.bind.JAXBElement;

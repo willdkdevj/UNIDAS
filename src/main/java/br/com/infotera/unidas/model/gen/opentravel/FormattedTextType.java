@@ -50,11 +50,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     VendorMessageType.class,
     VehicleLocationInformationType.class,
     br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo.ShuttleInfo.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc.class,
     br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationVehiclesTypeVehicleInfo.VehicleInfo.class
 })
 public class FormattedTextType {

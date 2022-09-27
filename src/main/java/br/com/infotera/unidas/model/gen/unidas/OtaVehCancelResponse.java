@@ -8,7 +8,7 @@
 
 package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.OtaVehCancelResult;
+import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancelResult;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

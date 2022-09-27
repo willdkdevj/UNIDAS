@@ -93,9 +93,9 @@ import javax.xml.bind.annotation.XmlType;
     br.com.infotera.unidas.model.gen.opentravel.VehicleLocationAdditionalFeesType.Surcharges.Surcharge.class,
     br.com.infotera.unidas.model.gen.opentravel.VehicleLocationAdditionalFeesType.MiscellaneousCharges.MiscellaneousCharge.class,
     VehicleChargePurposeType.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge.OnLocServiceCharge.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge.class,
-    br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge.class
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge.OnLocServiceCharge.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge.class,
+    br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge.class
 })
 public class VehicleChargeType {
 

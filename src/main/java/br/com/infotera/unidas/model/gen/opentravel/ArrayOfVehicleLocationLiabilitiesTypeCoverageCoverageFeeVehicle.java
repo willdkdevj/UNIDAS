@@ -6,10 +6,10 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.FormattedTextType;
-import br.com.infotera.unidas.model.gen.opentravel.LocationDetailRequirementInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.IncludeExcludeType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,20 +20,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de ArrayOfVehicleLocationRequirementsTypeRequirementInfo complex type.
+ * <p>Classe Java de ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle complex type.
  * 
  * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfVehicleLocationRequirementsTypeRequirementInfo"&gt;
+ * &lt;complexType name="ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="RequirementInfo" maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="Vehicle" maxOccurs="unbounded" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
- *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
- *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementInfoType" /&gt;
+ *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}VehicleType"&gt;
+ *                 &lt;attribute name="IncludeExclude" type="{http://www.opentravel.org/OTA/2003/05}IncludeExcludeType" /&gt;
  *               &lt;/extension&gt;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
@@ -47,41 +47,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfVehicleLocationRequirementsTypeRequirementInfo", propOrder = {
-    "requirementInfo"
+@XmlType(name = "ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle", propOrder = {
+    "vehicle"
 })
-public class ArrayOfVehicleLocationRequirementsTypeRequirementInfo {
+public class ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle {
 
-    @XmlElement(name = "RequirementInfo")
-    protected List<ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo> requirementInfo;
+    @XmlElement(name = "Vehicle")
+    protected List<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle> vehicle;
 
     /**
-     * Gets the value of the requirementInfo property.
+     * Gets the value of the vehicle property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the requirementInfo property.
+     * This is why there is not a <CODE>set</CODE> method for the vehicle property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRequirementInfo().add(newItem);
+     *    getVehicle().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo }
+     * {@link ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle }
      * 
      * 
      */
-    public List<ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo> getRequirementInfo() {
-        if (requirementInfo == null) {
-            requirementInfo = new ArrayList<ArrayOfVehicleLocationRequirementsTypeRequirementInfo.RequirementInfo>();
+    public List<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle> getVehicle() {
+        if (vehicle == null) {
+            vehicle = new ArrayList<ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFeeVehicle.Vehicle>();
         }
-        return this.requirementInfo;
+        return this.vehicle;
     }
 
 
@@ -93,8 +93,8 @@ public class ArrayOfVehicleLocationRequirementsTypeRequirementInfo {
      * <pre>
      * &lt;complexType&gt;
      *   &lt;complexContent&gt;
-     *     &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
-     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementInfoType" /&gt;
+     *     &lt;extension base="{http://www.opentravel.org/OTA/2003/05}VehicleType"&gt;
+     *       &lt;attribute name="IncludeExclude" type="{http://www.opentravel.org/OTA/2003/05}IncludeExcludeType" /&gt;
      *     &lt;/extension&gt;
      *   &lt;/complexContent&gt;
      * &lt;/complexType&gt;
@@ -104,35 +104,35 @@ public class ArrayOfVehicleLocationRequirementsTypeRequirementInfo {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class RequirementInfo
-        extends FormattedTextType
+    public static class Vehicle
+        extends VehicleType
     {
 
-        @XmlAttribute(name = "Type", required = true)
-        protected LocationDetailRequirementInfoType type;
+        @XmlAttribute(name = "IncludeExclude")
+        protected IncludeExcludeType includeExclude;
 
         /**
-         * Obtém o valor da propriedade type.
+         * Obtém o valor da propriedade includeExclude.
          * 
          * @return
          *     possible object is
-         *     {@link LocationDetailRequirementInfoType }
+         *     {@link IncludeExcludeType }
          *     
          */
-        public LocationDetailRequirementInfoType getType() {
-            return type;
+        public IncludeExcludeType getIncludeExclude() {
+            return includeExclude;
         }
 
         /**
-         * Define o valor da propriedade type.
+         * Define o valor da propriedade includeExclude.
          * 
          * @param value
          *     allowed object is
-         *     {@link LocationDetailRequirementInfoType }
+         *     {@link IncludeExcludeType }
          *     
          */
-        public void setType(LocationDetailRequirementInfoType value) {
-            this.type = value;
+        public void setIncludeExclude(IncludeExcludeType value) {
+            this.includeExclude = value;
         }
 
     }

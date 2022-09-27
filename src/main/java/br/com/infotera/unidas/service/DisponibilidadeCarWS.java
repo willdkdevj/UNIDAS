@@ -39,9 +39,16 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+/**
+ * SpringBoot default configuration class
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ */
+@Service
 public class DisponibilidadeCarWS {
 
     @Autowired

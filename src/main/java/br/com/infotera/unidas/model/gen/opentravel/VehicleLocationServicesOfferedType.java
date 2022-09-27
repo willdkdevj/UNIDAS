@@ -8,9 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOffLocationService;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeOnLocationService;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipment;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;

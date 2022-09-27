@@ -5,6 +5,13 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import org.springframework.stereotype.Service;
 
+/**
+ * SpringBoot default configuration class
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ */
 @Service
 public class PreCancelarCarWS {
 

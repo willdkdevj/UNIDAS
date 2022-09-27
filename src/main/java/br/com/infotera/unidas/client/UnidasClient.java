@@ -1,6 +1,3 @@
-/*
- * DOCUMENTAÇÃO DO FORNECEDOR: https://www.dotwconnect.com/interface/pt/documentation
- */
 package br.com.infotera.unidas.client;
 
 import br.com.infotera.common.ErrorException;

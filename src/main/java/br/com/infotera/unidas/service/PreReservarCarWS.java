@@ -14,11 +14,17 @@ import br.com.infotera.common.util.Utils;
 import java.util.Arrays;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * SpringBoot default configuration class
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ */
 @Service
 public class PreReservarCarWS {
 
-    public WSPreReservarRS preReservar(WSPreReservarRQ preReservarRQ) throws ErrorException {
+    public WSPreReservarRS preBooking(WSPreReservarRQ preReservarRQ) throws ErrorException {
         
         WSReservaServico reservaServico = applyCompulsoryCPF(preReservarRQ);
         

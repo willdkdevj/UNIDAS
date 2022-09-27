@@ -16,7 +16,13 @@ import br.com.infotera.unidas.service.interfaces.OTAVehResRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * SpringBoot default configuration class
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ */
 @Service
 public class ReservarCarWS {
 
@@ -37,6 +43,6 @@ public class ReservarCarWS {
     }
 
     private void checkStatusBooking(WSReservarRQ reservarRQ, OtaVehResResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }

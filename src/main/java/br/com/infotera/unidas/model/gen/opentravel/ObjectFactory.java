@@ -9,7 +9,6 @@
 package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.unidas.*;
-import br.com.infotera.unidas.model.gen.*;
 import br.com.infotera.unidas.model.gen.unidas.Usuario;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

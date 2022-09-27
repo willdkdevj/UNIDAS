@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleTourInfoType;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleArrivalDetailsType;

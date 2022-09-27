@@ -6,7 +6,7 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.opentravel.VehicleChargeType;
 import br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleCoreType;
@@ -19,16 +19,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge complex type.
+ * <p>Classe Java de ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge complex type.
  * 
  * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge"&gt;
+ * &lt;complexType name="ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="EquipCharge" maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="OffLocServiceCharge" maxOccurs="unbounded" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
  *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}VehicleChargeType"&gt;
@@ -48,41 +48,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge", propOrder = {
-    "equipCharge"
+@XmlType(name = "ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge", propOrder = {
+    "offLocServiceCharge"
 })
-public class ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge {
+public class ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge {
 
-    @XmlElement(name = "EquipCharge")
-    protected List<ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge> equipCharge;
+    @XmlElement(name = "OffLocServiceCharge")
+    protected List<ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge> offLocServiceCharge;
 
     /**
-     * Gets the value of the equipCharge property.
+     * Gets the value of the offLocServiceCharge property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the equipCharge property.
+     * This is why there is not a <CODE>set</CODE> method for the offLocServiceCharge property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEquipCharge().add(newItem);
+     *    getOffLocServiceCharge().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge }
+     * {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge }
      * 
      * 
      */
-    public List<ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge> getEquipCharge() {
-        if (equipCharge == null) {
-            equipCharge = new ArrayList<ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharge.EquipCharge>();
+    public List<ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge> getOffLocServiceCharge() {
+        if (offLocServiceCharge == null) {
+            offLocServiceCharge = new ArrayList<ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge.OffLocServiceCharge>();
         }
-        return this.equipCharge;
+        return this.offLocServiceCharge;
     }
 
 
@@ -109,7 +109,7 @@ public class ArrayOfVehicleLocationServicesOfferedTypeSpecialEquipmentEquipCharg
     @XmlType(name = "", propOrder = {
         "vehicles"
     })
-    public static class EquipCharge
+    public static class OffLocServiceCharge
         extends VehicleChargeType
     {
 

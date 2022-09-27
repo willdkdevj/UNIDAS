@@ -6,11 +6,11 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.opentravel.FormattedTextType;
+import br.com.infotera.unidas.model.gen.opentravel.OffLocationServiceIDType;
 import br.com.infotera.unidas.model.gen.opentravel.OperationSchedulesType;
-import br.com.infotera.unidas.model.gen.opentravel.OnLocationServiceIDType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,21 +21,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de ArrayOfVehicleLocationServicesOfferedTypeOnLocationService complex type.
+ * <p>Classe Java de ArrayOfVehicleLocationServicesOfferedTypeOffLocationService complex type.
  * 
  * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfVehicleLocationServicesOfferedTypeOnLocationService"&gt;
+ * &lt;complexType name="ArrayOfVehicleLocationServicesOfferedTypeOffLocationService"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="OnLocationService" maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="OffLocationService" maxOccurs="unbounded" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *                 &lt;sequence&gt;
- *                   &lt;element name="OnLocServiceDesc" minOccurs="0"&gt;
+ *                   &lt;element name="OffLocServiceDesc" minOccurs="0"&gt;
  *                     &lt;complexType&gt;
  *                       &lt;complexContent&gt;
  *                         &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlType;
  *                     &lt;/complexType&gt;
  *                   &lt;/element&gt;
  *                   &lt;element name="OperationSchedules" type="{http://www.opentravel.org/OTA/2003/05}OperationSchedulesType" minOccurs="0"/&gt;
- *                   &lt;element name="OnLocServiceCharges" type="{http://www.opentravel.org/OTA/2003/05}ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge" minOccurs="0"/&gt;
+ *                   &lt;element name="OffLocServiceCharges" type="{http://www.opentravel.org/OTA/2003/05}ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge" minOccurs="0"/&gt;
  *                 &lt;/sequence&gt;
- *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}OnLocationServiceID_Type" /&gt;
+ *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}OffLocationServiceID_Type" /&gt;
  *               &lt;/restriction&gt;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
@@ -60,41 +60,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfVehicleLocationServicesOfferedTypeOnLocationService", propOrder = {
-    "onLocationService"
+@XmlType(name = "ArrayOfVehicleLocationServicesOfferedTypeOffLocationService", propOrder = {
+    "offLocationService"
 })
-public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
+public class ArrayOfVehicleLocationServicesOfferedTypeOffLocationService {
 
-    @XmlElement(name = "OnLocationService")
-    protected List<ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService> onLocationService;
+    @XmlElement(name = "OffLocationService")
+    protected List<ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService> offLocationService;
 
     /**
-     * Gets the value of the onLocationService property.
+     * Gets the value of the offLocationService property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the onLocationService property.
+     * This is why there is not a <CODE>set</CODE> method for the offLocationService property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getOnLocationService().add(newItem);
+     *    getOffLocationService().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService }
+     * {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService }
      * 
      * 
      */
-    public List<ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService> getOnLocationService() {
-        if (onLocationService == null) {
-            onLocationService = new ArrayList<ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService>();
+    public List<ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService> getOffLocationService() {
+        if (offLocationService == null) {
+            offLocationService = new ArrayList<ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService>();
         }
-        return this.onLocationService;
+        return this.offLocationService;
     }
 
 
@@ -108,7 +108,7 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
      *   &lt;complexContent&gt;
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
      *       &lt;sequence&gt;
-     *         &lt;element name="OnLocServiceDesc" minOccurs="0"&gt;
+     *         &lt;element name="OffLocServiceDesc" minOccurs="0"&gt;
      *           &lt;complexType&gt;
      *             &lt;complexContent&gt;
      *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
@@ -117,9 +117,9 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
      *           &lt;/complexType&gt;
      *         &lt;/element&gt;
      *         &lt;element name="OperationSchedules" type="{http://www.opentravel.org/OTA/2003/05}OperationSchedulesType" minOccurs="0"/&gt;
-     *         &lt;element name="OnLocServiceCharges" type="{http://www.opentravel.org/OTA/2003/05}ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge" minOccurs="0"/&gt;
+     *         &lt;element name="OffLocServiceCharges" type="{http://www.opentravel.org/OTA/2003/05}ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge" minOccurs="0"/&gt;
      *       &lt;/sequence&gt;
-     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}OnLocationServiceID_Type" /&gt;
+     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}OffLocationServiceID_Type" /&gt;
      *     &lt;/restriction&gt;
      *   &lt;/complexContent&gt;
      * &lt;/complexType&gt;
@@ -129,43 +129,43 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "onLocServiceDesc",
+        "offLocServiceDesc",
         "operationSchedules",
-        "onLocServiceCharges"
+        "offLocServiceCharges"
     })
-    public static class OnLocationService {
+    public static class OffLocationService {
 
-        @XmlElement(name = "OnLocServiceDesc")
-        protected ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc onLocServiceDesc;
+        @XmlElement(name = "OffLocServiceDesc")
+        protected ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc offLocServiceDesc;
         @XmlElement(name = "OperationSchedules")
         protected OperationSchedulesType operationSchedules;
-        @XmlElement(name = "OnLocServiceCharges")
-        protected ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge onLocServiceCharges;
+        @XmlElement(name = "OffLocServiceCharges")
+        protected ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge offLocServiceCharges;
         @XmlAttribute(name = "Type", required = true)
-        protected OnLocationServiceIDType type;
+        protected OffLocationServiceIDType type;
 
         /**
-         * Obtém o valor da propriedade onLocServiceDesc.
+         * Obtém o valor da propriedade offLocServiceDesc.
          * 
          * @return
          *     possible object is
-         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc }
+         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc }
          *     
          */
-        public ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc getOnLocServiceDesc() {
-            return onLocServiceDesc;
+        public ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc getOffLocServiceDesc() {
+            return offLocServiceDesc;
         }
 
         /**
-         * Define o valor da propriedade onLocServiceDesc.
+         * Define o valor da propriedade offLocServiceDesc.
          * 
          * @param value
          *     allowed object is
-         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc }
+         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc }
          *     
          */
-        public void setOnLocServiceDesc(ArrayOfVehicleLocationServicesOfferedTypeOnLocationService.OnLocationService.OnLocServiceDesc value) {
-            this.onLocServiceDesc = value;
+        public void setOffLocServiceDesc(ArrayOfVehicleLocationServicesOfferedTypeOffLocationService.OffLocationService.OffLocServiceDesc value) {
+            this.offLocServiceDesc = value;
         }
 
         /**
@@ -193,27 +193,27 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
         }
 
         /**
-         * Obtém o valor da propriedade onLocServiceCharges.
+         * Obtém o valor da propriedade offLocServiceCharges.
          * 
          * @return
          *     possible object is
-         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge }
+         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge }
          *     
          */
-        public ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge getOnLocServiceCharges() {
-            return onLocServiceCharges;
+        public ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge getOffLocServiceCharges() {
+            return offLocServiceCharges;
         }
 
         /**
-         * Define o valor da propriedade onLocServiceCharges.
+         * Define o valor da propriedade offLocServiceCharges.
          * 
          * @param value
          *     allowed object is
-         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge }
+         *     {@link ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge }
          *     
          */
-        public void setOnLocServiceCharges(ArrayOfVehicleLocationServicesOfferedTypeOnLocationServiceOnLocServiceCharge value) {
-            this.onLocServiceCharges = value;
+        public void setOffLocServiceCharges(ArrayOfVehicleLocationServicesOfferedTypeOffLocationServiceOffLocServiceCharge value) {
+            this.offLocServiceCharges = value;
         }
 
         /**
@@ -221,10 +221,10 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
          * 
          * @return
          *     possible object is
-         *     {@link OnLocationServiceIDType }
+         *     {@link OffLocationServiceIDType }
          *     
          */
-        public OnLocationServiceIDType getType() {
+        public OffLocationServiceIDType getType() {
             return type;
         }
 
@@ -233,10 +233,10 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
          * 
          * @param value
          *     allowed object is
-         *     {@link OnLocationServiceIDType }
+         *     {@link OffLocationServiceIDType }
          *     
          */
-        public void setType(OnLocationServiceIDType value) {
+        public void setType(OffLocationServiceIDType value) {
             this.type = value;
         }
 
@@ -259,7 +259,7 @@ public class ArrayOfVehicleLocationServicesOfferedTypeOnLocationService {
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "")
-        public static class OnLocServiceDesc
+        public static class OffLocServiceDesc
             extends FormattedTextType
         {
 

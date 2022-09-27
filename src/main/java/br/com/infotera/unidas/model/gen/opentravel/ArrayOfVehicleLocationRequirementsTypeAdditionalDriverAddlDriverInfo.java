@@ -6,10 +6,10 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.opentravel.FormattedTextType;
-import br.com.infotera.unidas.model.gen.opentravel.LocationDetailRequirementAgeInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.LocationDetailRequirementAddlDriverInfoType;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,20 +20,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo complex type.
+ * <p>Classe Java de ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo complex type.
  * 
  * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo"&gt;
+ * &lt;complexType name="ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="AgeInfo" maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="AddlDriverInfo" maxOccurs="unbounded" minOccurs="0"&gt;
  *           &lt;complexType&gt;
  *             &lt;complexContent&gt;
  *               &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
- *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAgeInfoType" /&gt;
+ *                 &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAddlDriverInfoType" /&gt;
  *               &lt;/extension&gt;
  *             &lt;/complexContent&gt;
  *           &lt;/complexType&gt;
@@ -47,41 +47,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo", propOrder = {
-    "ageInfo"
+@XmlType(name = "ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo", propOrder = {
+    "addlDriverInfo"
 })
-public class ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo {
+public class ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo {
 
-    @XmlElement(name = "AgeInfo")
-    protected List<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo> ageInfo;
+    @XmlElement(name = "AddlDriverInfo")
+    protected List<ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo> addlDriverInfo;
 
     /**
-     * Gets the value of the ageInfo property.
+     * Gets the value of the addlDriverInfo property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ageInfo property.
+     * This is why there is not a <CODE>set</CODE> method for the addlDriverInfo property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAgeInfo().add(newItem);
+     *    getAddlDriverInfo().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo }
+     * {@link ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo }
      * 
      * 
      */
-    public List<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo> getAgeInfo() {
-        if (ageInfo == null) {
-            ageInfo = new ArrayList<ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo.AgeInfo>();
+    public List<ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo> getAddlDriverInfo() {
+        if (addlDriverInfo == null) {
+            addlDriverInfo = new ArrayList<ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo.AddlDriverInfo>();
         }
-        return this.ageInfo;
+        return this.addlDriverInfo;
     }
 
 
@@ -94,7 +94,7 @@ public class ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo {
      * &lt;complexType&gt;
      *   &lt;complexContent&gt;
      *     &lt;extension base="{http://www.opentravel.org/OTA/2003/05}FormattedTextType"&gt;
-     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAgeInfoType" /&gt;
+     *       &lt;attribute name="Type" use="required" type="{http://www.opentravel.org/OTA/2003/05}LocationDetailRequirementAddlDriverInfoType" /&gt;
      *     &lt;/extension&gt;
      *   &lt;/complexContent&gt;
      * &lt;/complexType&gt;
@@ -104,22 +104,22 @@ public class ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class AgeInfo
+    public static class AddlDriverInfo
         extends FormattedTextType
     {
 
         @XmlAttribute(name = "Type", required = true)
-        protected LocationDetailRequirementAgeInfoType type;
+        protected LocationDetailRequirementAddlDriverInfoType type;
 
         /**
          * Obtém o valor da propriedade type.
          * 
          * @return
          *     possible object is
-         *     {@link LocationDetailRequirementAgeInfoType }
+         *     {@link LocationDetailRequirementAddlDriverInfoType }
          *     
          */
-        public LocationDetailRequirementAgeInfoType getType() {
+        public LocationDetailRequirementAddlDriverInfoType getType() {
             return type;
         }
 
@@ -128,10 +128,10 @@ public class ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo {
          * 
          * @param value
          *     allowed object is
-         *     {@link LocationDetailRequirementAgeInfoType }
+         *     {@link LocationDetailRequirementAddlDriverInfoType }
          *     
          */
-        public void setType(LocationDetailRequirementAgeInfoType value) {
+        public void setType(LocationDetailRequirementAddlDriverInfoType value) {
             this.type = value;
         }
 

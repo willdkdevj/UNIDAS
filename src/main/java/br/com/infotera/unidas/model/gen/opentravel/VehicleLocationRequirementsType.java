@@ -8,9 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeAdditionalDriverAddlDriverInfo;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeAgeAgeInfo;
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationRequirementsTypeRequirementInfo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;

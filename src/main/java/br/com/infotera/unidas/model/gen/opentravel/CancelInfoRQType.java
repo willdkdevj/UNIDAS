@@ -6,7 +6,7 @@
 //
 
 
-package br.com.infotera.unidas.model.gen;
+package br.com.infotera.unidas.model.gen.opentravel;
 
 import br.com.infotera.unidas.model.gen.opentravel.PersonNameType;
 import br.com.infotera.unidas.model.gen.opentravel.TransactionActionType;

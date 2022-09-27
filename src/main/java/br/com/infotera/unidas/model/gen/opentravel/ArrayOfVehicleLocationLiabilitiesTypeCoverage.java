@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.ArrayOfVehicleLocationLiabilitiesTypeCoverageCoverageFee;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
