@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Classe responsável por efetivar a reserva do veículo conforme os dados enviados pelo passageiro (Booking)
+ * Class responsible for making the reservation of the vehicle according to the data sent by the passenger (Booking)
  * 
  * @author William Dias
  * @version 1.0

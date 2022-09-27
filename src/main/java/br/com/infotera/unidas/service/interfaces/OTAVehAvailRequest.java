@@ -10,8 +10,11 @@ import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author william
+ * Interface with the methods for assembling requisitions OTAVehAvailRate
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Component
 public interface OTAVehAvailRequest {

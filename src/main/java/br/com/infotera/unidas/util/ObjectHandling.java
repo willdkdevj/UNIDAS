@@ -1,6 +1,3 @@
-/*
- * DOCUMENTAÇÃO DO FORNECEDOR: https://www.dotwconnect.com/interface/pt/documentation
- */
 package br.com.infotera.unidas.util;
 
 import java.io.ByteArrayInputStream;
@@ -19,8 +16,11 @@ import javax.xml.transform.stream.StreamResult;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * Class that has auxiliary methods for serialization and deserialization of objects and String handling
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Component
 public class ObjectHandling {

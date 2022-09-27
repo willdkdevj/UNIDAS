@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * SpringBoot default configuration class
+ * Class to check rate change between availability and pre-booking process
  * 
  * @author William Dias
  * @version 1.0

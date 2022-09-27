@@ -10,8 +10,11 @@ import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * Interface with the methods for assembling requisitions OTAVehRes
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Component
 public interface OTAVehResRequest {

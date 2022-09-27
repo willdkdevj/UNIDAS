@@ -18,8 +18,11 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * Helper class that contains the methods that return objects common to requests made to the partner webservice
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Component
 public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {

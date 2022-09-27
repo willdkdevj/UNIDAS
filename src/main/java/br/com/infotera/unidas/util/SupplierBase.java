@@ -1,6 +1,3 @@
-/*
- * DOCUMENTAÇÃO DO FORNECEDOR: https://www.dotwconnect.com/interface/pt/documentation
- */
 package br.com.infotera.unidas.util;
 
 import java.util.HashMap;
@@ -8,8 +5,11 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 /**
- *
+ * Class that holds static data templates from the partner vendor
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Component
 public class SupplierBase {

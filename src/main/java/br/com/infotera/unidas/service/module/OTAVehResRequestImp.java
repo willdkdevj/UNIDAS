@@ -5,7 +5,6 @@
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaServico;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
@@ -17,13 +16,15 @@ import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehResRequest;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Class responsible for assembling the requisition to make the reservation of the input (OTAVehRes)
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Service
 public class OTAVehResRequestImp implements OTAVehResRequest {

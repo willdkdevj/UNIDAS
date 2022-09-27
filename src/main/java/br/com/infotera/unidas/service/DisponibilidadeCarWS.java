@@ -42,8 +42,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 /**
- * Classe responsável por realizar a análise a disponilidade de produtos do fornecedor ao realizar a tratativa de envio e recebimento
- * das informações 
+ * Class responsible for performing the analysis of the supplier's product availability when dealing with the sending and receiving
+ * of information 
  * 
  * @author William Dias
  * @version 1.0
@@ -78,32 +78,32 @@ public class DisponibilidadeCarWS {
                 List<VehicleAvailRSCoreType> vehicleAvailCoreList = checkAvailityReturn(integrador, otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore());
                 if(!Utils.isListNothing(vehicleAvailCoreList)){
                     for(VehicleAvailRSCoreType vehicleAvailCore : vehicleAvailCoreList){
-                        
+                        /** Pick-up and return dates */
                         Date dtRetirada = vehicleAvailCore.getVehRentalCore().getPickUpDateTime().toGregorianCalendar().getTime();
                         Date dtDevolucao = vehicleAvailCore.getVehRentalCore().getReturnDateTime().toGregorianCalendar().getTime();
                         
-                        /** Verifica lista de disponibilidade de veículos e seus respectivos detalhes */
+                        /** Checks the list of available vehicles and their details */
                         if(vehicleAvailCore.getVehVendorAvails() != null && !Utils.isListNothing(vehicleAvailCore.getVehVendorAvails().getVehVendorAvail())){
                             
-                            /** Verifica a disponibilidade dos veículos */
+                            /** Checks the availability of the vehicles */
                             List<WSVeiculo> veiculoList = new ArrayList();
                             for(VehicleVendorAvailabilityType vehVendorAvail : vehicleAvailCore.getVehVendorAvails().getVehVendorAvail()){
                                 
-                                /** Verifica local de retirada e devolução do veículo */
+                                /** Checks the vehicle pickup and return location */
                                 List<WSVeiculoLocal> veiculoLocalList = assembleDestinationRental(integrador, vehVendorAvail.getInfo());
                             
                                 for(VehAvail vehAvail : vehVendorAvail.getVehAvails().getVehAvail()){
                                     if(vehAvail.getVehAvailCore() != null && vehAvail.getVehAvailCore().getStatus().equals(InventoryStatusType.AVAILABLE)){
-                                        /** Monta lista com detalhes sobre o veículo */
+                                        /** Assemble list with details about the vehicle */
                                         List<WSVeiculoDetalhe> veiculoDetalheList = assembleDetailsVehicle(integrador, vehAvail.getVehAvailCore());
                                         
-                                        /** Monta lista de mídia sobre o veículo */
+                                        /** Assembles media list about the vehicle */
                                         List<WSMedia> mediaList = assembleMediaList(integrador, vehAvail.getVehAvailCore());        
                                         
-                                        /** Monta a tarifa e possíveis taxas aplicada na locação */
+                                        /** Sets up the rate and possible fees applied to the rental */
                                         WSTarifa tarifa = assembleRate(integrador, vehAvail.getVehAvailCore(), vehAvail.getVehAvailInfo());
                                         
-                                        /** Montar objeto Locadora UNIDAS */
+                                        /** Set up Rental Object UNIDAS */
                                         WSVeiculoLocadora locadora = assembleRentalCompany();
                                         
                                         WSVeiculo veiculo = new WSVeiculo();
@@ -129,8 +129,9 @@ public class DisponibilidadeCarWS {
                                 }
                             }
                             
-                            /** Monta Lista de Pesquisa de Veículos */
+                            /** Assemble Vehicle Search List */
                             veiculoPesquisaList = Arrays.asList(new WSVeiculoPesquisa(1, veiculoList, null));
+                            
                         } else {
                             throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleSearchVehiclesList", WSMensagemErroEnum.SDI, 
                                 "Não foi possível obter as informações sobre os veículos. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
@@ -154,6 +155,7 @@ public class DisponibilidadeCarWS {
         try {
             vehicleAvailCoreList = new ArrayList();
             for(Object obj : errorsOrSuccessOrVehAvailRSCore) {
+                /** Checks if the VehicleAvailRSCoreType object was returned, which refers to the supplies available from the vendor */
                 if(obj instanceof VehicleAvailRSCoreType){
                     VehicleAvailRSCoreType vehAvailCore = (VehicleAvailRSCoreType) obj;
                     vehicleAvailCoreList.add(vehAvailCore);
@@ -173,16 +175,16 @@ public class DisponibilidadeCarWS {
             if(vehVendorAvailType != null && !Utils.isListNothing(vehVendorAvailType.getLocationDetails())){
                 veiculoLocalList = new ArrayList();
                 vehVendorAvailType.getLocationDetails().stream().map(localDetail -> {
-                    /** Obtém a lista de telefones atrelado as locadoras */
+                    /** Get the phone book tied to the rental companies */
                     String telefones = treatPhones(integrador, localDetail.getTelephone());
                     
-                    /** Obtém as localidades das locadoras (Retirada - Devolução) */
+                    /** Get the locations of the car rental companies (Pickup - Return) */
                     WSVeiculoLocal veiculoLocal = new WSVeiculoLocal();
                     veiculoLocal.setCdLocal(localDetail.getCode());
                     veiculoLocal.setNmLocal(localDetail.getName());
                     veiculoLocal.setDsTelefone(telefones);
                     
-                    /** Insere os dados de logradouro a locadora */
+                    /** Enters the address data of the Landlord (Rental) */
                     setUpAddresses(integrador, veiculoLocal, localDetail.getAddress());
                     
                     return veiculoLocal;
@@ -192,7 +194,7 @@ public class DisponibilidadeCarWS {
                 throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleDestinationRental", WSMensagemErroEnum.SDI, 
                     "Não foi possível obter as informações sobre as lojas. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
             }
-        } catch (Exception ex) {
+        } catch (ErrorException ex) {
             throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleDestinationRental", WSMensagemErroEnum.SDI, 
                     "Não foi possível montar as informações sobre logradouro das lojas. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
@@ -207,37 +209,37 @@ public class DisponibilidadeCarWS {
             if(vehAvailCore.getVehicle() != null){
                 veiculoDetalheList = new ArrayList();
                 
-                /** Verifica o codigo referente a categoria do veículo */
+                /** Checks the code for the vehicle category */
                 WSVeiculoDetalhe veiculoCategoria = new WSVeiculoDetalhe();
                 veiculoCategoria.setDetalheEnum(WSVeiculoDetalheEnum.CATEGORIA);
                 veiculoCategoria.setNmDetalhe(vehAvailCore.getVehicle().getCode() != null ? SupplierBase.loadingClassVehicle().get(vehAvailCore.getVehicle().getCode()) : "Não informada");
                 veiculoDetalheList.add(veiculoCategoria);
                 
-                /** Verifica a existencia de ar condicionado */
+                /** Checks for air conditioning */
                 WSVeiculoDetalhe veiculoAr = new WSVeiculoDetalhe();
                 veiculoAr.setDetalheEnum(WSVeiculoDetalheEnum.AR_CONDICIONADO);
                 veiculoAr.setNmDetalhe(vehAvailCore.getVehicle().isAirConditionInd() ? "Ar condicionado" : "Sem ar condicionado");
                 veiculoDetalheList.add(veiculoAr);
                                         
-                /** Verifica o tipo de transmissão do veículo */
+                /** Checks the vehicle's transmission type */
                 WSVeiculoDetalhe veiculoTransmissao = new WSVeiculoDetalhe();
                 veiculoTransmissao.setDetalheEnum(WSVeiculoDetalheEnum.TRANSMISSAO);
                 veiculoTransmissao.setNmDetalhe(vehAvailCore.getVehicle().getTransmissionType().MANUAL.name().toUpperCase().equals("MANUAL") ? vehAvailCore.getVehicle().getTransmissionType().MANUAL.value() : vehAvailCore.getVehicle().getTransmissionType().AUTOMATIC.value());
                 veiculoDetalheList.add(veiculoTransmissao);
                 
-                /** Verifica a quantidade de passageiros limite do veículo */
+                /** Checks the vehicle's passenger limit */
                 WSVeiculoDetalhe veiculoQtdPass = new WSVeiculoDetalhe();
                 veiculoQtdPass.setDetalheEnum(WSVeiculoDetalheEnum.QT_PASSAGEIRO);
                 veiculoQtdPass.setNmDetalhe(vehAvailCore.getVehicle().getPassengerQuantity() != null ? vehAvailCore.getVehicle().getPassengerQuantity() : "Não Informado");
                 veiculoDetalheList.add(veiculoQtdPass);
                 
-                /** Verifica a quantidade de portas do veículo */
+                /** Checks the number of doors on the vehicle */
                 WSVeiculoDetalhe veiculoQtdPortas = new WSVeiculoDetalhe();
                 veiculoQtdPortas.setDetalheEnum(WSVeiculoDetalheEnum.QT_PORTAS);
                 veiculoQtdPortas.setNmDetalhe(vehAvailCore.getVehicle().getVehType() != null && vehAvailCore.getVehicle().getVehType().getDoorCount() != null ? vehAvailCore.getVehicle().getVehType().getDoorCount() : "Não Informado");
                 veiculoDetalheList.add(veiculoQtdPortas);
                 
-                /** Verifica a Quilometragem limite do veículo */
+                /** Checks the vehicle's Mileage Limit */
                 VehicleRentalRateType.RateDistance rateDistance = vehAvailCore.getRentalRate().stream().findFirst().get().getRateDistance().stream().findFirst().orElse(null);
                 if(rateDistance != null){
                     WSVeiculoDetalhe veiculoKm = new WSVeiculoDetalhe();
@@ -260,6 +262,7 @@ public class DisponibilidadeCarWS {
         try {
             List<VehicleLocationDetailsType.Telephone> phoneList = telephones.stream().filter(phone -> phone != null).collect(Collectors.toList());
             if(!Utils.isListNothing(phoneList)){
+                /** Checks the values corresponding to the phone numbers of the rental companies */
                 for(VehicleLocationDetailsType.Telephone phone : phoneList){
                     if(telefones != null){
                         telefones += " / " + phone.getPhoneNumber(); 
@@ -278,20 +281,19 @@ public class DisponibilidadeCarWS {
         }
         
         return telefones;
-                    
     }
 
     private void setUpAddresses(WSIntegrador integrador, WSVeiculoLocal veiculoLocal, List<AddressInfoType> addressList) {
         try {
-            /** Verifica as informações de logradouro de retirada e devolução */
+            /** Checks the pickup and return address information */
             AddressInfoType addressLocal = addressList.stream().filter(address -> address != null).findFirst().orElse(null);
             
             if(addressLocal != null){
                 int i = 0;
-                /** Monta os dados de endereço e coordenadas ao WSVeiculoLocal */
+                /** Assemble the address and coordinate data to WSVeicleLocation */
                 for(String address : addressLocal.getAddressLine()){
                     
-                    /** Retorna no segundo elemento  da lista (get(1)) as informações de coordenadas do logradouro */
+                    /** Returns in the second element of the list (get(1)) the coordinate information of the street address */
                     if(i == 1){
                         String[] latitudeLongitude = address.split(", ");
                         veiculoLocal.setCdLatitude(latitudeLongitude[0]);
@@ -309,7 +311,7 @@ public class DisponibilidadeCarWS {
             
         } catch (Exception ex) {
             try {
-                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "treatAddresses", WSMensagemErroEnum.SDI,
+                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "setUpAddresses", WSMensagemErroEnum.SDI,
                         "Não foi possível obter as informações de logradouro da Locadora. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
             } catch (ErrorException ex1) {
                 Logger.getLogger(DisponibilidadeCarWS.class.getName()).log(Level.SEVERE, null, ex1);
@@ -321,13 +323,14 @@ public class DisponibilidadeCarWS {
     private List<WSMedia> assembleMediaList(WSIntegrador integrador, VehicleAvailCoreType vehAvailCore) {
         List<WSMedia> mediaList = null;
         try {
+            /** List populated with a WSMedia object because it returns only one parameter */
             mediaList = new ArrayList();
             if(vehAvailCore.getVehicle() != null && vehAvailCore.getVehicle().getPictureURL() != null) {
                 mediaList = Arrays.asList(new WSMedia(WSMediaCategoriaEnum.VEICULO, vehAvailCore.getVehicle().getPictureURL()));
             }
         } catch (Exception ex) {
             try {
-                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "treatAddresses", WSMensagemErroEnum.SDI,
+                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleMediaList", WSMensagemErroEnum.SDI,
                         "Não foi possível obter a lista de mídias sobre o veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
             } catch (ErrorException ex1) {
                 Logger.getLogger(DisponibilidadeCarWS.class.getName()).log(Level.SEVERE, null, ex1);
@@ -345,13 +348,13 @@ public class DisponibilidadeCarWS {
                 String sgMoeda = null;
                 Double vlNeto = 0.0d;
                 
-                /** Obtém o valor para a tarifa de locação */
+                /** Gets the value for the rental rate */
                 for(TotalCharge charge : vehAvailCore.getTotalCharge()){
                     sgMoeda = charge.getCurrencyCode();
                     vlNeto = Utils.somar(vlNeto, charge.getEstimatedTotalAmount().doubleValue());
                 }
                                 
-                /** Verifica a existência de taxas de serviço para a tarifa */
+                /** Checks for service charges for the tariff */
                 List<WSTarifaAdicional> tarifaAdicionalList = null;
                 if(!Utils.isListNothing(vehAvailCore.getFees().getFee())){
                     String sgMoedaTaxa = null;
@@ -360,8 +363,9 @@ public class DisponibilidadeCarWS {
                     tarifaAdicionalList = new ArrayList();
                     for(VehicleChargePurposeType fee : vehAvailCore.getFees().getFee()){
                         if(fee.getAmount() != null && fee.getAmount().doubleValue() > 0.0){
-                            /** sigla de moeda da taxa */
+                            /** Rate currency abbreviation */
                             sgMoedaTaxa = fee.getCurrencyCode();
+                            
                             /**
                              * 1 - Vehicle rental
                              * 2 - Drop
@@ -401,11 +405,11 @@ public class DisponibilidadeCarWS {
                              */
                             WSTarifaAdicional taxaAdicional = new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, fee.getDescription(), sgMoedaTaxa, fee.getAmount().doubleValue());
                             tarifaAdicionalList.add(taxaAdicional);
-
+                            /** Performs the calculation of all returned fees */
                             vlNetoTaxa = Utils.somar(vlNetoTaxa, fee.getAmount().doubleValue());
                         }
                     }
-                    
+                    /** Performs the calculation in order to subtract the fees from the total amount */
                     vlNeto = Utils.subtrair(vlNeto, vlNetoTaxa);
                 }
                 
@@ -435,6 +439,7 @@ public class DisponibilidadeCarWS {
             if(vehAvailInfo != null && vehAvailInfo.getPricedCoverages() != null && !Utils.isListNothing(vehAvailInfo.getPricedCoverages().getPricedCoverage())){
                 for(CoveragePricedType coverage : vehAvailInfo.getPricedCoverages().getPricedCoverage()){
                     if(coverage.isRequired()){
+                        /** Assemble the fare description that is classified as required */
                         for(CoverageDetailsType detail : coverage.getCoverage().getDetails()){
                             if(detail.getCoverageTextType().equals(CoverageTextType.SUPPLEMENT)){
                                 description += "<b>" + detail.getValue() + "</b> </br>";

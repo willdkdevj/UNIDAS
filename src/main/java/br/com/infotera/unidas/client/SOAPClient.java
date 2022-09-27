@@ -118,7 +118,7 @@ public class SOAPClient extends WebServiceGatewaySupport {
                 
                 return result1;
             });
-            
+
             connection.checkError(integrador, result);
             
         } catch (ErrorException ex) {

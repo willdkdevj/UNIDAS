@@ -23,8 +23,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * Class responsible for assembling the requisition to analyze the supplier's product availability (OTAVehAvailRate)
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
  */
 @Service
 public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
