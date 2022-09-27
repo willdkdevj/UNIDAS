@@ -24,6 +24,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.logging.Logger;
 
+/**
+ * Class responsible for allocating the API Service methods to communicate with the Legacy System
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (29/08/2022)
+ * 
+ * @see - preReservar - performs validation of the guests to be tied to the reservation
+ * @see - reservar - analyzes the reservation status and applies the locator to it
+ * @see - consultar - checks the reserve status and updates the status and policies for the reserve
+ * @see - preCancelar - check the status of the reservation before proceeding with the cancellation
+ * @see - cancelar - checks the status of the reservation to make the cancellation request
+ * @see - pesquisaHotel - search the supplier for the hotel by its ID
+ * @see - detalheHotel - fetches details about the hotel to apply to the data returned to the host system
+ * @see - relatorio - checks the periodicity applied to fetch the reservations made at the service provider
+ * 
+ */
 @RestController
 public class ApiController {
 
@@ -41,21 +58,15 @@ public class ApiController {
 //    private PreCancelarCarWS preCancelarWS;
     @Autowired
     private Gson gson;
-//
-//    private static Logger logger;
-//
-//    static {
-//        try {
-//            logger = Logger.getLogger(ApiController.class.getName());
-//        } catch (Exception e) {
-//            e.printStackTrace(System.err);
-//        }
-//    }
-//
-//    @RequestMapping(value = "ola", method = RequestMethod.GET)
-//    public String helloWorld() {
-//        return "Hello World Amadeus Car";
-//    }
+
+    private static Logger logger;
+    static {
+        try {
+            logger = Logger.getLogger(ApiController.class.getName());
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+    }
 
     @RequestMapping(value = "tarifar", method = RequestMethod.POST)
     public String tarifar(@RequestBody String jsonRQ) {

@@ -19,7 +19,6 @@ import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
-import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.soap.SoapEnvelopeException;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
@@ -77,60 +76,6 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
         if (dsErro != null && !dsErro.equals("")) {
             throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkError", WSMensagemErroEnum.GENCONEC, 
                     "Problema relatado pelo Fornecedor: " + dsErro, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-        }
-    }
-
-    /**
-     * Check the state of the response provided by the partner webservice on the parameters sent by the request (HTTP)
-     * 
-     * @param integrador Parameter responsible for passing information between the API and the Legacy System 
-     * @param response HttpClient framework's HttpResponse object analyzes the response state of the partner webservice
-     * @throws ErrorException - If errors occur in the process to be carried out, an exception is launched in order to inform the user through the Legacy System 
-     */
-    @Override
-    public void checkEndpointError(WSIntegrador integrador, HttpResponse response) throws ErrorException {
-        int statusCode = response.getStatusLine().getStatusCode();
-        if(statusCode > 300) {
-            String dsMsg = response.getStatusLine().getReasonPhrase();
-            switch (String.valueOf(statusCode)) {
-                case "400":
-                case "500":
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "401":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: O usuário e senha ou token de acesso são inválidos! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "403":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: O acesso à API está bloqueado ou o usuário está bloqueado! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "404":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: O endereço acessado não existe! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "405":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: O acesso ao método não permitido! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "406":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: A requisição está fora do formato (JSON) permitido! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "422":
-                    //Erro 422 não retorna lista de campos, apenas mensagem
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: CODERROR - "  + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "429":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: O usuário atingiu o limite de requisições! CODERROR: " + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                case "503":
-                    //Erro generico, mensagem especificada na documentação
-                    throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkEndpointError", WSMensagemErroEnum.GENENDPOINT, 
-                            "Erro do conector: Servidor temporariamente off-line! CODERROR: "  + statusCode + " " + dsMsg, WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                default:
-            }
         }
     }
     

@@ -7,7 +7,6 @@ package br.com.infotera.unidas.client.interfaces;
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.unidas.model.gen.unidas.Usuario;
-import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.ws.soap.saaj.SaajSoapMessage;
 
@@ -29,8 +28,6 @@ import org.springframework.ws.soap.saaj.SaajSoapMessage;
 public interface ConnectionWebservice {
     
     void checkError(WSIntegrador integrador, Object response) throws ErrorException;
-    
-    void checkEndpointError(WSIntegrador integrador, HttpResponse response) throws ErrorException;
     
     String checkURI(WSIntegrador integrador) throws ErrorException;
     

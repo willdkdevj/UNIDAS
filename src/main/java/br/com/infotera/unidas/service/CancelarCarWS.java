@@ -8,7 +8,7 @@ package br.com.infotera.unidas.service;
 import org.springframework.stereotype.Service;
 
 /**
- * SpringBoot default configuration class
+ * Class responsible for handling the data to be received and sent from the OTAVehCancel method (Cancel) 
  * 
  * @author William Dias
  * @version 1.0

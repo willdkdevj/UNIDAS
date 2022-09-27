@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @since Branch Master (20/09/2022)
  * 
- * @see - callOTAVehAvailRate
- * @see - callOTAVehRes
+ * @see - callOTAVehAvailRate - Method responsible for invoking the availability function
+ * @see - callOTAVehRes - Method responsible for invoking the reservation function
  */
 @Service
 public class UnidasClient {
@@ -28,10 +28,10 @@ public class UnidasClient {
     private SOAPClient soapClient;
     
     /**
-     * The callOTAVehAvailRate method is responsible for forwarding requests created from the BookingDetailA 
+     * The callOTAVehAvailRate method is responsible for forwarding requests created from the OtaVehAvailRateResponse 
      * that follow a certain ordering pattern of its parameters that is checked when arriving at the partner webservice
      * 
-     * @param vehAvailRateRQ
+     * @param vehAvailRateRQ - Request object parameter expected by the partner webservice method
      * @see - sendAndReceive - responsible for handling the validation of the transaction of sending and receiving requests (XML)
      * @see - marshalXMLToObject - responsible for converting the returned text into an object (POJO)
      * 
@@ -58,15 +58,16 @@ public class UnidasClient {
     }
     
     /**
-     * The invokeB method is responsible for forwarding requests created from the BookingDetailB 
+     * The callOTAVehRes method is responsible for forwarding requests created from the OtaVehResResponse 
      * that follow a certain ordering pattern of its parameters that is checked when arriving at the partner webservice
      * 
+     * @param vehAvailRateRQ - Parametro de objeto de requisição aguardado pelo método do webservice parceiro
      * @see - sendAndReceive - responsible for handling the validation of the transaction of sending and receiving requests (XML)
      * @see - marshalXMLToObject - responsible for converting the returned text into an object (POJO)
      * 
      * @param integrador Parameter responsible for passing information between the API and the Legacy System
      * @return Result - Class responsible for encapsulating the response referring to the type (command) of request sent
-     * @throws ErrorException - No caso de ocorrência de erros no processo a ser realizado é lançado uma exceção a fim de informar o usuário através do Sistema Legado
+     * @throws ErrorException - If errors occur in the process to be carried out, an exception is launched in order to inform the user through the Legacy System
      */
     public OtaVehResResponse callOTAVehRes(WSIntegrador integrador, OtaVehRes vehAvailRateRQ) throws ErrorException {
         OtaVehResResponse response = null;

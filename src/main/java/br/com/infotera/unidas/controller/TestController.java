@@ -24,8 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Class responsible for performing function validation tests
+ * 
  * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ * 
+ * @see - ola - Method used in order to validate the functioning of the API in production
+ * @see - teste - Method used to make a call to the availability method to validate its communication
+ * @see - getCustomer - Implemented method of the BuilderCustomer Interface in order to parameterize requisition to supplier availability
  */
 @RestController
 public class TestController {

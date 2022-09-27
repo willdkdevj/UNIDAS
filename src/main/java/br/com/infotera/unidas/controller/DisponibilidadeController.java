@@ -18,6 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.logging.Logger;
 
+/**
+ * Class responsible for allocating the API availability method to return queries to the Legacy System
+ * 
+ * @author William Dias
+ * @version 1.0
+ * @since Branch Master (20/09/2022)
+ * 
+ * @see - disponibilidade - checks the availability of rooms in the hotels registered with the service provider
+ */
 @RestController
 public class DisponibilidadeController {
 

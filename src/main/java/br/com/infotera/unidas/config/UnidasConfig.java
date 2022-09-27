@@ -34,8 +34,7 @@ public class UnidasConfig {
     @Bean
     public Jaxb2Marshaller assembleMarshaller() {
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setContextPaths("br.com.infotera.unidas.model.gen",
-                                        "br.com.infotera.unidas.model.gen.unidas",
+        jaxb2Marshaller.setContextPaths("br.com.infotera.unidas.model.gen.unidas",
                                         "br.com.infotera.unidas.model.gen.opentravel");
         
         return jaxb2Marshaller;
@@ -52,7 +51,7 @@ public class UnidasConfig {
     }
     
     /**
-     * Responsible for delivering an instance of GSON into API and Legacy System
+     * Learn to consume SOAP web services using spring boot soap client and auto client proxy class generation using JAXB maven plugin
      * 
      * @return Gson - Responsible for delivering an instance of GSON for serialization and deserialization to the API in order to exchange context with the Legacy System
      */
@@ -67,7 +66,8 @@ public class UnidasConfig {
     }
 
     /**
-     * Responsible for delivering an instance of GSON into API and Legacy System
+     * SAAJ-specific implementation of the {@link https://docs.spring.io/spring-ws/site/apidocs/org/springframework/ws/soap/SoapMessage.html} interface. 
+     * Created via the {@link https://docs.spring.io/spring-ws/site/apidocs/org/springframework/ws/soap/saaj/SaajSoapMessageFactory.html}, wraps a {@link SOAPMessage}.
      * 
      * @return Gson - Responsible for delivering an instance of GSON for serialization and deserialization to the API in order to exchange context with the Legacy System
      */
@@ -86,7 +86,7 @@ public class UnidasConfig {
     }
     
     /**
-     * Responsible for delivering an instance of GSON into API and Legacy System
+     * Understanding the Jackson ObjectMapper class and how to serialize Java objects into JSON and deserialize JSON string into Java objects
      * 
      * @return Gson - Responsible for delivering an instance of GSON for serialization and deserialization to the API in order to exchange context with the Legacy System
      */

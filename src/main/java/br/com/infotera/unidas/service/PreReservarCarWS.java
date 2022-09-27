@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.springframework.stereotype.Service;
 
 /**
- * SpringBoot default configuration class
+ * Classe responsável por obter os dados do passageiro a fim de assegurar a reserva do veículo (PreBooking)
  * 
  * @author William Dias
  * @version 1.0
@@ -39,13 +39,12 @@ public class PreReservarCarWS {
                 "Não foi possível a reserva do serviço (WSReservaServico). Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false));
         
         if (!Utils.isListNothing(reservaServico.getServico().getReservaNomeList())) {
-//            Boolean isFirst = true;
+            Boolean isFirst = true;
             for(WSReservaNome reservaNome : reservaServico.getServico().getReservaNomeList()) {
-//                if(isFirst){
+                if(isFirst){
                     reservaNome.setDocumento(new WSDocumento(WSDocumentoTipoEnum.CPF, Boolean.TRUE));
-//                    isFirst = false;
-                    break;
-//                }
+                    isFirst = false;
+                }
             }
         } else {
             WSReservaNome reservaNomePadrao = new WSReservaNome();

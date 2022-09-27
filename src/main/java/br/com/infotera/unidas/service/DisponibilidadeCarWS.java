@@ -42,7 +42,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 /**
- * SpringBoot default configuration class
+ * Classe responsável por realizar a análise a disponilidade de produtos do fornecedor ao realizar a tratativa de envio e recebimento
+ * das informações 
  * 
  * @author William Dias
  * @version 1.0

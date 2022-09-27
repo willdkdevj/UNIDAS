@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.XmlMappingException;
+import org.springframework.stereotype.Component;
 import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.WebServiceMessageFactory;
 import org.springframework.ws.client.core.WebServiceTemplate;
@@ -39,6 +40,7 @@ import org.springframework.ws.transport.http.HttpUrlConnectionMessageSender;
  * 
  * @see - sendAndReceive - responsibles for executing the HttpClient functionality in order to meet the communication metrics with the webservice partner
  */
+@Component
 public class SOAPClient extends WebServiceGatewaySupport {
 
     @Autowired
@@ -48,6 +50,16 @@ public class SOAPClient extends WebServiceGatewaySupport {
         super(messageFactory);
     }
 
+    /**
+     * Method responsible for using the WebServiceMessage function to communicate with the partner webservice
+     * 
+     * @param integrador
+     * @param object - Object representing the request to be sent to the partner webservice
+     * @param action - Name of the function to be invoked to get the information about the booking process step
+     * @return Object - Generic object that will be populated with the information from the function invoked in the partner webservice
+     * 
+     * @throws ErrorException - If errors occur in the process to be carried out, an exception is launched in order to inform the user through the Legacy System
+     */
     public Object sendAndReceive(WSIntegrador integrador, Object object, String action) throws ErrorException {
         Object result = null;
         WSIntegradorLog log = new WSIntegradorLog(integrador.getDsAction(), WSIntegradorLogTipoEnum.XML);

@@ -8,7 +8,8 @@ package br.com.infotera.unidas.service;
 import org.springframework.stereotype.Service;
 
 /**
- * SpringBoot default configuration class
+ * Class responsible for handling the sending and receiving of data related to a specific reservation
+ * when invoking the method OTAVehLOCSearch (Get)
  * 
  * @author William Dias
  * @version 1.0

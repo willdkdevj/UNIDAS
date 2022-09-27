@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * SpringBoot default configuration class
+ * Classe responsável por efetivar a reserva do veículo conforme os dados enviados pelo passageiro (Booking)
  * 
  * @author William Dias
  * @version 1.0
