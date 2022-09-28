@@ -5,6 +5,7 @@
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaServico;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
@@ -13,12 +14,15 @@ import br.com.infotera.unidas.model.gen.opentravel.OTAVehRetResRQ;
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehRetResRQ.VehRetResRQCore;
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleRetrieveResRSCoreType;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehRetResRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * Class responsible for assembling the requisition to make the reservation of the input (OTAVehRetRes)
@@ -27,7 +31,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @since Branch Master (20/09/2022)
  */
-@Service
+@Component
 public class OTAVehRetResRequestImp implements OTAVehRetResRequest {
 
     @Autowired
@@ -44,12 +48,32 @@ public class OTAVehRetResRequestImp implements OTAVehRetResRequest {
             vehRet = new OtaVehRetRes();
             vehRet.setOTAVehRetResRQ(resRQ);
             
-        } catch(Exception ex){
+        } catch(ErrorException ex){
             throw new ErrorException(reservaRQ.getIntegrador(), OTAVehRetResRequestImp.class, "builderOTAVehRetResRequest", WSMensagemErroEnum.GENMETHOD, 
                     "Erro ao parametrizar o OTAVehRetResRequest a fim de realizar a requisição - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
         
         return vehRet;
+    }
+    
+    @Override
+    public List<VehicleRetrieveResRSCoreType> checkRetResReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehRetResRSCore) throws ErrorException {
+        List<VehicleRetrieveResRSCoreType> vehicleRetResCoreList = null;
+        try {
+            vehicleRetResCoreList = new ArrayList();
+            for(Object obj : errorsOrSuccessOrVehRetResRSCore) {
+                /** Checks if the VehicleCancelRSCoreType object was returned, which refers to the status cancel of reservation in vendor */
+                if(obj instanceof VehicleRetrieveResRSCoreType){
+                    VehicleRetrieveResRSCoreType vehRetResCore = (VehicleRetrieveResRSCoreType) obj;
+                    vehicleRetResCoreList.add(vehRetResCore);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, OTAVehCancelRequestImp.class, "checkRetResReturn", WSMensagemErroEnum.GENMETHOD, 
+                    "Não foi possível montar o retorno da consulta da reserva. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+        }
+        
+        return vehicleRetResCoreList;
     }
     
     private OTAVehRetResRQ.VehRetResRQCore setUpVehRetResRQCore(WSReservaRQ reservaRQ){

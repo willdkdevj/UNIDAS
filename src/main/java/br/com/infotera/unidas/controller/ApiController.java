@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * 
  * @author William Dias
  * @version 1.0
- * @since Branch Master (29/08/2022)
+ * @since Branch Master (20/09/2022)
  * 
  * @see - preReservar - performs validation of the guests to be tied to the reservation
  * @see - reservar - analyzes the reservation status and applies the locator to it
@@ -121,23 +121,6 @@ public class ApiController {
         }
         return gson.toJson(result);
     }
-
-//    @RequestMapping(value = "confirmar", method = RequestMethod.POST)
-//    public String confirmar(@RequestBody String jsonRQ) {
-//        WSReservaRS result = null;
-//        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("confirmar");
-//        try {
-//            result = confirmarWS.confirmar(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSReservaRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "confirmar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates;
-//    }
 
     @RequestMapping(value = "consultar", method = RequestMethod.POST)
     public String consulta(@RequestBody String jsonRQ) {

@@ -5,6 +5,7 @@
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaServico;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
@@ -14,11 +15,14 @@ import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
 import br.com.infotera.unidas.model.gen.opentravel.VehiclePrefType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehResRequest;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * Class responsible for assembling the requisition to make the reservation of the input (OTAVehRes)
@@ -27,7 +31,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @since Branch Master (20/09/2022)
  */
-@Service
+@Component
 public class OTAVehResRequestImp implements OTAVehResRequest {
 
     @Autowired
@@ -52,6 +56,26 @@ public class OTAVehResRequestImp implements OTAVehResRequest {
         return otaVehRes;
     }
 
+    @Override
+    public List<VehicleResRSAdditionalInfoType> checkResReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehResRSCore) throws ErrorException {
+        List<VehicleResRSAdditionalInfoType> vehicleResCoreList = null;
+        try {
+            vehicleResCoreList = new ArrayList();
+            for(Object obj : errorsOrSuccessOrVehResRSCore) {
+                /** Checks if the VehicleCancelRSCoreType object was returned, which refers to the status cancel of reservation in vendor */
+                if(obj instanceof VehicleResRSAdditionalInfoType){
+                    VehicleResRSAdditionalInfoType vehResCore = (VehicleResRSAdditionalInfoType) obj;
+                    vehicleResCoreList.add(vehResCore);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, OTAVehCancelRequestImp.class, "checkResReturn", WSMensagemErroEnum.GENMETHOD, 
+                    "Não foi possível montar o retorno para a reserva. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+        }
+        
+        return vehicleResCoreList;
+    }
+    
     public OTAVehResRQ.VehResRQCore setUpVehResCore(WSReservarRQ reservarRQ) throws ErrorException {
         OTAVehResRQ.VehResRQCore vehResCore = null;
         try {

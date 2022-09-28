@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * Class responsible for assembling the requisition to make the reservation of the input (OTAVehCancel)
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @since Branch Master (20/09/2022)
  */
-@Service
+@Component
 public class OTAVehCancelRequestImp implements OTAVehCancelRequest {
 
     @Autowired

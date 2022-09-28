@@ -5,8 +5,11 @@
 package br.com.infotera.unidas.service.interfaces;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,5 +23,7 @@ import org.springframework.stereotype.Component;
 public interface OTAVehResRequest {
     
     OtaVehRes builderOTAVehResRequest(WSReservarRQ reservarRQ) throws ErrorException;
+    
+    List<VehicleResRSAdditionalInfoType> checkResReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehResRSCore) throws ErrorException;
 
 }
