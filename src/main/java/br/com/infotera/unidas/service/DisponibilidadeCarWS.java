@@ -73,9 +73,12 @@ public class DisponibilidadeCarWS {
     private List<WSVeiculoPesquisa> assembleSearchVehiclesList(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ, OtaVehAvailRateResponse otaVehAvailRateResponse) throws ErrorException {
         List<WSVeiculoPesquisa> veiculoPesquisaList = null;
         WSIntegrador integrador = disponibilidadeVeiculoRQ.getIntegrador();
+        
         try {
             if(otaVehAvailRateResponse != null && otaVehAvailRateResponse.getOtaVehAvailRateResult() != null && !Utils.isListNothing(otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore())) {
-                List<VehicleAvailRSCoreType> vehicleAvailCoreList = checkAvailityReturn(integrador, otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore());
+                
+                List<VehicleAvailRSCoreType> vehicleAvailCoreList = request.checkAvailityReturn(integrador, otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore());
+                
                 if(!Utils.isListNothing(vehicleAvailCoreList)){
                     for(VehicleAvailRSCoreType vehicleAvailCore : vehicleAvailCoreList){
                         /** Pick-up and return dates */
@@ -116,8 +119,9 @@ public class DisponibilidadeCarWS {
                                         veiculo.setLocalDevolucao(veiculoLocalList.size() > 1 ? veiculoLocalList.get(1) : veiculoLocalList.get(0));
                                         veiculo.setVeiculoDetalheList(veiculoDetalheList);
                                         veiculo.setLocadora(locadora);
-                                        veiculo.setCdServico(vehAvail.getVehAvailCore().getVehicle().getVehMakeModel().getCode());
+                                        veiculo.setCdServico(vehAvail.getVehAvailCore().getVehicle().getCode());
                                         veiculo.setNmServico(vehAvail.getVehAvailCore().getVehicle().getVehMakeModel().getName());
+                                        veiculo.setDsParametro(vehAvail.getVehAvailCore().getVehicle().getCodeContext());
                                         veiculo.setTarifa(tarifa);
                                         veiculo.setDtServico(dtRetirada);
                                         veiculo.setMediaList(mediaList);
@@ -148,25 +152,6 @@ public class DisponibilidadeCarWS {
         }
         
         return veiculoPesquisaList;
-    }
-
-    private List<VehicleAvailRSCoreType> checkAvailityReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehAvailRSCore) throws ErrorException {
-        List<VehicleAvailRSCoreType> vehicleAvailCoreList = null;
-        try {
-            vehicleAvailCoreList = new ArrayList();
-            for(Object obj : errorsOrSuccessOrVehAvailRSCore) {
-                /** Checks if the VehicleAvailRSCoreType object was returned, which refers to the supplies available from the vendor */
-                if(obj instanceof VehicleAvailRSCoreType){
-                    VehicleAvailRSCoreType vehAvailCore = (VehicleAvailRSCoreType) obj;
-                    vehicleAvailCoreList.add(vehAvailCore);
-                }
-            }
-        } catch (Exception ex) {
-            throw new ErrorException(integrador, DisponibilidadeCarWS.class, "checkAvailityReturn", WSMensagemErroEnum.SDI, 
-                    "Não foi possível montar a disponibilidade dos veículos do fornecedor. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
-        }
-        
-        return vehicleAvailCoreList;
     }
 
     private List<WSVeiculoLocal> assembleDestinationRental(WSIntegrador integrador, VehicleAvailVendorInfoType vehVendorAvailType) throws ErrorException {
@@ -205,7 +190,6 @@ public class DisponibilidadeCarWS {
     private List<WSVeiculoDetalhe> assembleDetailsVehicle(WSIntegrador integrador, VehicleAvailCoreType vehAvailCore) throws ErrorException {
         List<WSVeiculoDetalhe> veiculoDetalheList = null;
         try {
-            
             if(vehAvailCore.getVehicle() != null){
                 veiculoDetalheList = new ArrayList();
                 
@@ -230,7 +214,7 @@ public class DisponibilidadeCarWS {
                 /** Checks the vehicle's passenger limit */
                 WSVeiculoDetalhe veiculoQtdPass = new WSVeiculoDetalhe();
                 veiculoQtdPass.setDetalheEnum(WSVeiculoDetalheEnum.QT_PASSAGEIRO);
-                veiculoQtdPass.setNmDetalhe(vehAvailCore.getVehicle().getPassengerQuantity() != null ? vehAvailCore.getVehicle().getPassengerQuantity() : "Não Informado");
+                veiculoQtdPass.setNmDetalhe(vehAvailCore.getVehicle().getPassengerQuantity() != null ? vehAvailCore.getVehicle().getPassengerQuantity() : "Não informada");
                 veiculoDetalheList.add(veiculoQtdPass);
                 
                 /** Checks the number of doors on the vehicle */
@@ -239,12 +223,18 @@ public class DisponibilidadeCarWS {
                 veiculoQtdPortas.setNmDetalhe(vehAvailCore.getVehicle().getVehType() != null && vehAvailCore.getVehicle().getVehType().getDoorCount() != null ? vehAvailCore.getVehicle().getVehType().getDoorCount() : "Não Informado");
                 veiculoDetalheList.add(veiculoQtdPortas);
                 
+                /** Checks the quantity of baggege on the vehicle */
+                WSVeiculoDetalhe veiculoQtdBagagem = new WSVeiculoDetalhe();
+                veiculoQtdBagagem.setDetalheEnum(WSVeiculoDetalheEnum.QT_BAGAGEM);
+                veiculoQtdBagagem.setNmDetalhe(vehAvailCore.getVehicle().getBaggageQuantity() != null ? vehAvailCore.getVehicle().getBaggageQuantity().toString() : "Não informada");
+                veiculoDetalheList.add(veiculoQtdBagagem);
+                
                 /** Checks the vehicle's Mileage Limit */
                 VehicleRentalRateType.RateDistance rateDistance = vehAvailCore.getRentalRate().stream().findFirst().get().getRateDistance().stream().findFirst().orElse(null);
                 if(rateDistance != null){
                     WSVeiculoDetalhe veiculoKm = new WSVeiculoDetalhe();
                     veiculoKm.setDetalheEnum(WSVeiculoDetalheEnum.KILOMETRAGEM);
-                    veiculoKm.setNmDetalhe(rateDistance.isUnlimited() ? "Unlimited" : rateDistance.getDistUnitName().KM.equals(DistanceUnitNameType.KM) && rateDistance.getQuantity() != null ? rateDistance.getQuantity().toString() : "Não Informado");
+                    veiculoKm.setNmDetalhe(rateDistance.isUnlimited() ? "Unlimited" : rateDistance.getDistUnitName().KM.equals(DistanceUnitNameType.KM) && rateDistance.getQuantity() != null ? rateDistance.getQuantity().toString() : "Não informada");
                     veiculoDetalheList.add(veiculoKm);
                 }
                 
@@ -260,7 +250,10 @@ public class DisponibilidadeCarWS {
     private String treatPhones(WSIntegrador integrador, List<VehicleLocationDetailsType.Telephone> telephones) {
         String telefones = null;
         try {
-            List<VehicleLocationDetailsType.Telephone> phoneList = telephones.stream().filter(phone -> phone != null).collect(Collectors.toList());
+            List<VehicleLocationDetailsType.Telephone> phoneList = telephones.stream()
+                    .filter(phone -> phone != null)
+                    .collect(Collectors.toList());
+            
             if(!Utils.isListNothing(phoneList)){
                 /** Checks the values corresponding to the phone numbers of the rental companies */
                 for(VehicleLocationDetailsType.Telephone phone : phoneList){
@@ -286,7 +279,10 @@ public class DisponibilidadeCarWS {
     private void setUpAddresses(WSIntegrador integrador, WSVeiculoLocal veiculoLocal, List<AddressInfoType> addressList) {
         try {
             /** Checks the pickup and return address information */
-            AddressInfoType addressLocal = addressList.stream().filter(address -> address != null).findFirst().orElse(null);
+            AddressInfoType addressLocal = addressList.stream()
+                    .filter(address -> address != null)
+                    .findFirst()
+                    .orElse(null);
             
             if(addressLocal != null){
                 int i = 0;
@@ -308,7 +304,6 @@ public class DisponibilidadeCarWS {
                 veiculoLocal.setNmMunicipio(addressLocal.getCityName() + " - " + addressLocal.getStateProv() != null ? addressLocal.getStateProv().getStateCode() : "" + ", CEP:" + addressLocal.getPostalCode());
                 veiculoLocal.setNmPais(addressLocal.getCounty() != null && addressLocal.getCounty().equals("BR") ? "BRASIL" : addressLocal.getCounty());
             }
-            
         } catch (Exception ex) {
             try {
                 throw new ErrorException(integrador, DisponibilidadeCarWS.class, "setUpAddresses", WSMensagemErroEnum.SDI,
@@ -317,7 +312,6 @@ public class DisponibilidadeCarWS {
                 Logger.getLogger(DisponibilidadeCarWS.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
-        
     }
 
     private List<WSMedia> assembleMediaList(WSIntegrador integrador, VehicleAvailCoreType vehAvailCore) {
@@ -343,7 +337,6 @@ public class DisponibilidadeCarWS {
     private WSTarifa assembleRate(WSIntegrador integrador, VehicleAvailCoreType vehAvailCore, VehicleAvailAdditionalInfoType vehAvailInfo) {
         WSTarifa tarifa = null;
         try {
-            
             if(!Utils.isListNothing(vehAvailCore.getTotalCharge())){
                 String sgMoeda = null;
                 Double vlNeto = 0.0d;

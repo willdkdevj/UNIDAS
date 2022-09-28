@@ -62,6 +62,7 @@ public class ObjectHandling {
             );
             marshaller.marshal(object, new StreamResult(out));
         } catch (PropertyException e) {
+            
             e.printStackTrace();
         } catch (JAXBException e) {
             e.printStackTrace();

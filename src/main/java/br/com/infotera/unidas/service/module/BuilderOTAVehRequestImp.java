@@ -5,16 +5,24 @@
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSContato;
+import br.com.infotera.common.WSInfoAdicional;
 import br.com.infotera.common.WSIntegrador;
+import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
+import br.com.infotera.common.enumerator.WSSexoEnum;
+import br.com.infotera.common.servico.WSVeiculo;
 import br.com.infotera.common.util.Utils;
-import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
-import br.com.infotera.unidas.model.gen.opentravel.CompanyNameType;
-import br.com.infotera.unidas.model.gen.opentravel.SourceType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
+import br.com.infotera.unidas.model.gen.opentravel.*;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType.Primary;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerType.Email;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerType.Telephone;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
 /**
@@ -36,7 +44,10 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
             
             SourceType.RequestorID requestorID = setUpRequestor(integrador);
             source.setRequestorID(requestorID);
-
+            
+//            SourceType.BookingChannel bookingChannel = setUpBookingChannel(integrador);
+//            source.setBookingChannel(bookingChannel);
+            
             sourcesType = new ArrayOfSourceType();
             sourcesType.getSource().add(source);
             
@@ -72,7 +83,30 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
         return vehicleRentalCoreType;    
             
     }
+    
+    @Override
+    public CustomerPrimaryAdditionalType setUpCustomer(WSIntegrador integrador, WSContato contato, List<WSReservaNome> reservaNomeList, List<WSInfoAdicional> infoAdicionalList) {
+        Primary primary = new Primary();
+        primary.getPersonName().add(assemblePerson(integrador, reservaNomeList));
+        primary.getDocument().add(assembleDocumentType(integrador, reservaNomeList));
+        primary.getEmail().add(getEmail(integrador, infoAdicionalList));
+        primary.getTelephone().add(getTelephone(integrador, infoAdicionalList));
+        
+        CustomerPrimaryAdditionalType customer = new CustomerPrimaryAdditionalType();
+        customer.setPrimary(primary);
+        
+        return customer; 
+    }
  
+    @Override
+    public VehiclePrefType setUpVehPref(WSIntegrador integrador, WSVeiculo veiculo) {
+        VehiclePrefType vehPref = new VehiclePrefType();
+        vehPref.setCode(veiculo.getCdServico());
+        vehPref.setCodeContext(veiculo.getDsParametro());
+            
+        return vehPref;
+    }
+    
     private SourceType.RequestorID setUpRequestor(WSIntegrador integrador) throws ErrorException {
         SourceType.RequestorID requestorID = null;
         try {
@@ -104,7 +138,8 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
             bookingChannel.setType("TOS");
 
             CompanyNameType companyNameType = new CompanyNameType();
-            companyNameType.setCodeContext("26");
+            companyNameType.setCode("26");
+            companyNameType.setCodeContext("Internal Code");
             
             bookingChannel.setCompanyName(companyNameType);
 
@@ -116,5 +151,94 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
         return bookingChannel;
     }
 
+    private DocumentType assembleDocumentType(WSIntegrador integrador, List<WSReservaNome> reservaNomeList){
+        DocumentType document = null;
+        try {
+            if(!Utils.isListNothing(reservaNomeList)){
+                for(WSReservaNome reservaNome : reservaNomeList) {
+                    document = new DocumentType();
+                    document.setDocType(reservaNome.getDocumento().getDocumentoTipo().getNmTipo());
+                    document.setDocID(reservaNome.getDocumento().getNrDocumento());
+                }
+            } else {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "assembleDocumentType", WSMensagemErroEnum.GENMETHOD, 
+                    "Não foi possível localizar o cadastro do documento do passageiro principal - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+            }
+        } catch(ErrorException ex){
+            try {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "assembleDocumentType", WSMensagemErroEnum.GENMETHOD,
+                        "Não foi possível montar a requisição devido a problema do cadastro do documento do passageiro - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+            } catch (ErrorException ex1) {
+                Logger.getLogger(BuilderOTAVehRequestImp.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        
+        return document;
+    }
     
+    private PersonNameType assemblePerson(WSIntegrador integrador, List<WSReservaNome> reservaNomeList){
+        PersonNameType person = null;
+        try {
+            if(!Utils.isListNothing(reservaNomeList)){
+                for(WSReservaNome reservaNome : reservaNomeList) {
+                    person = new PersonNameType();
+                    person.getNamePrefix().add(reservaNome.getSexo().equals(WSSexoEnum.MASCULINO) ? "Mr." : "Mrs.");
+                    person.getGivenName().add(reservaNome.getNmNome());
+                    person.setSurname(reservaNome.getNmSobrenome());
+                }
+                
+            } else {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "assemblePerson", WSMensagemErroEnum.GENMETHOD, 
+                    "Não foi possível localizar o passageiro principal da reserva - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+            }
+        } catch(ErrorException ex){
+            try {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "assemblePerson", WSMensagemErroEnum.GENMETHOD,
+                        "Não foi possível montar a requisição devido a problema do cadastro do passageiro principal - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+            } catch (ErrorException ex1) {
+                Logger.getLogger(BuilderOTAVehRequestImp.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return person;
+    }
+    
+    private CustomerType.Telephone getTelephone(WSIntegrador integrador, List<WSInfoAdicional> infoAdicionalList){
+        CustomerType.Telephone telefone = null;
+        if(!Utils.isListNothing(infoAdicionalList)){
+            String dsTelefone = infoAdicionalList.get(1).getDsTexto();
+            telefone = new Telephone();
+            telefone.setPhoneUseType("Voice");
+            telefone.setAreaCityCode(dsTelefone.substring(0, 2));
+            telefone.setPhoneNumber(dsTelefone.substring(2, dsTelefone.length()));
+
+        } else {
+            try {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "getTelephone", WSMensagemErroEnum.GENMETHOD,
+                        "Não foi possível obter o telefone do passageiro - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+            } catch (ErrorException ex) {
+                Logger.getLogger(BuilderOTAVehRequestImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return telefone; 
+    }
+
+    private CustomerType.Email getEmail(WSIntegrador integrador, List<WSInfoAdicional> infoAdicionalList){
+        CustomerType.Email email = null;
+        if(!Utils.isListNothing(infoAdicionalList)){
+            String dsEmail = infoAdicionalList.get(0).getDsTexto();
+            
+            email = new Email();
+            email.setValue(dsEmail);
+        } else {
+            try {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "getEmail", WSMensagemErroEnum.GENMETHOD,
+                        "Não foi possível obter o endereço eletrônico (e-mail) do passageiro - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+            } catch (ErrorException ex) {
+                Logger.getLogger(BuilderOTAVehRequestImp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return email; 
+    }
 }

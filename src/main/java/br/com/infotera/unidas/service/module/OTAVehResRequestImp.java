@@ -10,8 +10,9 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.servico.WSVeiculo;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType;
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
-import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ.VehResRQCore;
+import br.com.infotera.unidas.model.gen.opentravel.VehiclePrefType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
@@ -50,30 +51,42 @@ public class OTAVehResRequestImp implements OTAVehResRequest {
      
         return otaVehRes;
     }
-    
-    private OTAVehResRQ.VehResRQCore setUpVehResCore(WSReservarRQ reservarRQ) throws ErrorException {
+
+    public OTAVehResRQ.VehResRQCore setUpVehResCore(WSReservarRQ reservarRQ) throws ErrorException {
         OTAVehResRQ.VehResRQCore vehResCore = null;
         try {
             WSReservaServico reservaServico = reservarRQ.getReserva().getReservaServicoList().stream()
                     .findFirst()
-                    .orElseThrow(() -> new ErrorException(reservarRQ.getIntegrador(), OTAVehResRequestImp.class, "builderOTAVehAvailRateRequest", WSMensagemErroEnum.SRE,
+                    .orElseThrow(() -> new ErrorException(reservarRQ.getIntegrador(), OTAVehResRequestImp.class, "setUpVehResCore", WSMensagemErroEnum.SRE,
                             "Erro ao obter o serviço (WSReservaServico) - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false));
-            
+               
             WSVeiculo veiculo = (WSVeiculo) reservaServico.getServico();
-            VehicleRentalCoreType vehicleRentalCoreType = builderRequest.setUpVehRentalCore(reservarRQ.getIntegrador(), 
-                                                                                            veiculo.getDtRetirada(), 
-                                                                                            veiculo.getDtDevolucao(), 
-                                                                                            veiculo.getLocalRetirada().getCdLocal(), 
-                                                                                            veiculo.getLocalDevolucao().getCdLocal());
             
-            vehResCore = new VehResRQCore();
+            VehicleRentalCoreType vehicleRentalCoreType = builderRequest.setUpVehRentalCore(reservarRQ.getIntegrador(),
+                    veiculo.getDtRetirada(),
+                    veiculo.getDtDevolucao(),
+                    veiculo.getLocalRetirada().getCdLocal(),
+                    veiculo.getLocalDevolucao().getCdLocal());
+
+            CustomerPrimaryAdditionalType customer = builderRequest.setUpCustomer(reservarRQ.getIntegrador(), 
+                    reservarRQ.getReserva().getContato(), 
+                    veiculo.getReservaNomeList(), 
+                    veiculo.getInfoAdicionalList());
+            
+            VehiclePrefType vehPref = builderRequest.setUpVehPref(reservarRQ.getIntegrador(), veiculo);
+            
+            vehResCore = new OTAVehResRQ.VehResRQCore();
+            vehResCore.setStatus("All");
             vehResCore.setVehRentalCore(vehicleRentalCoreType);
+            vehResCore.setCustomer(customer);
+            vehResCore.setVehPref(vehPref);
             
         } catch(ErrorException ex){
-            throw new ErrorException(reservarRQ.getIntegrador(), OTAVehAvailRequestImp.class, "setUpVehResCore", WSMensagemErroEnum.GENMETHOD, 
+            throw new ErrorException(reservarRQ.getIntegrador(), OTAVehAvailRequestImp.class, "setUpVehResCore", WSMensagemErroEnum.GENMETHOD,
                     "Erro ao parametrizar o VehResRQCore a fim de realizar a requisição - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
-        
+
         return vehResCore;
     }
+
 }

@@ -5,20 +5,20 @@
 package br.com.infotera.unidas.service.interfaces;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
-import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
+import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
+import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
 import org.springframework.stereotype.Component;
 
 /**
- * Interface with the methods for assembling requisitions OTAVehRes
+ * Interface with the methods for assembling requisitions OTAVehRetRes
  * 
  * @author William Dias
  * @version 1.0
  * @since Branch Master (20/09/2022)
  */
 @Component
-public interface OTAVehResRequest {
+public interface OTAVehRetResRequest {
     
-    OtaVehRes builderOTAVehResRequest(WSReservarRQ reservarRQ) throws ErrorException;
+    OtaVehRetRes builderOTAVehRetResRequest(WSReservaRQ reservaRQ) throws ErrorException;
 
 }

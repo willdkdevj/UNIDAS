@@ -5,6 +5,7 @@
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRQ;
@@ -14,9 +15,12 @@ import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import br.com.infotera.unidas.model.gen.opentravel.PreferLevelType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRQAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRQCoreType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRSCoreType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehAvailRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +75,26 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
         }
     }
 
+    @Override
+    public List<VehicleAvailRSCoreType> checkAvailityReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehAvailRSCore) throws ErrorException {
+        List<VehicleAvailRSCoreType> vehicleAvailCoreList = null;
+        try {
+            vehicleAvailCoreList = new ArrayList();
+            for(Object obj : errorsOrSuccessOrVehAvailRSCore) {
+                /** Checks if the VehicleAvailRSCoreType object was returned, which refers to the supplies available from the vendor */
+                if(obj instanceof VehicleAvailRSCoreType){
+                    VehicleAvailRSCoreType vehAvailCore = (VehicleAvailRSCoreType) obj;
+                    vehicleAvailCoreList.add(vehAvailCore);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "checkAvailityReturn", WSMensagemErroEnum.GENMETHOD, 
+                    "Não foi possível montar a disponibilidade dos veículos do fornecedor. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+        }
+        
+        return vehicleAvailCoreList;
+    }
+    
     private OTAVehAvailRateRQ.VehAvailRQCore setUpVehAvailCore(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) throws ErrorException {
         OTAVehAvailRateRQ.VehAvailRQCore vehAvailCore = null;
         try {
@@ -84,7 +108,7 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
             vehAvailCore.setVehRentalCore(vehicleRentalCoreType);
             vehAvailCore.getRateQualifier().add(rateQualifier);
             
-        } catch(Exception ex){
+        } catch(ErrorException ex){
             throw new ErrorException(disponibilidadeVeiculoRQ.getIntegrador(), OTAVehAvailRequestImp.class, "setUpVehAvailCore", WSMensagemErroEnum.GENMETHOD, 
                     "Erro ao parametrizar o VehAvailRQCore a fim de realizar a requisição - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
@@ -105,4 +129,6 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
         
         return infoAdditional;
     }
+
+    
 }

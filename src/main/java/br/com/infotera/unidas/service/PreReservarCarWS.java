@@ -33,22 +33,22 @@ public class PreReservarCarWS {
     }
     
     private WSReservaServico applyCompulsoryCPF(WSPreReservarRQ preReservarRQ) throws ErrorException{
-        
+        /** Checks the existence of the service reservation presented by Infotravel */
         WSReservaServico reservaServico = preReservarRQ.getReserva().getReservaServicoList().stream()
                 .findFirst()
                 .orElseThrow(() -> new ErrorException(preReservarRQ.getIntegrador(), PreReservarCarWS.class, "applyCompulsoryCPF", WSMensagemErroEnum.SPR, 
                 "Não foi possível a reserva do serviço (WSReservaServico). Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false));
         
         if (!Utils.isListNothing(reservaServico.getServico().getReservaNomeList())) {
-            Boolean isFirst = true;
+            Boolean isFirst = Boolean.TRUE;
             for(WSReservaNome reservaNome : reservaServico.getServico().getReservaNomeList()) {
                 if(isFirst){
                     reservaNome.setDocumento(new WSDocumento(WSDocumentoTipoEnum.CPF, Boolean.TRUE));
-                    isFirst = false;
+                    isFirst = Boolean.FALSE;
                 }
             }
-            
         } else {
+            /** Created instance of Pax (Default) for the reservation */
             WSReservaNome reservaNomePadrao = new WSReservaNome();
             reservaNomePadrao.setPaxTipo(WSPaxTipoEnum.ADT);
             reservaNomePadrao.setQtIdade(30);
@@ -59,7 +59,7 @@ public class PreReservarCarWS {
 
             reservaServico.getServico().setReservaNomeList(Arrays.asList(reservaNomePadrao));
         }
-        
+        /** Inserted the list with customer implementation information (WSInfoAdicional) */
         reservaServico.getServico().setInfoAdicionalList(assembleInfoAdditionalList());
         
         return reservaServico;

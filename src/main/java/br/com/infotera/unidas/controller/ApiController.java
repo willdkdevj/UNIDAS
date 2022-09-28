@@ -12,6 +12,9 @@ import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRQ;
 import br.com.infotera.common.servico.rqrs.WSTarifarServicoRS;
 import br.com.infotera.common.util.LogWS;
+import br.com.infotera.unidas.service.CancelarCarWS;
+import br.com.infotera.unidas.service.ConsultarCarWS;
+import br.com.infotera.unidas.service.PreCancelarCarWS;
 import br.com.infotera.unidas.service.PreReservarCarWS;
 import br.com.infotera.unidas.service.ReservarCarWS;
 import br.com.infotera.unidas.service.TarifarCarWS;
@@ -44,18 +47,18 @@ import java.util.logging.Logger;
 @RestController
 public class ApiController {
 
-//    @Autowired
-//    private CancelarCarWS cancelarWS;
-//    @Autowired
-//    private ConsultarCarWS consultarWS;
+    @Autowired
+    private CancelarCarWS cancelarWS;
+    @Autowired
+    private ConsultarCarWS consultarWS;
     @Autowired
     private PreReservarCarWS preReservarWS;
     @Autowired
     private ReservarCarWS reservarWS;
     @Autowired
     private TarifarCarWS tarifarWS;
-//    @Autowired
-//    private PreCancelarCarWS preCancelarWS;
+    @Autowired
+    private PreCancelarCarWS preCancelarWS;
     @Autowired
     private Gson gson;
 
@@ -135,51 +138,51 @@ public class ApiController {
 //        }
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates;
 //    }
-//
-//    @RequestMapping(value = "consultar", method = RequestMethod.POST)
-//    public String consulta(@RequestBody String jsonRQ) {
-//        WSReservaRS result = null;
-//        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("consultar");
-//        try {
-//            result = consultarWS.consulta(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSReservaRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "consultar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        return gson.toJson(result);
-//    }
-//
-//    @RequestMapping(value = "preCancelar", method = RequestMethod.POST)
-//    public String preCancelar(@RequestBody String jsonRQ) {
-//        WSReservaRS result = null;
-//        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("preCancelar");
-//        try {
-//            result = preCancelarWS.preCancelar(wsRQ);
-//        } catch (Exception ex) {
-//            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "preCancelar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
-//        }
-//        return gson.toJson(result);
-//    }
-//
-//    @RequestMapping(value = "cancelar", method = RequestMethod.POST)
-//    public String cancelar(@RequestBody String jsonRQ) {
-//        WSReservaRS result = null;
-//        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
-//        wsRQ.getIntegrador().setDsMetodo("cancelar");
-//        try {
-//            result = cancelarWS.cancelar(wsRQ);
-//        } catch (ErrorException ex) {
-//            result = new WSReservaRS(null, ex.getIntegrador());
-//        } catch (Exception ex) {
-//            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "cancelar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
-//        } finally {
-//            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
-//        }
-//        return gson.toJson(result);
-//    }
+
+    @RequestMapping(value = "consultar", method = RequestMethod.POST)
+    public String consulta(@RequestBody String jsonRQ) {
+        WSReservaRS result = null;
+        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("consultar");
+        try {
+            result = consultarWS.check(wsRQ, Boolean.FALSE);
+        } catch (ErrorException ex) {
+            result = new WSReservaRS(null, ex.getIntegrador());
+        } catch (Exception ex) {
+            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "consultar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false).getIntegrador());
+        } finally {
+            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
+        }
+        return gson.toJson(result);
+    }
+
+    @RequestMapping(value = "preCancelar", method = RequestMethod.POST)
+    public String preCancelar(@RequestBody String jsonRQ) {
+        WSReservaRS result = null;
+        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("preCancelar");
+        try {
+            result = preCancelarWS.preCancel(wsRQ);
+        } catch (Exception ex) {
+            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "preCancelar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
+        }
+        return gson.toJson(result);
+    }
+
+    @RequestMapping(value = "cancelar", method = RequestMethod.POST)
+    public String cancelar(@RequestBody String jsonRQ) {
+        WSReservaRS result = null;
+        WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
+        wsRQ.getIntegrador().setDsMetodo("cancelar");
+        try {
+            result = cancelarWS.cancel(wsRQ);
+        } catch (ErrorException ex) {
+            result = new WSReservaRS(null, ex.getIntegrador());
+        } catch (Exception ex) {
+            result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "cancelar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
+        } finally {
+            LogWS.gerarLog(result.getIntegrador(), jsonRQ, result);
+        }
+        return gson.toJson(result);
+    }
 }
