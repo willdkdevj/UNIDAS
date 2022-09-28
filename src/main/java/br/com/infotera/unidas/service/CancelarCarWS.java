@@ -6,12 +6,17 @@
 package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.unidas.client.UnidasClient;
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancel;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleCancelRSAdditionalInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehCancelResponse;
 import br.com.infotera.unidas.service.interfaces.OTAVehCancelRequest;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,14 +43,21 @@ public class CancelarCarWS {
         
         OtaVehCancel vehCancel = request.builderOTAVehCancelRequest(reservaRQ);
         
-        OtaVehCancelResponse response = unidasClient.callOTAVehCancel(reservaRQ.getIntegrador(), vehCancel);
+        OtaVehCancelResponse otaVehCancelResponse = unidasClient.callOTAVehCancel(reservaRQ.getIntegrador(), vehCancel);
         
-        updateStatusCancelByBooking(reservaRQ, response);
+        updateStatusCancelByBooking(reservaRQ, otaVehCancelResponse);
         
         return consultar.check(reservaRQ, Boolean.TRUE);
     }
 
-    private void updateStatusCancelByBooking(WSReservaRQ reservaRQ, OtaVehCancelResponse response) {
-        
+    private void updateStatusCancelByBooking(WSReservaRQ reservaRQ, OtaVehCancelResponse otaVehCancelResponse) throws ErrorException {
+        if(otaVehCancelResponse != null && otaVehCancelResponse.getOtaVehCancelResult() != null) {
+            List<VehicleCancelRSAdditionalInfoType> checkCancelReturn = request.checkCancelReturn(reservaRQ.getIntegrador(), otaVehCancelResponse.getOtaVehCancelResult().getErrorsOrSuccessOrVehCancelRSCore());
+            
+            
+        }  else {
+            throw new ErrorException(reservaRQ.getIntegrador(), CancelarCarWS.class, "updateStatusCancelByBooking", WSMensagemErroEnum.SCA, 
+                "Não foi possível obter a validação do cancelamento da reserva! Entre em contato com o Fornecedor", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+        }
     }
 }

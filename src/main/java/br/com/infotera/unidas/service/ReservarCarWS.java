@@ -7,12 +7,15 @@ package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 import br.com.infotera.unidas.client.UnidasClient;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehResResponse;
 import br.com.infotera.unidas.service.interfaces.OTAVehResRequest;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +38,21 @@ public class ReservarCarWS {
         
         OtaVehRes vehRes = request.builderOTAVehResRequest(reservarRQ);
         
-        OtaVehResResponse response = unidasClient.callOTAVehRes(reservarRQ.getIntegrador(), vehRes);
+        OtaVehResResponse otaVehResResponse = unidasClient.callOTAVehRes(reservarRQ.getIntegrador(), vehRes);
         
-        checkStatusBooking(reservarRQ, response);
+        checkStatusBooking(reservarRQ, otaVehResResponse);
         
         return new WSReservarRS(reservarRQ.getReserva(), reservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
 
-    private void checkStatusBooking(WSReservarRQ reservarRQ, OtaVehResResponse response) {
-        
+    private void checkStatusBooking(WSReservarRQ reservarRQ, OtaVehResResponse otaVehResResponse) throws ErrorException {
+        if(otaVehResResponse != null && otaVehResResponse.getOtaVehResResult() != null) {
+            List<VehicleResRSAdditionalInfoType> response = request.checkResReturn(reservarRQ.getIntegrador(), otaVehResResponse.getOtaVehResResult().getErrorsOrSuccessOrVehResRSCore());
+            
+            
+        }  else {
+            throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusBooking", WSMensagemErroEnum.SRE, 
+                "Não foi possível obter a validação da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+        }
     }
 }
