@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.ErrorException;
@@ -42,13 +37,13 @@ public class ReservarCarWS {
     private ConsultarCarWS consultar;
 
     public WSReservarRS book(WSReservarRQ reservarRQ) throws ErrorException {
-        
+        /** Assemble requisition for call to do reservation */
         OtaVehRes vehRes = request.builderOTAVehResRequest(reservarRQ);
-        
+        /** Get response object from the vendor according to parameters sent by the request */
         OtaVehResResponse otaVehResResponse = unidasClient.callOTAVehRes(reservarRQ.getIntegrador(), vehRes);
-        
+        /** Verifica o retorno do localizador da reserva após solicitação */
         checkStatusLOCBooking(reservarRQ, otaVehResResponse);
-        
+        /** Verifica o estado da reserva na plataforma do fornecedor */
         WSReservaRS checkReservation = consultar.check(new WSReservaRQ(reservarRQ.getIntegrador(), reservarRQ.getReserva()));
         
         return new WSReservarRS(checkReservation.getReserva(), checkReservation.getIntegrador(), WSIntegracaoStatusEnum.OK);

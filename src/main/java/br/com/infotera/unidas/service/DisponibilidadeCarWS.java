@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.*;
@@ -154,7 +149,7 @@ public class DisponibilidadeCarWS {
                 throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleSearchVehiclesList", WSMensagemErroEnum.SDI, 
                     "Não foi possível obter a disponibilidade dos veículos. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
             }
-        } catch (Exception ex) {
+        } catch (ErrorException ex) {
             throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleSearchVehiclesList", WSMensagemErroEnum.SDI, 
                     "Erro ao montar a lista de veículos disponíveis. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
@@ -236,7 +231,6 @@ public class DisponibilidadeCarWS {
                 int i = 0;
                 /** Assemble the address and coordinate data to WSVeicleLocation */
                 for(String address : addressLocal.getAddressLine()){
-                    
                     /** Returns in the second element of the list (get(1)) the coordinate information of the street address */
                     if(i == 1){
                         String[] latitudeLongitude = address.split(", ");

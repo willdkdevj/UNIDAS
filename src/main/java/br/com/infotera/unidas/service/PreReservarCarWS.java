@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.*;
@@ -66,8 +61,8 @@ public class PreReservarCarWS {
     }
     
     private List<WSInfoAdicional> assembleInfoAdditionalList() {
-        return Arrays.asList(new WSInfoAdicional("EMAIL", "Email", "Informar o email principal do passageiro", null, null, Boolean.TRUE, "email"),
-                             new WSInfoAdicional("CELULAR", "Celular", "Informar o celular principal do passageiro", null, null, Boolean.TRUE, "55 99 99999999?9"));
+        return Arrays.asList(new WSInfoAdicional("EMAIL", "Email", "Informar o email principal do condutor", null, null, Boolean.TRUE, "email"),
+                             new WSInfoAdicional("CELULAR", "Celular", "Informar o celular principal do condutor", null, null, Boolean.TRUE, "55 99 99999999?9"));
     }
 
 }
