@@ -16,6 +16,7 @@ import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
 import br.com.infotera.unidas.model.gen.opentravel.VehiclePrefType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
+import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSCoreType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehResRequest;
@@ -57,14 +58,14 @@ public class OTAVehResRequestImp implements OTAVehResRequest {
     }
 
     @Override
-    public List<VehicleResRSAdditionalInfoType> checkResReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehResRSCore) throws ErrorException {
-        List<VehicleResRSAdditionalInfoType> vehicleResCoreList = null;
+    public List<VehicleResRSCoreType> checkResReturn(WSIntegrador integrador, List<Object> errorsOrSuccessOrVehResRSCore) throws ErrorException {
+        List<VehicleResRSCoreType> vehicleResCoreList = null;
         try {
             vehicleResCoreList = new ArrayList();
             for(Object obj : errorsOrSuccessOrVehResRSCore) {
                 /** Checks if the VehicleCancelRSCoreType object was returned, which refers to the status cancel of reservation in vendor */
-                if(obj instanceof VehicleResRSAdditionalInfoType){
-                    VehicleResRSAdditionalInfoType vehResCore = (VehicleResRSAdditionalInfoType) obj;
+                if(obj instanceof VehicleResRSCoreType){
+                    VehicleResRSCoreType vehResCore = (VehicleResRSCoreType) obj;
                     vehicleResCoreList.add(vehResCore);
                 }
             }

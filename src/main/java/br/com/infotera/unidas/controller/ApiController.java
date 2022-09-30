@@ -128,7 +128,7 @@ public class ApiController {
         WSReservaRQ wsRQ = gson.fromJson(jsonRQ, WSReservaRQ.class);
         wsRQ.getIntegrador().setDsMetodo("consultar");
         try {
-            result = consultarWS.check(wsRQ, Boolean.FALSE);
+            result = consultarWS.check(wsRQ);
         } catch (ErrorException ex) {
             result = new WSReservaRS(null, ex.getIntegrador());
         } catch (Exception ex) {
@@ -146,7 +146,7 @@ public class ApiController {
         wsRQ.getIntegrador().setDsMetodo("preCancelar");
         try {
             result = preCancelarWS.preCancel(wsRQ);
-        } catch (Exception ex) {
+        } catch (ErrorException ex) {
             result = new WSReservaRS(null, new ErrorException(wsRQ.getIntegrador(), ApiController.class, "preCancelar", WSMensagemErroEnum.GENNULO, "", WSIntegracaoStatusEnum.NEGADO, ex, false).getIntegrador());
         }
         return gson.toJson(result);

@@ -94,7 +94,7 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
             if (WSAmbienteEnum.PRODUCAO.equals(integrador.getAmbiente())) {
                 uri = "https://externo-wbsota.novaunidas.com.br/WBS2Z_OTA.asmx";
             } else {
-                uri = "https://wbsota.hml.unidas.com.br/WBS2Z_OTA.asmx";
+                uri = "https://wbs.hml.unidas.com.br/WBS2Z_OTA.asmx"; //https://wbsota.hml.unidas.com.br/WBS2Z_OTA.asmx
             }
         } catch (Exception ex){
             throw new ErrorException(integrador, ConnectionWebServiceImp.class, "checkURI", WSMensagemErroEnum.GENMETHOD, 
@@ -107,7 +107,7 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
     public Usuario buiderUserCredential(WSIntegrador integrador) throws ErrorException {
         Usuario user = null;
         try {
-            /** Retorna a lista de parâmetros da credencial cadastrada */
+            /** Returns the parameter list of the registered credential */
             List<String> credentials = integrador.getDsCredencialList();
             
             user = new Usuario();
@@ -125,6 +125,7 @@ public class ConnectionWebServiceImp implements ConnectionWebservice {
     @Override
     public void soapEnvelopeCustom(SaajSoapMessage message) {
         try {
+            /** Modified the structure of the SOAP envelope in order to be accepted in the partner webservice */
             SOAPMessage soapMessage = (SOAPMessage) message.getSaajMessage();
             SOAPEnvelope envelope = soapMessage.getSOAPPart().getEnvelope();
             SOAPHeader header = soapMessage.getSOAPHeader();

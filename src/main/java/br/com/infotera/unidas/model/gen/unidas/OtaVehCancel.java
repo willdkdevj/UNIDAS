@@ -6,7 +6,7 @@
 //
 
 
-package br.com.infotera.unidas.model.gen.opentravel;
+package br.com.infotera.unidas.model.gen.unidas;
 
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancelRQ;
 import javax.xml.bind.annotation.XmlAccessType;

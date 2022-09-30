@@ -7,7 +7,7 @@ package br.com.infotera.unidas.service.interfaces;
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancel;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehCancel;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleCancelRSAdditionalInfoType;
 import java.util.List;
 import org.springframework.stereotype.Component;

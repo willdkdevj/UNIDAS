@@ -11,7 +11,7 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.unidas.model.gen.opentravel.CancelInfoRQType;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancel;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehCancel;
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancelRQ;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleCancelRSAdditionalInfoType;

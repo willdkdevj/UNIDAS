@@ -4,7 +4,7 @@ import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancel;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehCancel;
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;

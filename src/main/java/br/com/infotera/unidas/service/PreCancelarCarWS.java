@@ -1,6 +1,7 @@
 package br.com.infotera.unidas.service;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class PreCancelarCarWS {
     protected ConsultarCarWS consultar;
     
     public WSReservaRS preCancel(WSReservaRQ reservaRQ) throws ErrorException {
-        /** Queries the input to check its status */
-        return consultar.check(reservaRQ, Boolean.TRUE);
+        return new WSReservaRS(reservaRQ.getReserva(), reservaRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
 }
