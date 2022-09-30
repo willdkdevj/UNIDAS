@@ -84,7 +84,7 @@ public class DisponibilidadeCarWS {
                             /** Checks the availability of the vehicles */
                             Integer ind = 0;
                             veiculoPesquisaList = new ArrayList();
-                            List<WSVeiculo> veiculoList = null; //new ArrayList();
+                            List<WSVeiculo> veiculoList = null; 
                             for(VehicleVendorAvailabilityType vehVendorAvail : vehicleAvailCore.getVehVendorAvails().getVehVendorAvail()){
                                 
                                 /** Checks the vehicle pickup and return location */
