@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
@@ -15,7 +11,6 @@ import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
 import br.com.infotera.unidas.model.gen.opentravel.VehiclePrefType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSAdditionalInfoType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleResRSCoreType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehRes;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;

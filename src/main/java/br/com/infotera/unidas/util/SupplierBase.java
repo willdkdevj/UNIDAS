@@ -21,7 +21,7 @@ public class SupplierBase {
     }
     
     /**
-     * Modelo de Dados - Webservice Unidas Rent a Car (2009) - Classificação de Veiculos conforme código SIPP
+     * Data Model - Webservice Unidas Rent a Car (2009) - Vehicle Classification according to SIPP code
      * @return 
      */
     public static Map<String, String> loadingClassVehicle(){

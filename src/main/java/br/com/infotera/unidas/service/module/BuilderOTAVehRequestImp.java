@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
@@ -68,15 +64,15 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
             vehicleRentalCoreType.setReturnDateTime(Utils.convertStringDateToXmlGregorianCalendar(dtDevolucao, Boolean.FALSE));
             
             VehicleRentalCoreType.PickUpLocation pickupLocation = new VehicleRentalCoreType.PickUpLocation();
-            pickupLocation.setLocationCode(cdRetirada);
+            pickupLocation.setLocationCode(cdRetirada.length() < 4 ? cdRetirada.concat("1") : cdRetirada);
             vehicleRentalCoreType.getPickUpLocation().add(pickupLocation);
             
             VehicleRentalCoreType.ReturnLocation returnLocation = new VehicleRentalCoreType.ReturnLocation();
-            returnLocation.setLocationCode(cdDevolucao);
+            returnLocation.setLocationCode(cdDevolucao.length() < 4 ? cdDevolucao.concat("1") : cdDevolucao);
             vehicleRentalCoreType.setReturnLocation(returnLocation);
             
         } catch(Exception ex){
-            throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "setUpPos", WSMensagemErroEnum.GENMETHOD, 
+            throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "setUpVehRentalCore", WSMensagemErroEnum.GENMETHOD, 
                     "Erro ao parametrizar o RentalCoreType a fim de realizar a requisição - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
         
@@ -182,7 +178,7 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
             if(!Utils.isListNothing(reservaNomeList)){
                 for(WSReservaNome reservaNome : reservaNomeList) {
                     person = new PersonNameType();
-                    person.getNamePrefix().add(reservaNome.getSexo().equals(WSSexoEnum.MASCULINO) ? "Mr." : "Mrs.");
+                    person.getNamePrefix().add(reservaNome.getSexo().equals(WSSexoEnum.MASCULINO) ? "Mr." : "Ms.");
                     person.getGivenName().add(reservaNome.getNmNome());
                     person.setSurname(reservaNome.getNmSobrenome());
                 }

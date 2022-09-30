@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
@@ -62,8 +58,8 @@ public class OTAVehAvailRequestImp implements OTAVehAvailRequest {
     @Override
     public void validateBusinessRules(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) {
         /** 
-         * Verifica se o parâmetro stNacionalidade consta com o valor booleano como TRUE, 
-         * caso contrário é reportado que o fornecedor não possui produtos internacionais 
+         * Checks if the stNationality parameter has the boolean value TRUE, 
+         * otherwise it reports that the supplier has no international products 
          */
         if(!disponibilidadeVeiculoRQ.getStNacional()){
             try {

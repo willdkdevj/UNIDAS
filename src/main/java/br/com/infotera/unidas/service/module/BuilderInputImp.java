@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.infotera.unidas.service.module;
 
 import br.com.infotera.common.ErrorException;
@@ -86,7 +82,7 @@ public class BuilderInputImp implements BuilderInput {
                 /** Checks the code for the vehicle category */
                 WSVeiculoDetalhe veiculoCategoria = new WSVeiculoDetalhe();
                 veiculoCategoria.setDetalheEnum(WSVeiculoDetalheEnum.CATEGORIA);
-                veiculoCategoria.setNmDetalhe(vehicle.getCode() != null ? SupplierBase.loadingClassVehicle().get(vehicle.getCode()) : "Não informada");
+                veiculoCategoria.setNmDetalhe(vehicle.getCode() != null && SupplierBase.loadingClassVehicle().get(vehicle.getCode()) != null ? SupplierBase.loadingClassVehicle().get(vehicle.getCode()) : "Não informada");
                 veiculoDetalheList.add(veiculoCategoria);
                 
                 /** Checks for air conditioning */
@@ -124,7 +120,7 @@ public class BuilderInputImp implements BuilderInput {
                 if(rateDistance != null){
                     WSVeiculoDetalhe veiculoKm = new WSVeiculoDetalhe();
                     veiculoKm.setDetalheEnum(WSVeiculoDetalheEnum.KILOMETRAGEM);
-                    veiculoKm.setNmDetalhe(rateDistance.isUnlimited() ? "Unlimited" : rateDistance.getDistUnitName().KM.equals(DistanceUnitNameType.KM) && rateDistance.getQuantity() != null ? rateDistance.getQuantity().toString() : "Não informada");
+                    veiculoKm.setNmDetalhe(rateDistance.isUnlimited() ? "ILIMITADA" : rateDistance.getDistUnitName().KM.equals(DistanceUnitNameType.KM) && rateDistance.getQuantity() != null ? rateDistance.getQuantity().toString() : "Não informada");
                     veiculoDetalheList.add(veiculoKm);
                 }
             }

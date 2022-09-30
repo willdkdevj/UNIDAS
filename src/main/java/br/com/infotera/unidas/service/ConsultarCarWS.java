@@ -171,8 +171,8 @@ public class ConsultarCarWS {
             }
         } catch(ErrorException ex){
             try {
-                throw new ErrorException(integrador, ReservarCarWS.class, "checkStatusReservation", WSMensagemErroEnum.SCO,
-                        "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
+                throw new ErrorException(integrador, ReservarCarWS.class, "importLOCReservation", WSMensagemErroEnum.SCO,
+                        "Não foi possível realizar a importação da reserva. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
             } catch (ErrorException ee) {
                 Logger.getLogger(ConsultarCarWS.class.getName()).log(Level.SEVERE, null, ee);
             }

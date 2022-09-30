@@ -14,23 +14,16 @@ import br.com.infotera.common.servico.rqrs.WSDisponibilidadeVeiculoRS;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.client.UnidasClient;
 import br.com.infotera.unidas.model.gen.opentravel.AddressInfoType;
-import br.com.infotera.unidas.model.gen.opentravel.ArrayOfVehicleChargePurposeType1;
 import br.com.infotera.unidas.model.gen.opentravel.CoverageDetailsType;
 import br.com.infotera.unidas.model.gen.opentravel.CoveragePricedType;
 import br.com.infotera.unidas.model.gen.opentravel.CoverageTextType;
-import br.com.infotera.unidas.model.gen.opentravel.DistanceUnitNameType;
 import br.com.infotera.unidas.model.gen.opentravel.InventoryStatusType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailAdditionalInfoType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailCoreType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailCoreType.TotalCharge;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailRSCoreType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleAvailVendorInfoType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleChargePurposeType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleLocationDetailsType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalRateType;
-import br.com.infotera.unidas.model.gen.opentravel.VehicleType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleVendorAvailabilityType.VehAvails.VehAvail;
 import br.com.infotera.unidas.service.interfaces.BuilderInput;
@@ -63,13 +56,13 @@ public class DisponibilidadeCarWS {
     private BuilderInput builderIn;
 
     public WSDisponibilidadeVeiculoRS availability(WSDisponibilidadeVeiculoRQ disponibilidadeVeiculoRQ) throws ErrorException {
-
+        /** Checks vendor business rules */
         request.validateBusinessRules(disponibilidadeVeiculoRQ);
-        
+        /** Assemble requisition for call to analyze its availability */
         OtaVehAvailRate carAvailability = request.builderOTAVehAvailRateRequest(disponibilidadeVeiculoRQ);
-
+        /** Get response object from the vendor according to parameters sent by the request */
         OtaVehAvailRateResponse  otaVehAvailRateResponse = unidasClient.callOTAVehAvailRate(disponibilidadeVeiculoRQ.getIntegrador(), carAvailability);
-        
+        /** Assembles list of research vehicles */
         List<WSVeiculoPesquisa> searchVehiclesList = assembleSearchVehiclesList(disponibilidadeVeiculoRQ, otaVehAvailRateResponse);
 
         return builderDisponibilidadeVeiculoRS(disponibilidadeVeiculoRQ.getIntegrador(), searchVehiclesList);
@@ -81,7 +74,7 @@ public class DisponibilidadeCarWS {
         
         try {
             if(otaVehAvailRateResponse != null && otaVehAvailRateResponse.getOtaVehAvailRateResult() != null && !Utils.isListNothing(otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore())) {
-                
+                /** Converts to vehicleAvailCore list to get the vehicles available from the vendor */
                 List<VehicleAvailRSCoreType> vehicleAvailCoreList = request.checkAvailityReturn(integrador, otaVehAvailRateResponse.getOtaVehAvailRateResult().getErrorsOrSuccessOrVehAvailRSCore());
                 
                 if(!Utils.isListNothing(vehicleAvailCoreList)){
@@ -94,13 +87,16 @@ public class DisponibilidadeCarWS {
                         if(vehicleAvailCore.getVehVendorAvails() != null && !Utils.isListNothing(vehicleAvailCore.getVehVendorAvails().getVehVendorAvail())){
                             
                             /** Checks the availability of the vehicles */
-                            List<WSVeiculo> veiculoList = new ArrayList();
+                            Integer ind = 0;
+                            veiculoPesquisaList = new ArrayList();
+                            List<WSVeiculo> veiculoList = null; //new ArrayList();
                             for(VehicleVendorAvailabilityType vehVendorAvail : vehicleAvailCore.getVehVendorAvails().getVehVendorAvail()){
                                 
                                 /** Checks the vehicle pickup and return location */
                                 List<WSVeiculoLocal> veiculoLocalList = assembleDestinationRental(integrador, 
                                         vehVendorAvail.getInfo());
-                            
+                                
+                                WSVeiculo veiculo = null;
                                 for(VehAvail vehAvail : vehVendorAvail.getVehAvails().getVehAvail()){
                                     if(vehAvail.getVehAvailCore() != null && vehAvail.getVehAvailCore().getStatus().equals(InventoryStatusType.AVAILABLE)){
                                         /** Assemble list with details about the vehicle */
@@ -122,7 +118,7 @@ public class DisponibilidadeCarWS {
                                         /** Set up Rental Object UNIDAS */
                                         WSVeiculoLocadora locadora = builderIn.assembleRentalCompany();
                                         
-                                        WSVeiculo veiculo = new WSVeiculo();
+                                        veiculo = new WSVeiculo();
                                         veiculo.setServicoTipo(WSServicoTipoEnum.VEICULO);
                                         veiculo.setDtRetirada(dtRetirada);
                                         veiculo.setDtDevolucao(dtDevolucao);
@@ -139,16 +135,15 @@ public class DisponibilidadeCarWS {
                                         veiculo.setDtServico(dtRetirada);
                                         veiculo.setMediaList(mediaList);
                                         veiculo.setStOperadora(Boolean.FALSE);
+                                        veiculo.setStDisponivel(Boolean.TRUE);
                                         veiculo.setTarifaOpcionalList(Arrays.asList(tarifa));
                                         
-                                        veiculoList.add(veiculo);
+                                        veiculoList = Arrays.asList(veiculo);
+                                        /** Assemble Vehicle Search List */
+                                        veiculoPesquisaList.add(new WSVeiculoPesquisa(++ind, veiculoList, null));
                                     }
                                 }
                             }
-                            
-                            /** Assemble Vehicle Search List */
-                            veiculoPesquisaList = Arrays.asList(new WSVeiculoPesquisa(1, veiculoList, null));
-                            
                         } else {
                             throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleSearchVehiclesList", WSMensagemErroEnum.SDI, 
                                 "Não foi possível obter as informações sobre os veículos. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
@@ -200,66 +195,6 @@ public class DisponibilidadeCarWS {
         return veiculoLocalList;
     }
     
-    private List<WSVeiculoDetalhe> assembleDetailsVehicle(WSIntegrador integrador, VehicleType vehicle, List<VehicleRentalRateType> rentalRates) throws ErrorException {
-        List<WSVeiculoDetalhe> veiculoDetalheList = null;
-        try {
-            if(vehicle != null){
-                veiculoDetalheList = new ArrayList();
-                
-                /** Checks the code for the vehicle category */
-                WSVeiculoDetalhe veiculoCategoria = new WSVeiculoDetalhe();
-                veiculoCategoria.setDetalheEnum(WSVeiculoDetalheEnum.CATEGORIA);
-                veiculoCategoria.setNmDetalhe(vehicle.getCode() != null ? SupplierBase.loadingClassVehicle().get(vehicle.getCode()) : "Não informada");
-                veiculoDetalheList.add(veiculoCategoria);
-                
-                /** Checks for air conditioning */
-                WSVeiculoDetalhe veiculoAr = new WSVeiculoDetalhe();
-                veiculoAr.setDetalheEnum(WSVeiculoDetalheEnum.AR_CONDICIONADO);
-                veiculoAr.setNmDetalhe(vehicle.isAirConditionInd() ? "Ar condicionado" : "Sem ar condicionado");
-                veiculoDetalheList.add(veiculoAr);
-                                        
-                /** Checks the vehicle's transmission type */
-                WSVeiculoDetalhe veiculoTransmissao = new WSVeiculoDetalhe();
-                veiculoTransmissao.setDetalheEnum(WSVeiculoDetalheEnum.TRANSMISSAO);
-                veiculoTransmissao.setNmDetalhe(vehicle.getTransmissionType().MANUAL.name().toUpperCase().equals("MANUAL") ? vehicle.getTransmissionType().MANUAL.value() : vehicle.getTransmissionType().AUTOMATIC.value());
-                veiculoDetalheList.add(veiculoTransmissao);
-                
-                /** Checks the vehicle's passenger limit */
-                WSVeiculoDetalhe veiculoQtdPass = new WSVeiculoDetalhe();
-                veiculoQtdPass.setDetalheEnum(WSVeiculoDetalheEnum.QT_PASSAGEIRO);
-                veiculoQtdPass.setNmDetalhe(vehicle.getPassengerQuantity() != null ? vehicle.getPassengerQuantity() : "Não informada");
-                veiculoDetalheList.add(veiculoQtdPass);
-                
-                /** Checks the number of doors on the vehicle */
-                WSVeiculoDetalhe veiculoQtdPortas = new WSVeiculoDetalhe();
-                veiculoQtdPortas.setDetalheEnum(WSVeiculoDetalheEnum.QT_PORTAS);
-                veiculoQtdPortas.setNmDetalhe(vehicle.getVehType() != null && vehicle.getVehType().getDoorCount() != null ? vehicle.getVehType().getDoorCount() : "Não Informado");
-                veiculoDetalheList.add(veiculoQtdPortas);
-                
-                /** Checks the quantity of baggege on the vehicle */
-                WSVeiculoDetalhe veiculoQtdBagagem = new WSVeiculoDetalhe();
-                veiculoQtdBagagem.setDetalheEnum(WSVeiculoDetalheEnum.QT_BAGAGEM);
-                veiculoQtdBagagem.setNmDetalhe(vehicle.getBaggageQuantity() != null ? vehicle.getBaggageQuantity().toString() : "Não informada");
-                veiculoDetalheList.add(veiculoQtdBagagem);
-                
-                /** Checks the vehicle's Mileage Limit */
-                VehicleRentalRateType.RateDistance rateDistance = rentalRates.stream().findFirst().get().getRateDistance().stream().findFirst().orElse(null);
-                if(rateDistance != null){
-                    WSVeiculoDetalhe veiculoKm = new WSVeiculoDetalhe();
-                    veiculoKm.setDetalheEnum(WSVeiculoDetalheEnum.KILOMETRAGEM);
-                    veiculoKm.setNmDetalhe(rateDistance.isUnlimited() ? "Unlimited" : rateDistance.getDistUnitName().KM.equals(DistanceUnitNameType.KM) && rateDistance.getQuantity() != null ? rateDistance.getQuantity().toString() : "Não informada");
-                    veiculoDetalheList.add(veiculoKm);
-                }
-                
-            }
-        } catch (Exception ex) {
-            throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleDetailsVehicle", WSMensagemErroEnum.SDI, 
-                    "Não foi possível obter os detalhes para o veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
-        }
-        
-        return veiculoDetalheList;
-    }
-
     private String treatPhones(WSIntegrador integrador, List<VehicleLocationDetailsType.Telephone> telephones) {
         String telefones = null;
         try {
@@ -309,7 +244,7 @@ public class DisponibilidadeCarWS {
                         veiculoLocal.setCdLongitude(latitudeLongitude[1]);
                         i += latitudeLongitude.length;
                     } else {
-                        veiculoLocal.setDsEndereco(address + addressLocal.getStreetNmbr() != null ? ", " + addressLocal.getStreetNmbr() : "");
+                        veiculoLocal.setDsEndereco(address != null && addressLocal.getStreetNmbr() != null ? address + ", " + addressLocal.getStreetNmbr() : address);
                         i++;
                     }
                 }
@@ -327,117 +262,6 @@ public class DisponibilidadeCarWS {
         }
     }
 
-    private List<WSMedia> assembleMediaList(WSIntegrador integrador,  VehicleType vehicle) {
-        List<WSMedia> mediaList = null;
-        try {
-            /** List populated with a WSMedia object because it returns only one parameter */
-            mediaList = new ArrayList();
-            if(vehicle != null && vehicle.getPictureURL() != null) {
-                mediaList = Arrays.asList(new WSMedia(WSMediaCategoriaEnum.VEICULO, vehicle.getPictureURL()));
-            }
-        } catch (Exception ex) {
-            try {
-                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleMediaList", WSMensagemErroEnum.SDI,
-                        "Não foi possível obter a lista de mídias sobre o veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
-            } catch (ErrorException ex1) {
-                Logger.getLogger(DisponibilidadeCarWS.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-        }
-        
-        return mediaList;
-    }
-
-    private WSTarifa assembleRate(WSIntegrador integrador, List<TotalCharge> totalCharges, ArrayOfVehicleChargePurposeType1 fees) {
-        WSTarifa tarifa = null;
-        try {
-            if(!Utils.isListNothing(totalCharges)){
-                String sgMoeda = null;
-                Double vlNeto = 0.0d;
-                
-                /** Gets the value for the rental rate */
-                for(TotalCharge charge : totalCharges){
-                    sgMoeda = charge.getCurrencyCode();
-                    vlNeto = Utils.somar(vlNeto, charge.getEstimatedTotalAmount().doubleValue());
-                }
-                                
-                /** Checks for service charges for the tariff */
-                List<WSTarifaAdicional> tarifaAdicionalList = null;
-                if(!Utils.isListNothing(fees.getFee())){
-                    String sgMoedaTaxa = null;
-                    Double vlNetoTaxa = 0.0d;
-                    
-                    tarifaAdicionalList = new ArrayList();
-                    for(VehicleChargePurposeType fee : fees.getFee()){
-                        if(fee.getAmount() != null && fee.getAmount().doubleValue() > 0.0){
-                            /** Rate currency abbreviation */
-                            sgMoedaTaxa = fee.getCurrencyCode();
-                            
-                            /**
-                             * 1 - Vehicle rental
-                             * 2 - Drop
-                             * 3 - Discount
-                             * 4 - Coverage
-                             * 5 - Surcharge
-                             * 6 - Fee
-                             * 7 - Tax
-                             * 8 - Additional Distance
-                             * 9 - Additional Week
-                             * 10 - Additional Day
-                             * 11 - Additional Hour
-                             * 12 - Additional Day
-                             * 13 - Young driver
-                             * 14 - Younger driver
-                             * 15 - Senior
-                             * 16 - Customer pickup
-                             * 17 - Customer drop off
-                             * 18 - Vehicle delivery
-                             * 19 - Vehicle collection
-                             * 20 - Fuel
-                             * 21 - Equipment
-                             * 22 - Prepay amount
-                             * 23 - Pay on arrival amount
-                             * 24 - Prepaid fuel
-                             * 25 - Adjustment
-                             * 26 - Mandatory charges total
-                             * 27 - Subtotal
-                             * 28 - Optional
-                             * 29 - Contract fee
-                             * 30 - Airport surcharge
-                             * 31 - Air conditioning surcharge
-                             * 32 - Registration fee
-                             * 33 - Vehicle license fee
-                             * 34 - Winter service charge
-                             * 35 - Base rate
-                             */
-                            WSTarifaAdicional taxaAdicional = new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, fee.getDescription(), sgMoedaTaxa, fee.getAmount().doubleValue());
-                            tarifaAdicionalList.add(taxaAdicional);
-                            /** Performs the calculation of all returned fees */
-                            vlNetoTaxa = Utils.somar(vlNetoTaxa, fee.getAmount().doubleValue());
-                        }
-                    }
-                    /** Performs the calculation in order to subtract the fees from the total amount */
-                    vlNeto = Utils.subtrair(vlNeto, vlNetoTaxa);
-                }
-                
-                tarifa = new WSTarifa();
-                tarifa.setSgMoeda(sgMoeda);
-                tarifa.setSgMoedaNeto(sgMoeda);
-                tarifa.setVlNeto(vlNeto);
-                tarifa.setTarifaAdicionalList(tarifaAdicionalList);
-            }
-            
-        } catch (Exception ex) {
-            try {
-                throw new ErrorException(integrador, DisponibilidadeCarWS.class, "assembleRate", WSMensagemErroEnum.SDI,
-                        "Não foi possível montar a tarifa para o veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
-            } catch (ErrorException ex1) {
-                Logger.getLogger(DisponibilidadeCarWS.class.getName()).log(Level.SEVERE, null, ex1);
-            }
-        }
-        
-        return tarifa;
-    }
-
     private String descriptionRate(WSIntegrador integrador, VehicleAvailAdditionalInfoType vehAvailInfo){
         String description = "";
         try {
@@ -447,9 +271,9 @@ public class DisponibilidadeCarWS {
                         /** Assemble the fare description that is classified as required */
                         for(CoverageDetailsType detail : coverage.getCoverage().getDetails()){
                             if(detail.getCoverageTextType().equals(CoverageTextType.SUPPLEMENT)){
-                                description += "<b>" + detail.getValue() + "</b> </br>";
+                                description += detail.getValue() + "<br />";
                             } else if(detail.getCoverageTextType().equals(CoverageTextType.DESCRIPTION)){
-                                description += detail.getValue() + "</br> </br>";
+                                description += detail.getValue() + "<br /> <br />";
                             }
                         }
                     }
@@ -467,15 +291,6 @@ public class DisponibilidadeCarWS {
         return description;
     }
 
-    private WSVeiculoLocadora assembleRentalCompany() {
-        WSVeiculoLocadora locadora = new WSVeiculoLocadora();
-        locadora.setCdLocadora("UN");
-        locadora.setNmLocadora("UNIDAS");
-        locadora.setTerminal(Boolean.FALSE);
-        
-        return locadora;
-    }
-    
     private WSDisponibilidadeVeiculoRS builderDisponibilidadeVeiculoRS(WSIntegrador integrador, List<WSVeiculoPesquisa> searchVehiclesList) {
         WSDisponibilidadeVeiculoRS disponibilidadeVeiculoRS = null;
         if(!Utils.isListNothing(searchVehiclesList)){

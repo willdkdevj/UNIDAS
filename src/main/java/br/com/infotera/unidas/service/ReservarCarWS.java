@@ -72,12 +72,12 @@ public class ReservarCarWS {
                                     
                                 });
                             } else {
-                                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusBooking", WSMensagemErroEnum.SRE,
+                                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusLOCBooking", WSMensagemErroEnum.SRE,
                                         "Não foi retornado o localizador para a reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
                             }
                         } catch (ErrorException ex) {
                             try {
-                                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusBooking", WSMensagemErroEnum.SRE,
+                                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusLOCBooking", WSMensagemErroEnum.SRE,
                                         "Não foi possível verificar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
                             } catch (ErrorException ex1) {
                                 Logger.getLogger(ReservarCarWS.class.getName()).log(Level.SEVERE, null, ex1);
@@ -86,12 +86,12 @@ public class ReservarCarWS {
                     }
                 });
             } else {
-                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusBooking", WSMensagemErroEnum.SRE,
+                throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusLOCBooking", WSMensagemErroEnum.SRE,
                         "Não foi possível obter a validação da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
             }
             
         } else {
-            throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusBooking", WSMensagemErroEnum.SRE, 
+            throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusLOCBooking", WSMensagemErroEnum.SRE, 
                 "Não foi possível obter a validação da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
         }
     }
