@@ -11,4 +11,4 @@ RUN addgroup bootapp && \
 
 WORKDIR /opt
 USER bootapp
-CMD java -server -Xms256m -Xmx512m -XX:MaxMetaspaceSize=128m -Duser.timezone=GMT-3 -Djava.awt.headless=true -Dspring.profiles.active=$ST_AMBIENTE -jar app.jar $ST_AMBIENTE
+CMD java -server -Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m -Duser.timezone=GMT-3 -Djava.awt.headless=true -Dspring.profiles.active=$ST_AMBIENTE -jar app.jar $ST_AMBIENTE

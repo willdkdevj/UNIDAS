@@ -59,10 +59,8 @@ public class ReservarCarWS {
                             if(response.getVehReservation().getVehSegmentCore() != null){
                                 reservarRQ.getReserva().getReservaServicoList().forEach(reservaServico -> {
                                     response.getVehReservation().getVehSegmentCore().getConfID().forEach(codID -> {
-                                        if(codID.getType().equals("14")){
-                                            reservarRQ.getIntegrador().setCdLocalizador(codID.getID());
-                                            reservaServico.setNmFornecedor(codID.getID());
-                                        }
+                                        reservarRQ.getIntegrador().setCdLocalizador(codID.getID());
+                                        reservaServico.setNrLocalizador(codID.getID());
                                     });
                                     
                                 });

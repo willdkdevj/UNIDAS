@@ -9,10 +9,12 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.unidas.model.gen.opentravel.CancelInfoRQType;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehCancel;
 import br.com.infotera.unidas.model.gen.opentravel.OtaVehCancelRQ;
+import br.com.infotera.unidas.model.gen.opentravel.TransactionActionType;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleCancelRSAdditionalInfoType;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
 import br.com.infotera.unidas.service.interfaces.OTAVehCancelRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,12 +40,12 @@ public class OTAVehCancelRequestImp implements OTAVehCancelRequest {
         OtaVehCancel cancel = null;
         try {
             OtaVehCancelRQ cancelRQ = new OtaVehCancelRQ();
-            cancelRQ.setPOS(builderRequest.setUpPos(reservaRQ.getIntegrador()));
+            cancelRQ.setVersion(BigDecimal.ZERO);
             cancelRQ.setVehCancelRQCore(setUpVehCancelRQCore(reservaRQ));
             
             cancel = new OtaVehCancel();
             cancel.setOtaVehCancelRQ(cancelRQ);
-        } catch(ErrorException ex){
+        } catch(Exception ex){
             throw new ErrorException(reservaRQ.getIntegrador(), OTAVehCancelRequestImp.class, "builderOTAVehCancelRequest", WSMensagemErroEnum.GENMETHOD, 
                     "Erro ao parametrizar o OTAVehRetResRequest a fim de realizar a requisição - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, ex, false);
         }
@@ -61,10 +63,10 @@ public class OTAVehCancelRequestImp implements OTAVehCancelRequest {
             
             if(reservaServico.getNrLocalizador() != null && !reservaServico.getNrLocalizador().equals("")){
                 UniqueIDType uniqueID = new UniqueIDType();
-                uniqueID.setType("14");
                 uniqueID.setID(reservaServico.getNrLocalizador());
                 
                 vehCancelRQCore = new CancelInfoRQType();
+                vehCancelRQCore.setCancelType(TransactionActionType.BOOK);
                 vehCancelRQCore.getUniqueID().add(uniqueID);
                 
             } else {

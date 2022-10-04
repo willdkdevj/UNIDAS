@@ -88,22 +88,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "OTA_VehRetResRQ", propOrder = {
     "primaryLangID",
     "pos",
     "vehRetResRQCore",
     "vehRetResRQInfo"
 })
-@XmlRootElement(name = "OTA_VehRetResRQ")
+@XmlRootElement(name = "OTA_VehRetResRQ", namespace = "http://www.opentravel.org/OTA/2003/05")
 public class OTAVehRetResRQ {
 
     @XmlElement(name = "PrimaryLangID")
     protected String primaryLangID;
-    @XmlElement(name = "POS")
+    @XmlElement(name = "POS", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected ArrayOfSourceType pos;
-    @XmlElement(name = "VehRetResRQCore")
+    @XmlElement(name = "VehRetResRQCore", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OTAVehRetResRQ.VehRetResRQCore vehRetResRQCore;
-    @XmlElement(name = "VehRetResRQInfo")
+    @XmlElement(name = "VehRetResRQInfo", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OTAVehRetResRQ.VehRetResRQInfo vehRetResRQInfo;
     @XmlAttribute(name = "EchoToken")
     protected String echoToken;

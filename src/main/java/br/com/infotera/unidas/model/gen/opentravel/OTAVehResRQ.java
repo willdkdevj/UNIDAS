@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -88,22 +87,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "OTA_VehResRQ", propOrder = {
     "primaryLangID",
     "pos",
     "vehResRQCore",
     "vehResRQInfo"
 })
-@XmlRootElement(name = "OTA_VehResRQ")
+@XmlRootElement(name = "OTA_VehResRQ", namespace = "http://www.opentravel.org/OTA/2003/05")
 public class OTAVehResRQ {
 
     @XmlElement(name = "PrimaryLangID")
     protected String primaryLangID;
-    @XmlElement(name = "POS")
+    @XmlElement(name = "POS", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected ArrayOfSourceType pos;
-    @XmlElement(name = "VehResRQCore")
+    @XmlElement(name = "VehResRQCore", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OTAVehResRQ.VehResRQCore vehResRQCore;
-    @XmlElement(name = "VehResRQInfo")
+    @XmlElement(name = "VehResRQInfo", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OTAVehResRQ.VehResRQInfo vehResRQInfo;
     @XmlAttribute(name = "EchoToken")
     protected String echoToken;

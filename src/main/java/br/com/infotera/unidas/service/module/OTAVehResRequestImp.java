@@ -108,5 +108,4 @@ public class OTAVehResRequestImp implements OTAVehResRequest {
 
         return vehResCore;
     }
-
 }

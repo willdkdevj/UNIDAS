@@ -9,7 +9,6 @@
 package br.com.infotera.unidas.model.gen.unidas;
 
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
-import br.com.infotera.unidas.model.gen.opentravel.OTAVehResRQ;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -43,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "OtaVehRes", namespace = "http://www.unidas.com.br/")
 public class OtaVehRes {
 
-    @XmlElement(name = "OTA_VehResRQ")
+    @XmlElement(name = "OTA_VehResRQ", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OTAVehResRQ otaVehResRQ;
 
     /**

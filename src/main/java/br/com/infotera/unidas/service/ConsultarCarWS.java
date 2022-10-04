@@ -26,7 +26,7 @@ import br.com.infotera.unidas.model.gen.opentravel.CoverageDetailsType;
 import br.com.infotera.unidas.model.gen.opentravel.CoveragePricedType;
 import br.com.infotera.unidas.model.gen.opentravel.CoverageTextType;
 import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehRetRes;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleEquipmentPricedType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleLocationDetailsType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRentalCoreType;
@@ -92,7 +92,8 @@ public class ConsultarCarWS {
                                             response.getVehReservation().getVehSegmentInfo().getPricedCoverages(), 
                                             response.getVehReservation().getVehSegmentCore().getPricedEquips()));
                             
-                            checkStatusReservation(reservaRQ.getIntegrador(), reservaServico, response);
+                            reservaServico.setReservaStatus(checkStatusReservation(reservaRQ.getIntegrador(), response));
+                            
                         } else {
                             importLOCReservation(reservaRQ.getIntegrador(), reservaServico, response);
                         }
@@ -162,7 +163,7 @@ public class ConsultarCarWS {
                         response.getVehReservation().getVehSegmentInfo().getPricedCoverages(), 
                         response.getVehReservation().getVehSegmentCore().getPricedEquips()));
                 
-                checkStatusReservation(integrador,  reservaServico, response);
+                reservaServico.setReservaStatus(checkStatusReservation(integrador, response));
             }
         } catch(ErrorException ex){
             try {
@@ -192,35 +193,28 @@ public class ConsultarCarWS {
         return reservaNomeList;
     }
 
-    private void checkStatusReservation(WSIntegrador integrador, WSReservaServico reservaServico, VehicleRetrieveResRSCoreType response) throws ErrorException {
-        if(response.getVehResSummaries() != null && !Utils.isListNothing(response.getVehResSummaries().getVehResSummary())){
-            response.getVehResSummaries().getVehResSummary().forEach(summary -> {
-                if(summary.getReservationStatus() != null && !summary.getReservationStatus().equals("")){
-                    switch(summary.getReservationStatus()){
-                        case "CFA":
-                            reservaServico.setReservaStatus(WSReservaStatusEnum.CONFIRMADO);
-                            break;
-                        case "CAN":
-                            reservaServico.setReservaStatus(WSReservaStatusEnum.CANCELADO);
-                            break;
-                        case "SOL":
-                            reservaServico.setReservaStatus(WSReservaStatusEnum.ON_REQUEST);
-                            break;
-                        default:
-                            reservaServico.setReservaStatus(WSReservaStatusEnum.INCONSISTENTE);
-                            try {
-                                throw new ErrorException(integrador, ReservarCarWS.class, "checkStatusReservation", WSMensagemErroEnum.SCO,
-                                        "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
-                            } catch (ErrorException ex) {
-                                Logger.getLogger(ConsultarCarWS.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+    private WSReservaStatusEnum checkStatusReservation(WSIntegrador integrador, VehicleRetrieveResRSCoreType response) throws ErrorException {
+        if(response.getVehReservation() != null && response.getVehReservation().getReservationStatus() != null){
+            switch(response.getVehReservation().getReservationStatus()){
+                case "CFA":
+                    return WSReservaStatusEnum.CONFIRMADO;
+                case "CAN":
+                    return WSReservaStatusEnum.CANCELADO;
+                case "SOL":
+                    return WSReservaStatusEnum.ON_REQUEST;
+                default:
+                    try {
+                        throw new ErrorException(integrador, ReservarCarWS.class, "checkStatusReservation", WSMensagemErroEnum.SCO,
+                                "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+                    } catch (ErrorException ex) {
+                        Logger.getLogger(ConsultarCarWS.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-            });
+            }
         } else {
             throw new ErrorException(integrador, ReservarCarWS.class, "checkStatusReservation", WSMensagemErroEnum.SCO,
-                                        "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+                "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
         }
+        return null;
     }
 
     private void setUpPickUpAndReturnDate(WSVeiculo veiculo, VehicleRentalCoreType vehRentalCore) {
@@ -283,7 +277,7 @@ public class ConsultarCarWS {
             if(pricedCoverages != null && !Utils.isListNothing(pricedCoverages.getPricedCoverage())){
                 additionalServicesList = new ArrayList();
                 for(CoveragePricedType priced : pricedCoverages.getPricedCoverage()){
-                    String nmCobertura = null, dsCobertura = null;
+                    String nmCobertura = "", dsCobertura = "";
                     try {
                         for (CoverageDetailsType detail : priced.getCoverage().getDetails()) {
                             if (detail.getCoverageTextType().equals(CoverageTextType.SUPPLEMENT)) {
@@ -336,7 +330,7 @@ public class ConsultarCarWS {
             if(pricedCoverages != null && !Utils.isListNothing(pricedCoverages.getPricedCoverage())){
                 policiesList = new ArrayList();
                 for(CoveragePricedType priced : pricedCoverages.getPricedCoverage()){
-                    String nmCobertura = null, dsCobertura = null;
+                    String nmCobertura = "", dsCobertura = "";
                     try {
                         for (CoverageDetailsType detail : priced.getCoverage().getDetails()) {
                             if (detail.getCoverageTextType().equals(CoverageTextType.SUPPLEMENT)) {

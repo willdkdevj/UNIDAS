@@ -8,8 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.unidas.*;
-import br.com.infotera.unidas.model.gen.unidas.Usuario;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
@@ -436,371 +434,371 @@ public class ObjectFactory {
     public ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref createArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref() {
         return new ArrayOfVehicleAvailRQAdditionalInfoTypeCoveragePref();
     }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref }
-//     * 
-//     */
-//    public ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref createArrayOfVehicleAvailRQCoreTypeSpecialEquipPref() {
-//        return new ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleAvailRQCoreTypeVehPref }
-//     * 
-//     */
-//    public ArrayOfVehicleAvailRQCoreTypeVehPref createArrayOfVehicleAvailRQCoreTypeVehPref() {
-//        return new ArrayOfVehicleAvailRQCoreTypeVehPref();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehiclePrefType }
-//     * 
-//     */
-//    public VehiclePrefType createVehiclePrefType() {
-//        return new VehiclePrefType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleAvailRQCoreType }
-//     * 
-//     */
-//    public VehicleAvailRQCoreType createVehicleAvailRQCoreType() {
-//        return new VehicleAvailRQCoreType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleAvailRQCoreType.VendorPrefs }
-//     * 
-//     */
-//    public VehicleAvailRQCoreType.VendorPrefs createVehicleAvailRQCoreTypeVendorPrefs() {
-//        return new VehicleAvailRQCoreType.VendorPrefs();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation }
-//     * 
-//     */
-//    public ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation createArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation() {
-//        return new ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo }
-//     * 
-//     */
-//    public ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo createArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo() {
-//        return new ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfOperationScheduleTypeOperationTime }
-//     * 
-//     */
-//    public ArrayOfOperationScheduleTypeOperationTime createArrayOfOperationScheduleTypeOperationTime() {
-//        return new ArrayOfOperationScheduleTypeOperationTime();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationAdditionalDetailsType }
-//     * 
-//     */
-//    public VehicleLocationAdditionalDetailsType createVehicleLocationAdditionalDetailsType() {
-//        return new VehicleLocationAdditionalDetailsType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfRateQualifierTypeRateComment }
-//     * 
-//     */
-//    public ArrayOfRateQualifierTypeRateComment createArrayOfRateQualifierTypeRateComment() {
-//        return new ArrayOfRateQualifierTypeRateComment();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleRentalRateType }
-//     * 
-//     */
-//    public VehicleRentalRateType createVehicleRentalRateType() {
-//        return new VehicleRentalRateType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleSegmentCoreType }
-//     * 
-//     */
-//    public VehicleSegmentCoreType createVehicleSegmentCoreType() {
-//        return new VehicleSegmentCoreType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleReservationType }
-//     * 
-//     */
-//    public VehicleReservationType createVehicleReservationType() {
-//        return new VehicleReservationType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link OffLocationServiceCoreType }
-//     * 
-//     */
-//    public OffLocationServiceCoreType createOffLocationServiceCoreType() {
-//        return new OffLocationServiceCoreType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link OffLocationServiceType }
-//     * 
-//     */
-//    public OffLocationServiceType createOffLocationServiceType() {
-//        return new OffLocationServiceType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref }
-//     * 
-//     */
-//    public ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref createArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref() {
-//        return new ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleModifyRQAdditionalInfoType }
-//     * 
-//     */
-//    public VehicleModifyRQAdditionalInfoType createVehicleModifyRQAdditionalInfoType() {
-//        return new VehicleModifyRQAdditionalInfoType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleChargeTypeTaxAmount }
-//     * 
-//     */
-//    public ArrayOfVehicleChargeTypeTaxAmount createArrayOfVehicleChargeTypeTaxAmount() {
-//        return new ArrayOfVehicleChargeTypeTaxAmount();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref }
-//     * 
-//     */
-//    public ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref createArrayOfVehicleModifyRQCoreTypeSpecialEquipPref() {
-//        return new ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ContactPersonType }
-//     * 
-//     */
-//    public ContactPersonType createContactPersonType() {
-//        return new ContactPersonType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ParagraphType }
-//     * 
-//     */
-//    public ParagraphType createParagraphType() {
-//        return new ParagraphType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link CommissionType }
-//     * 
-//     */
-//    public CommissionType createCommissionType() {
-//        return new CommissionType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link PaymentCardType }
-//     * 
-//     */
-//    public PaymentCardType createPaymentCardType() {
-//        return new PaymentCardType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link DirectBillType }
-//     * 
-//     */
-//    public DirectBillType createDirectBillType() {
-//        return new DirectBillType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link CustomerType }
-//     * 
-//     */
-//    public CustomerType createCustomerType() {
-//        return new CustomerType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link CustomerType.PaymentForm }
-//     * 
-//     */
-//    public CustomerType.PaymentForm createCustomerTypePaymentForm() {
-//        return new CustomerType.PaymentForm();
-//    }
-//
-//    /**
-//     * Create an instance of {@link CustomerPrimaryAdditionalType }
-//     * 
-//     */
-//    public CustomerPrimaryAdditionalType createCustomerPrimaryAdditionalType() {
-//        return new CustomerPrimaryAdditionalType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleRentalCoreType }
-//     * 
-//     */
-//    public VehicleRentalCoreType createVehicleRentalCoreType() {
-//        return new VehicleRentalCoreType();
-//    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref }
+     * 
+     */
+    public ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref createArrayOfVehicleAvailRQCoreTypeSpecialEquipPref() {
+        return new ArrayOfVehicleAvailRQCoreTypeSpecialEquipPref();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleAvailRQCoreTypeVehPref }
+     * 
+     */
+    public ArrayOfVehicleAvailRQCoreTypeVehPref createArrayOfVehicleAvailRQCoreTypeVehPref() {
+        return new ArrayOfVehicleAvailRQCoreTypeVehPref();
+    }
+
+    /**
+     * Create an instance of {@link VehiclePrefType }
+     * 
+     */
+    public VehiclePrefType createVehiclePrefType() {
+        return new VehiclePrefType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleAvailRQCoreType }
+     * 
+     */
+    public VehicleAvailRQCoreType createVehicleAvailRQCoreType() {
+        return new VehicleAvailRQCoreType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleAvailRQCoreType.VendorPrefs }
+     * 
+     */
+    public VehicleAvailRQCoreType.VendorPrefs createVehicleAvailRQCoreTypeVendorPrefs() {
+        return new VehicleAvailRQCoreType.VendorPrefs();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation }
+     * 
+     */
+    public ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation createArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation() {
+        return new ArrayOfVehicleLocationAdditionalDetailsTypeOneWayDropLocation();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo }
+     * 
+     */
+    public ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo createArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo() {
+        return new ArrayOfVehicleLocationAdditionalDetailsTypeShuttleShuttleInfo();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfOperationScheduleTypeOperationTime }
+     * 
+     */
+    public ArrayOfOperationScheduleTypeOperationTime createArrayOfOperationScheduleTypeOperationTime() {
+        return new ArrayOfOperationScheduleTypeOperationTime();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationAdditionalDetailsType }
+     * 
+     */
+    public VehicleLocationAdditionalDetailsType createVehicleLocationAdditionalDetailsType() {
+        return new VehicleLocationAdditionalDetailsType();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfRateQualifierTypeRateComment }
+     * 
+     */
+    public ArrayOfRateQualifierTypeRateComment createArrayOfRateQualifierTypeRateComment() {
+        return new ArrayOfRateQualifierTypeRateComment();
+    }
+
+    /**
+     * Create an instance of {@link VehicleRentalRateType }
+     * 
+     */
+    public VehicleRentalRateType createVehicleRentalRateType() {
+        return new VehicleRentalRateType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleSegmentCoreType }
+     * 
+     */
+    public VehicleSegmentCoreType createVehicleSegmentCoreType() {
+        return new VehicleSegmentCoreType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleReservationType }
+     * 
+     */
+    public VehicleReservationType createVehicleReservationType() {
+        return new VehicleReservationType();
+    }
+
+    /**
+     * Create an instance of {@link OffLocationServiceCoreType }
+     * 
+     */
+    public OffLocationServiceCoreType createOffLocationServiceCoreType() {
+        return new OffLocationServiceCoreType();
+    }
+
+    /**
+     * Create an instance of {@link OffLocationServiceType }
+     * 
+     */
+    public OffLocationServiceType createOffLocationServiceType() {
+        return new OffLocationServiceType();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref }
+     * 
+     */
+    public ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref createArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref() {
+        return new ArrayOfVehicleModifyRQAdditionalInfoTypeCoveragePref();
+    }
+
+    /**
+     * Create an instance of {@link VehicleModifyRQAdditionalInfoType }
+     * 
+     */
+    public VehicleModifyRQAdditionalInfoType createVehicleModifyRQAdditionalInfoType() {
+        return new VehicleModifyRQAdditionalInfoType();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleChargeTypeTaxAmount }
+     * 
+     */
+    public ArrayOfVehicleChargeTypeTaxAmount createArrayOfVehicleChargeTypeTaxAmount() {
+        return new ArrayOfVehicleChargeTypeTaxAmount();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref }
+     * 
+     */
+    public ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref createArrayOfVehicleModifyRQCoreTypeSpecialEquipPref() {
+        return new ArrayOfVehicleModifyRQCoreTypeSpecialEquipPref();
+    }
+
+    /**
+     * Create an instance of {@link ContactPersonType }
+     * 
+     */
+    public ContactPersonType createContactPersonType() {
+        return new ContactPersonType();
+    }
+
+    /**
+     * Create an instance of {@link ParagraphType }
+     * 
+     */
+    public ParagraphType createParagraphType() {
+        return new ParagraphType();
+    }
+
+    /**
+     * Create an instance of {@link CommissionType }
+     * 
+     */
+    public CommissionType createCommissionType() {
+        return new CommissionType();
+    }
+
+    /**
+     * Create an instance of {@link PaymentCardType }
+     * 
+     */
+    public PaymentCardType createPaymentCardType() {
+        return new PaymentCardType();
+    }
+
+    /**
+     * Create an instance of {@link DirectBillType }
+     * 
+     */
+    public DirectBillType createDirectBillType() {
+        return new DirectBillType();
+    }
+
+    /**
+     * Create an instance of {@link CustomerType }
+     * 
+     */
+    public CustomerType createCustomerType() {
+        return new CustomerType();
+    }
+
+    /**
+     * Create an instance of {@link CustomerType.PaymentForm }
+     * 
+     */
+    public CustomerType.PaymentForm createCustomerTypePaymentForm() {
+        return new CustomerType.PaymentForm();
+    }
+
+    /**
+     * Create an instance of {@link CustomerPrimaryAdditionalType }
+     * 
+     */
+    public CustomerPrimaryAdditionalType createCustomerPrimaryAdditionalType() {
+        return new CustomerPrimaryAdditionalType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleRentalCoreType }
+     * 
+     */
+    public VehicleRentalCoreType createVehicleRentalCoreType() {
+        return new VehicleRentalCoreType();
+    }
 
     /**
      * Create an instance of {@link VehicleModifyRQCoreType }
      * 
      */
-//    public VehicleModifyRQCoreType createVehicleModifyRQCoreType() {
-//        return new VehicleModifyRQCoreType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link SourceType }
-//     * 
-//     */
-//    public SourceType createSourceType() {
-//        return new SourceType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationVehiclesType }
-//     * 
-//     */
-//    public VehicleLocationVehiclesType createVehicleLocationVehiclesType() {
-//        return new VehicleLocationVehiclesType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationRequirementsType }
-//     * 
-//     */
-//    public VehicleLocationRequirementsType createVehicleLocationRequirementsType() {
-//        return new VehicleLocationRequirementsType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationRequirementsType.PaymentOptions }
-//     * 
-//     */
-//    public VehicleLocationRequirementsType.PaymentOptions createVehicleLocationRequirementsTypePaymentOptions() {
-//        return new VehicleLocationRequirementsType.PaymentOptions();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationRequirementsType.Age }
-//     * 
-//     */
-//    public VehicleLocationRequirementsType.Age createVehicleLocationRequirementsTypeAge() {
-//        return new VehicleLocationRequirementsType.Age();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationDetailsType }
-//     * 
-//     */
-//    public VehicleLocationDetailsType createVehicleLocationDetailsType() {
-//        return new VehicleLocationDetailsType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationAdditionalFeesType }
-//     * 
-//     */
-//    public VehicleLocationAdditionalFeesType createVehicleLocationAdditionalFeesType() {
-//        return new VehicleLocationAdditionalFeesType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationAdditionalFeesType.MiscellaneousCharges }
-//     * 
-//     */
-//    public VehicleLocationAdditionalFeesType.MiscellaneousCharges createVehicleLocationAdditionalFeesTypeMiscellaneousCharges() {
-//        return new VehicleLocationAdditionalFeesType.MiscellaneousCharges();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationAdditionalFeesType.Surcharges }
-//     * 
-//     */
-//    public VehicleLocationAdditionalFeesType.Surcharges createVehicleLocationAdditionalFeesTypeSurcharges() {
-//        return new VehicleLocationAdditionalFeesType.Surcharges();
-//    }
+    public VehicleModifyRQCoreType createVehicleModifyRQCoreType() {
+        return new VehicleModifyRQCoreType();
+    }
+
+    /**
+     * Create an instance of {@link SourceType }
+     * 
+     */
+    public SourceType createSourceType() {
+        return new SourceType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationVehiclesType }
+     * 
+     */
+    public VehicleLocationVehiclesType createVehicleLocationVehiclesType() {
+        return new VehicleLocationVehiclesType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationRequirementsType }
+     * 
+     */
+    public VehicleLocationRequirementsType createVehicleLocationRequirementsType() {
+        return new VehicleLocationRequirementsType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationRequirementsType.PaymentOptions }
+     * 
+     */
+    public VehicleLocationRequirementsType.PaymentOptions createVehicleLocationRequirementsTypePaymentOptions() {
+        return new VehicleLocationRequirementsType.PaymentOptions();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationRequirementsType.Age }
+     * 
+     */
+    public VehicleLocationRequirementsType.Age createVehicleLocationRequirementsTypeAge() {
+        return new VehicleLocationRequirementsType.Age();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationDetailsType }
+     * 
+     */
+    public VehicleLocationDetailsType createVehicleLocationDetailsType() {
+        return new VehicleLocationDetailsType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationAdditionalFeesType }
+     * 
+     */
+    public VehicleLocationAdditionalFeesType createVehicleLocationAdditionalFeesType() {
+        return new VehicleLocationAdditionalFeesType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationAdditionalFeesType.MiscellaneousCharges }
+     * 
+     */
+    public VehicleLocationAdditionalFeesType.MiscellaneousCharges createVehicleLocationAdditionalFeesTypeMiscellaneousCharges() {
+        return new VehicleLocationAdditionalFeesType.MiscellaneousCharges();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationAdditionalFeesType.Surcharges }
+     * 
+     */
+    public VehicleLocationAdditionalFeesType.Surcharges createVehicleLocationAdditionalFeesTypeSurcharges() {
+        return new VehicleLocationAdditionalFeesType.Surcharges();
+    }
 
     /**
      * Create an instance of {@link VehicleLocationAdditionalFeesType.Fees }
      * 
      */
-//    public VehicleLocationAdditionalFeesType.Fees createVehicleLocationAdditionalFeesTypeFees() {
-//        return new VehicleLocationAdditionalFeesType.Fees();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleLocationAdditionalFeesType.Taxes }
-//     * 
-//     */
-//    public VehicleLocationAdditionalFeesType.Taxes createVehicleLocationAdditionalFeesTypeTaxes() {
-//        return new VehicleLocationAdditionalFeesType.Taxes();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfOTAVehLocSearchRQPOSSource }
-//     * 
-//     */
-//    public ArrayOfOTAVehLocSearchRQPOSSource createArrayOfOTAVehLocSearchRQPOSSource() {
-//        return new ArrayOfOTAVehLocSearchRQPOSSource();
-//    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfOTAVehLocSearchRQPOSSource.Source }
-//     * 
-//     */
-//    public ArrayOfOTAVehLocSearchRQPOSSource.Source createArrayOfOTAVehLocSearchRQPOSSourceSource() {
-//        return new ArrayOfOTAVehLocSearchRQPOSSource.Source();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleRetrieveResRSCoreType }
-//     * 
-//     */
-//    public VehicleRetrieveResRSCoreType createVehicleRetrieveResRSCoreType() {
-//        return new VehicleRetrieveResRSCoreType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link VehicleCancelRQAdditionalInfoType }
-//     * 
-//     */
-//    public VehicleCancelRQAdditionalInfoType createVehicleCancelRQAdditionalInfoType() {
-//        return new VehicleCancelRQAdditionalInfoType();
-//    }
-//
-//    /**
-//     * Create an instance of {@link OtaModify }
-//     * 
-//     */
+    public VehicleLocationAdditionalFeesType.Fees createVehicleLocationAdditionalFeesTypeFees() {
+        return new VehicleLocationAdditionalFeesType.Fees();
+    }
+
+    /**
+     * Create an instance of {@link VehicleLocationAdditionalFeesType.Taxes }
+     * 
+     */
+    public VehicleLocationAdditionalFeesType.Taxes createVehicleLocationAdditionalFeesTypeTaxes() {
+        return new VehicleLocationAdditionalFeesType.Taxes();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfOTAVehLocSearchRQPOSSource }
+     * 
+     */
+    public ArrayOfOTAVehLocSearchRQPOSSource createArrayOfOTAVehLocSearchRQPOSSource() {
+        return new ArrayOfOTAVehLocSearchRQPOSSource();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfOTAVehLocSearchRQPOSSource.Source }
+     * 
+     */
+    public ArrayOfOTAVehLocSearchRQPOSSource.Source createArrayOfOTAVehLocSearchRQPOSSourceSource() {
+        return new ArrayOfOTAVehLocSearchRQPOSSource.Source();
+    }
+
+    /**
+     * Create an instance of {@link VehicleRetrieveResRSCoreType }
+     * 
+     */
+    public VehicleRetrieveResRSCoreType createVehicleRetrieveResRSCoreType() {
+        return new VehicleRetrieveResRSCoreType();
+    }
+
+    /**
+     * Create an instance of {@link VehicleCancelRQAdditionalInfoType }
+     * 
+     */
+    public VehicleCancelRQAdditionalInfoType createVehicleCancelRQAdditionalInfoType() {
+        return new VehicleCancelRQAdditionalInfoType();
+    }
+
+    /**
+     * Create an instance of {@link OtaModify }
+     * 
+     */
 //    public OtaModify createOtaModify() {
 //        return new OtaModify();
 //    }
-//
-//    /**
-//     * Create an instance of {@link ArrayOfSourceType }
-//     * 
-//     */
+
+    /**
+     * Create an instance of {@link ArrayOfSourceType }
+     * 
+     */
     public ArrayOfSourceType createArrayOfSourceType() {
         return new ArrayOfSourceType();
     }

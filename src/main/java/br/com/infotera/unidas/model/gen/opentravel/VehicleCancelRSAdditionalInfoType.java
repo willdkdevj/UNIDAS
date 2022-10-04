@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.VehicleReservationType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -42,9 +41,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class VehicleCancelRSAdditionalInfoType {
 
-    @XmlElement(name = "VehReservation")
+    @XmlElement(name = "VehReservation", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected VehicleReservationType vehReservation;
-    @XmlElement(name = "TPA_Extensions")
+    @XmlElement(name = "TPA_Extensions", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected TPAExtensionsType tpaExtensions;
 
     /**

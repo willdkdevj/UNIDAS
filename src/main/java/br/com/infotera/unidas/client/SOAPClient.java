@@ -5,11 +5,13 @@ import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSIntegradorLog;
 import br.com.infotera.common.enumerator.WSIntegradorLogTipoEnum;
 import br.com.infotera.common.util.LogWS;
+import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.client.interfaces.ConnectionWebservice;
 import br.com.infotera.unidas.util.ObjectHandling;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,7 @@ public class SOAPClient extends WebServiceGatewaySupport {
     public Object sendAndReceive(WSIntegrador integrador, Object object, String action) throws ErrorException {
         Object result = null;
         WSIntegradorLog log = new WSIntegradorLog(integrador.getDsAction(), WSIntegradorLogTipoEnum.XML);
-
+        
         try {
             WebServiceMessageSender[] senders = getMessageSenders();
             setDefaultUri(connection.checkURI(integrador));
@@ -96,7 +98,7 @@ public class SOAPClient extends WebServiceGatewaySupport {
                 
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 ((WebServiceMessage) message).writeTo(out);
-                ObjectHandling.generateFile(out.toString(), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RQ_header.xml");
+                ObjectHandling.generateFile(out.toString(), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RQ_" + Utils.formatData(new Date(), "HHmmss") + ".xml");
                 LogWS.convertRequestSoap(integrador, log, message);
                 
             }, (WebServiceMessage message) -> {
@@ -110,7 +112,7 @@ public class SOAPClient extends WebServiceGatewaySupport {
                     throw ex;
                 }
                 LogWS.convertResponseSoap(integrador, log, result1);
-                ObjectHandling.generateFile(ObjectHandling.marshalObjectXML(result1), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RS_header.xml");
+                ObjectHandling.generateFile(ObjectHandling.marshalObjectXML(result1), "/home/william/Documentos/Unidas/", integrador.getDsAction() +"RS_" + Utils.formatData(new Date(), "HHmmss") + ".xml");
                 
                 return result1;
             });

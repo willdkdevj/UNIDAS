@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.WarningsType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;

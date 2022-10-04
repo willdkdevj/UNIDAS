@@ -5,7 +5,7 @@ import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehCancel;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehRetRes;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRate;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehAvailRateResponse;
 import br.com.infotera.unidas.model.gen.unidas.OtaVehCancelResponse;
@@ -67,7 +67,7 @@ public class UnidasClient {
      * The callOTAVehRes method is responsible for forwarding requests created from the OtaVehResResponse 
      * that follow a certain ordering pattern of its parameters that is checked when arriving at the partner webservice
      * 
-     * @param vehAvailRateRQ - Request object parameter expected by the partner webservice method
+     * @param otaVehRes - Request object parameter expected by the partner webservice method
      * @see - sendAndReceive - responsible for handling the validation of the transaction of sending and receiving requests (XML)
      * @see - marshalXMLToObject - responsible for converting the returned text into an object (POJO)
      * 
@@ -75,11 +75,11 @@ public class UnidasClient {
      * @return Result - Class responsible for encapsulating the response referring to the type (command) of request sent
      * @throws ErrorException - If errors occur in the process to be carried out, an exception is launched in order to inform the user through the Legacy System
      */
-    public OtaVehResResponse callOTAVehRes(WSIntegrador integrador, OtaVehRes vehAvailRateRQ) throws ErrorException {
+    public OtaVehResResponse callOTAVehRes(WSIntegrador integrador, OtaVehRes otaVehRes) throws ErrorException {
         OtaVehResResponse response = null;
         try {
             integrador.setDsAction("OTAVehRes");
-            response = (OtaVehResResponse) soapClient.sendAndReceive(integrador, vehAvailRateRQ, "http://www.unidas.com.br/OtaVehRes");
+            response = (OtaVehResResponse) soapClient.sendAndReceive(integrador, otaVehRes, "http://www.unidas.com.br/OtaVehRes");
             
         } catch (ErrorException ex){
             throw ex;

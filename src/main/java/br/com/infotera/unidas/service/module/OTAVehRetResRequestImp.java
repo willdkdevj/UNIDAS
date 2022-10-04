@@ -8,7 +8,7 @@ import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehRetResRQ;
 import br.com.infotera.unidas.model.gen.opentravel.OTAVehRetResRQ.VehRetResRQCore;
-import br.com.infotera.unidas.model.gen.opentravel.OtaVehRetRes;
+import br.com.infotera.unidas.model.gen.unidas.OtaVehRetRes;
 import br.com.infotera.unidas.model.gen.opentravel.UniqueIDType;
 import br.com.infotera.unidas.model.gen.opentravel.VehicleRetrieveResRSCoreType;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;

@@ -29,10 +29,8 @@ public class CancelarCarWS {
     
     @Autowired
     private UnidasClient unidasClient;
-    
     @Autowired
     private OTAVehCancelRequest request;
-    
     @Autowired
     private ConsultarCarWS consultar;
 
@@ -59,7 +57,7 @@ public class CancelarCarWS {
                     if(vehCancelInfo.getVehReservation() != null && vehCancelInfo.getVehReservation().getVehSegmentCore() != null){
                         /** Checked the returned locator in order to validate when querying whether the reservation was cancelled in the partner webservice */
                         for(ConfID id : vehCancelInfo.getVehReservation().getVehSegmentCore().getConfID()){
-                            if(id.getType().equals("14") && id.getID().equals(reservaServico.getNrLocalizador())){
+                            if(id.getID().equals(reservaServico.getNrLocalizador())){
                                 reservaRS = consultar.check(reservaRQ);
                             } else {
                                 throw new ErrorException(reservaRQ.getIntegrador(), CancelarCarWS.class, "updateStatusCancelByBooking", WSMensagemErroEnum.SCA, 

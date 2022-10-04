@@ -12,9 +12,13 @@ import br.com.infotera.common.servico.WSVeiculo;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.unidas.model.gen.opentravel.*;
 import br.com.infotera.unidas.model.gen.opentravel.CustomerPrimaryAdditionalType.Primary;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerType.Address;
 import br.com.infotera.unidas.model.gen.opentravel.CustomerType.Email;
+import br.com.infotera.unidas.model.gen.opentravel.CustomerType.PaymentForm;
 import br.com.infotera.unidas.model.gen.opentravel.CustomerType.Telephone;
+import br.com.infotera.unidas.model.gen.opentravel.PaymentFormType.Voucher;
 import br.com.infotera.unidas.service.interfaces.BuilderOTAVehRequest;
+import br.com.infotera.unidas.util.SupplierBase;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -64,11 +68,11 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
             vehicleRentalCoreType.setReturnDateTime(Utils.convertStringDateToXmlGregorianCalendar(dtDevolucao, Boolean.FALSE));
             
             VehicleRentalCoreType.PickUpLocation pickupLocation = new VehicleRentalCoreType.PickUpLocation();
-            pickupLocation.setLocationCode(cdRetirada.length() < 4 ? cdRetirada.concat("1") : cdRetirada);
+            pickupLocation.setLocationCode(cdRetirada.length() < 4 ? SupplierBase.loadingAirportIATACodes().get(cdRetirada) : cdRetirada);
             vehicleRentalCoreType.getPickUpLocation().add(pickupLocation);
             
             VehicleRentalCoreType.ReturnLocation returnLocation = new VehicleRentalCoreType.ReturnLocation();
-            returnLocation.setLocationCode(cdDevolucao.length() < 4 ? cdDevolucao.concat("1") : cdDevolucao);
+            returnLocation.setLocationCode(cdDevolucao.length() < 4 ? SupplierBase.loadingAirportIATACodes().get(cdDevolucao) : cdDevolucao);
             vehicleRentalCoreType.setReturnLocation(returnLocation);
             
         } catch(Exception ex){
@@ -84,9 +88,11 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
     public CustomerPrimaryAdditionalType setUpCustomer(WSIntegrador integrador, WSContato contato, List<WSReservaNome> reservaNomeList, List<WSInfoAdicional> infoAdicionalList) {
         Primary primary = new Primary();
         primary.getPersonName().add(assemblePerson(integrador, reservaNomeList));
-        primary.getDocument().add(assembleDocumentType(integrador, reservaNomeList));
-        primary.getEmail().add(getEmail(integrador, infoAdicionalList));
         primary.getTelephone().add(getTelephone(integrador, infoAdicionalList));
+        primary.getEmail().add(getEmail(integrador, infoAdicionalList));
+        primary.getAddress().add(getAddress(integrador, contato));
+        primary.getPaymentForm().add(getPaymentForm());
+        primary.getDocument().add(assembleDocumentType(integrador, reservaNomeList));
         
         CustomerPrimaryAdditionalType customer = new CustomerPrimaryAdditionalType();
         customer.setPrimary(primary);
@@ -203,9 +209,8 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
         if(!Utils.isListNothing(infoAdicionalList)){
             String dsTelefone = infoAdicionalList.get(1).getDsTexto();
             telefone = new Telephone();
-            telefone.setPhoneUseType("Voice");
-            telefone.setAreaCityCode(dsTelefone.substring(0, 2));
-            telefone.setPhoneNumber(dsTelefone.substring(2, dsTelefone.length()));
+            telefone.setAreaCityCode(dsTelefone.substring(3, 5));
+            telefone.setPhoneNumber(dsTelefone.substring(6, dsTelefone.length()));
 
         } else {
             try {
@@ -236,5 +241,34 @@ public class BuilderOTAVehRequestImp implements BuilderOTAVehRequest {
         }
         
         return email; 
+    }
+
+    private CustomerType.Address getAddress(WSIntegrador integrador, WSContato contato) {
+        CustomerType.Address address = null;
+        try {
+            address = new Address();
+            address.setCityName(contato.getEndereco().getMunicipio().getNmMunicipio());
+            address.setPostalCode(contato.getEndereco().getNrCep());
+            
+        } catch(Exception ex){
+            try {
+                throw new ErrorException(integrador, OTAVehAvailRequestImp.class, "getAddress", WSMensagemErroEnum.GENMETHOD,
+                        "Não foi possível obter o endereço para a reserva - Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
+            } catch (ErrorException ee) {
+                Logger.getLogger(BuilderOTAVehRequestImp.class.getName()).log(Level.SEVERE, null, ee);
+            }
+        }
+        
+        return address;
+    }
+
+    private CustomerType.PaymentForm getPaymentForm() {
+        Voucher voucher = new Voucher();
+        voucher.setValueType("BV2");
+        
+        CustomerType.PaymentForm payment = new PaymentForm();
+        payment.setVoucher(voucher);
+        
+        return payment;
     }
 }

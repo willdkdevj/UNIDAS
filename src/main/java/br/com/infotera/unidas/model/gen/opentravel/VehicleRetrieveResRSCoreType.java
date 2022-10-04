@@ -56,9 +56,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class VehicleRetrieveResRSCoreType {
 
-    @XmlElement(name = "VehResSummaries")
+    @XmlElement(name = "VehResSummaries", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected VehicleRetrieveResRSCoreType.VehResSummaries vehResSummaries;
-    @XmlElement(name = "VehReservation")
+    @XmlElement(name = "VehReservation", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected VehicleReservationType vehReservation;
 
     /**

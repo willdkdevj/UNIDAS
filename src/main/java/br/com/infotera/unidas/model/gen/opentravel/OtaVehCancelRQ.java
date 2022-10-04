@@ -8,7 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.opentravel;
 
-import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -78,16 +77,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "vehCancelRQCore",
     "vehCancelRQInfo"
 })
-@XmlRootElement(name = "Ota_VehCancelRQ")
+@XmlRootElement(name = "Ota_VehCancelRQ", namespace = "http://www.opentravel.org/OTA/2003/05")
 public class OtaVehCancelRQ {
 
     @XmlElement(name = "PrimaryLangID")
     protected String primaryLangID;
-    @XmlElement(name = "POS")
+    @XmlElement(name = "POS", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected ArrayOfSourceType pos;
-    @XmlElement(name = "VehCancelRQCore")
+    @XmlElement(name = "VehCancelRQCore", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected CancelInfoRQType vehCancelRQCore;
-    @XmlElement(name = "VehCancelRQInfo")
+    @XmlElement(name = "VehCancelRQInfo", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected VehicleCancelRQAdditionalInfoType vehCancelRQInfo;
     @XmlAttribute(name = "EchoToken")
     protected String echoToken;

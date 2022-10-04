@@ -65,6 +65,7 @@ public class ArrayOfSourceType {
      * {@link SourceType }
      * 
      * 
+     * @return 
      */
     public List<SourceType> getSource() {
         if (source == null) {

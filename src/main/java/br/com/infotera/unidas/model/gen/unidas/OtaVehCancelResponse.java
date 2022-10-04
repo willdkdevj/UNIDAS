@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "OtaVehCancelResponse", namespace = "http://www.unidas.com.br/")
 public class OtaVehCancelResponse {
 
-    @XmlElement(name = "OtaVehCancelResult")
+    @XmlElement(name = "OtaVehCancelResult", namespace = "http://www.opentravel.org/OTA/2003/05")
     protected OtaVehCancelResult otaVehCancelResult;
 
     /**

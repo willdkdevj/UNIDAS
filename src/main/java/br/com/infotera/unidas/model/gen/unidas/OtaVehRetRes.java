@@ -6,9 +6,9 @@
 //
 
 
-package br.com.infotera.unidas.model.gen.opentravel;
+package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.opentravel.OTAVehLocDetailRQ;
+import br.com.infotera.unidas.model.gen.opentravel.OTAVehRetResRQ;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OTA_VehLocDetailRQ" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opentravel.org/OTA/2003/05}OTA_VehRetResRQ" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,36 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "otaVehLocDetailRQ"
+    "otaVehRetResRQ"
 })
-@XmlRootElement(name = "OtaVehLocDetail", namespace = "http://www.unidas.com.br/")
-public class OtaVehLocDetail {
+@XmlRootElement(name = "OtaVehRetRes", namespace = "http://www.unidas.com.br/")
+public class OtaVehRetRes {
 
-    @XmlElement(name = "OTA_VehLocDetailRQ")
-    protected OTAVehLocDetailRQ otaVehLocDetailRQ;
+    @XmlElement(name = "OTA_VehRetResRQ", namespace = "http://www.opentravel.org/OTA/2003/05")
+    protected OTAVehRetResRQ otaVehRetResRQ;
 
     /**
-     * Obtém o valor da propriedade otaVehLocDetailRQ.
+     * Obtém o valor da propriedade otaVehRetResRQ.
      * 
      * @return
      *     possible object is
-     *     {@link OTAVehLocDetailRQ }
+     *     {@link OTAVehRetResRQ }
      *     
      */
-    public OTAVehLocDetailRQ getOTAVehLocDetailRQ() {
-        return otaVehLocDetailRQ;
+    public OTAVehRetResRQ getOTAVehRetResRQ() {
+        return otaVehRetResRQ;
     }
 
     /**
-     * Define o valor da propriedade otaVehLocDetailRQ.
+     * Define o valor da propriedade otaVehRetResRQ.
      * 
      * @param value
      *     allowed object is
-     *     {@link OTAVehLocDetailRQ }
+     *     {@link OTAVehRetResRQ }
      *     
      */
-    public void setOTAVehLocDetailRQ(OTAVehLocDetailRQ value) {
-        this.otaVehLocDetailRQ = value;
+    public void setOTAVehRetResRQ(OTAVehRetResRQ value) {
+        this.otaVehRetResRQ = value;
     }
 
 }

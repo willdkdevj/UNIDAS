@@ -8,8 +8,6 @@
 
 package br.com.infotera.unidas.model.gen.unidas;
 
-import br.com.infotera.unidas.model.gen.opentravel.ArrayOfSourceType;
-import br.com.infotera.unidas.model.gen.opentravel.OTAVehAvailRateRQ;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
@@ -77,7 +75,7 @@ public class ObjectFactory {
 //    public OtaVehCancelResult createOtaVehCancelResult() {
 //        return new OtaVehCancelResult();
 //    }
-//
+
 //    /**
 //     * Create an instance of {@link OTAVehRetResRQ }
 //     * 
@@ -93,7 +91,7 @@ public class ObjectFactory {
 //    public OTAVehResRQ createOTAVehResRQ() {
 //        return new OTAVehResRQ();
 //    }
-//
+
 //    /**
 //     * Create an instance of {@link OtaVehResResult }
 //     * 
@@ -101,7 +99,7 @@ public class ObjectFactory {
 //    public OtaVehResResult createOtaVehResResult() {
 //        return new OtaVehResResult();
 //    }
-//
+
 //    /**
 //     * Create an instance of {@link OTAVehLocSearchRQ }
 //     * 
@@ -109,7 +107,7 @@ public class ObjectFactory {
 //    public OTAVehLocSearchRQ createOTAVehLocSearchRQ() {
 //        return new OTAVehLocSearchRQ();
 //    }
-//
+
 //    /**
 //     * Create an instance of {@link OtaVehLocSearchResult }
 //     * 
@@ -117,7 +115,7 @@ public class ObjectFactory {
 //    public OtaVehLocSearchResult createOtaVehLocSearchResult() {
 //        return new OtaVehLocSearchResult();
 //    }
-//
+
 //    /**
 //     * Create an instance of {@link OTAVehLocDetailRQ }
 //     * 
@@ -789,15 +787,15 @@ public class ObjectFactory {
 //    public VehicleCancelRQAdditionalInfoType createVehicleCancelRQAdditionalInfoType() {
 //        return new VehicleCancelRQAdditionalInfoType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaModify }
-//     * 
-//     */
-//    public OtaModify createOtaModify() {
-//        return new OtaModify();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaModify }
+     * 
+     */
+    public OtaModify createOtaModify() {
+        return new OtaModify();
+    }
+
 //    /**
 //     * Create an instance of {@link ArrayOfSourceType }
 //     * 
@@ -829,15 +827,15 @@ public class ObjectFactory {
 //    public OTAVehModifyRQ.VehModifyRQInfo createOTAVehModifyRQVehModifyRQInfo() {
 //        return new OTAVehModifyRQ.VehModifyRQInfo();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaModifyResponse }
-//     * 
-//     */
-//    public OtaModifyResponse createOtaModifyResponse() {
-//        return new OtaModifyResponse();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaModifyResponse }
+     * 
+     */
+    public OtaModifyResponse createOtaModifyResponse() {
+        return new OtaModifyResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link ErrorsType }
 //     * 
@@ -877,23 +875,23 @@ public class ObjectFactory {
 //    public WarningsType createWarningsType() {
 //        return new WarningsType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link Usuario }
-//     * 
-//     */
+
+    /**
+     * Create an instance of {@link Usuario }
+     * 
+     */
     public Usuario createUsuario() {
         return new Usuario();
     }
-//
-//    /**
-//     * Create an instance of {@link OtaVehAvailRate }
-//     * 
-//     */
+
+    /**
+     * Create an instance of {@link OtaVehAvailRate }
+     * 
+     */
     public OtaVehAvailRate createOtaVehAvailRate() {
         return new OtaVehAvailRate();
     }
-//
+
 //    /**
 //     * Create an instance of {@link OTAVehAvailRateRQ.VehAvailRQCore }
 //     * 
@@ -941,15 +939,15 @@ public class ObjectFactory {
 //    public VehicleAvailRSAdditionalInfoType createVehicleAvailRSAdditionalInfoType() {
 //        return new VehicleAvailRSAdditionalInfoType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehCancel }
-//     * 
-//     */
-//    public OtaVehCancel createOtaVehCancel() {
-//        return new OtaVehCancel();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehCancel }
+     * 
+     */
+    public OtaVehCancel createOtaVehCancel() {
+        return new OtaVehCancel();
+    }
+
 //    /**
 //     * Create an instance of {@link OtaVehCancelRQ }
 //     * 
@@ -965,15 +963,15 @@ public class ObjectFactory {
 //    public CancelInfoRQType createCancelInfoRQType() {
 //        return new CancelInfoRQType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehCancelResponse }
-//     * 
-//     */
-//    public OtaVehCancelResponse createOtaVehCancelResponse() {
-//        return new OtaVehCancelResponse();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehCancelResponse }
+     * 
+     */
+    public OtaVehCancelResponse createOtaVehCancelResponse() {
+        return new OtaVehCancelResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link OtaVehCancelResult.VehCancelRSCore }
 //     * 
@@ -989,15 +987,15 @@ public class ObjectFactory {
 //    public VehicleCancelRSAdditionalInfoType createVehicleCancelRSAdditionalInfoType() {
 //        return new VehicleCancelRSAdditionalInfoType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehRetRes }
-//     * 
-//     */
-//    public OtaVehRetRes createOtaVehRetRes() {
-//        return new OtaVehRetRes();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehRetRes }
+     * 
+     */
+    public OtaVehRetRes createOtaVehRetRes() {
+        return new OtaVehRetRes();
+    }
+
 //    /**
 //     * Create an instance of {@link OTAVehRetResRQ.VehRetResRQCore }
 //     * 
@@ -1013,23 +1011,15 @@ public class ObjectFactory {
 //    public OTAVehRetResRQ.VehRetResRQInfo createOTAVehRetResRQVehRetResRQInfo() {
 //        return new OTAVehRetResRQ.VehRetResRQInfo();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehRetResResponse }
-//     * 
-//     */
-//    public OtaVehRetResResponse createOtaVehRetResResponse() {
-//        return new OtaVehRetResResponse();
-//    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehRetResResult }
-//     * 
-//     */
-//    public OtaVehRetResResult createOtaVehRetResResult() {
-//        return new OtaVehRetResResult();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehRetResResponse }
+     * 
+     */
+    public OtaVehRetResResponse createOtaVehRetResResponse() {
+        return new OtaVehRetResResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link VehicleRetrieveResRSAdditionalInfoType }
 //     * 
@@ -1058,10 +1048,10 @@ public class ObjectFactory {
      * Create an instance of {@link OtaVehRes }
      * 
      */
-//    public OtaVehRes createOtaVehRes() {
-//        return new OtaVehRes();
-//    }
-//
+    public OtaVehRes createOtaVehRes() {
+        return new OtaVehRes();
+    }
+
 //    /**
 //     * Create an instance of {@link OTAVehResRQ.VehResRQCore }
 //     * 
@@ -1077,15 +1067,15 @@ public class ObjectFactory {
 //    public OTAVehResRQ.VehResRQInfo createOTAVehResRQVehResRQInfo() {
 //        return new OTAVehResRQ.VehResRQInfo();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehResResponse }
-//     * 
-//     */
-//    public OtaVehResResponse createOtaVehResResponse() {
-//        return new OtaVehResResponse();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehResResponse }
+     * 
+     */
+    public OtaVehResResponse createOtaVehResResponse() {
+        return new OtaVehResResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link OtaVehResResult.VehResRSCore }
 //     * 
@@ -1117,15 +1107,15 @@ public class ObjectFactory {
 //    public OTAVehLocSearchRQ.VehLocSearchCriterion createOTAVehLocSearchRQVehLocSearchCriterion() {
 //        return new OTAVehLocSearchRQ.VehLocSearchCriterion();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehLocSearchResponse }
-//     * 
-//     */
-//    public OtaVehLocSearchResponse createOtaVehLocSearchResponse() {
-//        return new OtaVehLocSearchResponse();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehLocSearchResponse }
+     * 
+     */
+    public OtaVehLocSearchResponse createOtaVehLocSearchResponse() {
+        return new OtaVehLocSearchResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link TPAExtensionsType }
 //     * 
@@ -1149,15 +1139,15 @@ public class ObjectFactory {
 //    public CompanyNameType createCompanyNameType() {
 //        return new CompanyNameType();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehLocDetail }
-//     * 
-//     */
-//    public OtaVehLocDetail createOtaVehLocDetail() {
-//        return new OtaVehLocDetail();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehLocDetail }
+     * 
+     */
+    public OtaVehLocDetail createOtaVehLocDetail() {
+        return new OtaVehLocDetail();
+    }
+
 //    /**
 //     * Create an instance of {@link OTAVehLocDetailRQ.Location }
 //     * 
@@ -1189,15 +1179,15 @@ public class ObjectFactory {
 //    public OTAVehLocDetailRQ.Keyword createOTAVehLocDetailRQKeyword() {
 //        return new OTAVehLocDetailRQ.Keyword();
 //    }
-//
-//    /**
-//     * Create an instance of {@link OtaVehLocDetailResponse }
-//     * 
-//     */
-//    public OtaVehLocDetailResponse createOtaVehLocDetailResponse() {
-//        return new OtaVehLocDetailResponse();
-//    }
-//
+
+    /**
+     * Create an instance of {@link OtaVehLocDetailResponse }
+     * 
+     */
+    public OtaVehLocDetailResponse createOtaVehLocDetailResponse() {
+        return new OtaVehLocDetailResponse();
+    }
+
 //    /**
 //     * Create an instance of {@link OtaVehLocDetailResult.Date }
 //     * 
