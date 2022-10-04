@@ -62,7 +62,6 @@ public class ReservarCarWS {
                                         reservarRQ.getIntegrador().setCdLocalizador(codID.getID());
                                         reservaServico.setNrLocalizador(codID.getID());
                                     });
-                                    
                                 });
                             } else {
                                 throw new ErrorException(reservarRQ.getIntegrador(), ReservarCarWS.class, "checkStatusLOCBooking", WSMensagemErroEnum.SRE,

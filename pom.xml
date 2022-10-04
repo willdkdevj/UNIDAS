@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.infotera</groupId>
 	<artifactId>unidas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>unidas</name>
 	<description>Projeto para webservice de API para locação de veículos</description>
 	<properties>

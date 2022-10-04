@@ -214,6 +214,7 @@ public class ConsultarCarWS {
             throw new ErrorException(integrador, ReservarCarWS.class, "checkStatusReservation", WSMensagemErroEnum.SCO,
                 "Não foi possível determinar o status da reserva do veículo. Entre em contato com o suporte", WSIntegracaoStatusEnum.INCONSISTENTE, null, false);
         }
+        
         return null;
     }
 
@@ -244,9 +245,6 @@ public class ConsultarCarWS {
                         veiculoLocal.setDsEndereco(address.getAddressLine().stream().findFirst().orElse(null));
                         veiculoLocal.setNmMunicipio(address.getCityName());
                         veiculoLocal.setNmPais(address.getStateProv().getValue());
-    //                        veiculoLocal.setCdLatitude(address.);
-    //                        veiculoLocal.setCdLongitude(cdLongitude);
-
                     }
 
                     return veiculoLocal;
